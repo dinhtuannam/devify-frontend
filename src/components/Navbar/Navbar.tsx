@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './Navbar.module.scss';
 import logo from '../../assets/img/logo.png';
 import { FaBell, FaUserCircle } from 'react-icons/fa';
+import NavbarSearch from './Search/NavbarSearch';
 const cx = classNames.bind(styles);
 
 function Navbar() {
@@ -11,12 +12,7 @@ function Navbar() {
                 <img className={cx('logo-img')} src={logo} alt="logo" />
                 <h4 className={cx('logo-title')}>Devify Academy</h4>
             </div>
-            <div className={cx('body')}>
-                <div className={cx('search-wrapper')}>
-                    <div className={cx('search-icon')}></div>
-                    <input className={cx('search-input')} />
-                </div>
-            </div>
+            <NavbarSearch />
             <div className={cx('action')}>
                 <div>
                     <button className={cx('mylearn')}>Khóa học của tôi</button>
