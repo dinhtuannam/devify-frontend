@@ -5,18 +5,19 @@ import { useState, useRef, useEffect } from 'react';
 import useDebounce from '../../../hooks/useDebounce';
 import PopperWrapper from '../PopperWrapper/PopperWrapper';
 import Tippy from '@tippyjs/react';
+
 const cx = classNames.bind(styles);
 
 function NavbarSearch() {
     const [searchValue, setSearchValue] = useState('');
     const [showTippy, setShowTippy] = useState(false);
-    const [searchResult, setSearchResult] = useState([]);
+    //const [searchResult, setSearchResult] = useState([]);
     const debounce = useDebounce(searchValue, 500);
     const tippyRef = useRef<HTMLDivElement>(null);
-    const inputRef = useRef<HTMLInputElement>(null);
+
     useEffect(() => {
         if (!debounce.trim()) {
-            setSearchResult([]);
+            //setSearchResult([]);
             return;
         }
     }, [debounce]);

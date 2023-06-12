@@ -1,0 +1,75 @@
+.vertical {
+    margin-bottom: 20px;
+}
+
+.heading-wrap {
+    align-items: baseline;
+    display: flex;
+    justify-content: space-between;
+    .heading {
+        color: #242424;
+        font-size: 2.4rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin: 20px 0px 20px 0px;
+    }
+    .more {
+        font-weight: 500;
+        transition: 0.2s ease-in-out;
+        font-size: 1.6rem;
+        color: var(--primary-bg-color);
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.body {
+    min-height: 200px;
+    padding-bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -12px;
+    margin-right: -12px;
+    .list-wrap {
+        width: 25%;
+        margin-bottom: 30px;
+        padding: 0px 12px;
+    }
+}
+.link {
+    cursor: pointer;
+    position: relative;
+    .img {
+        height: 100%;
+        left: 0;
+        object-fit: cover;
+        border-radius: 18px;
+        top: 0;
+        width: 100%;
+    }
+    .img-hover {
+        position: absolute;
+        background-color: #242424;
+        width: 100%;
+        height: calc(100% - 3px);
+        border-radius: 18px;
+        top: 0;
+        opacity: 0;
+        transition: 0.2s ease-in-out;
+        &:hover {
+            opacity: 0.4;
+        }
+    }
+}
+
+.course-title {
+    margin: 10px 0px 6px 0px;
+    font-weight: 500;
+}
+.price {
+    color: var(--primary-bg-color);
+    font-size: 1.4rem;
+    font-weight: 600;
+}

@@ -12,25 +12,25 @@ function Sidebar() {
                 <ul className={cx('list-container')}>
                     <Link to="/" className={cx('link')}>
                         <li className={cx('list-item')}>
-                            <AiFillHome />
+                            <AiFillHome className={cx('icon')} />
                             <span className={cx('title')}>Home</span>
                         </li>
                     </Link>
                     <Link to="/course" className={cx('link')}>
                         <li className={cx('list-item')}>
-                            <FaLightbulb />
+                            <FaLightbulb className={cx('icon')} />
                             <span className={cx('title')}>Course</span>
                         </li>
                     </Link>
                     <Link to="roadmap" className={cx('link')}>
                         <li className={cx('list-item')}>
-                            <FaRoad />
+                            <FaRoad className={cx('icon')} />
                             <span className={cx('title')}>Roadmap</span>
                         </li>
                     </Link>
                     <Link to="blog" className={cx('link')}>
                         <li className={cx('list-item')}>
-                            <FaBlogger />
+                            <FaBlogger className={cx('icon')} />
                             <span className={cx('title')}>Blog</span>
                         </li>
                     </Link>

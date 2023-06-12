@@ -2,3 +2,9 @@
     display: flex;
     min-height: calc(100vh - 66px);
 }
+.content-wrapper {
+    max-width: calc(100% - 96px);
+    padding: 0 40px 0 20px;
+    flex: 1 1;
+    margin: 0 auto;
+}

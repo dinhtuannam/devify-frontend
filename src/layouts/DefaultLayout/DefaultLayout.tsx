@@ -21,7 +21,7 @@ const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
             <Navbar />
             <div className={cx('container')}>
                 <Sidebar />
-                {children}
+                <div className={cx('content-wrapper')}>{children}</div>
             </div>
             <Footer />
         </div>
