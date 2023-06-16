@@ -16,7 +16,7 @@ function Sidebar() {
                             <span className={cx('title')}>Home</span>
                         </li>
                     </Link>
-                    <Link to="/course" className={cx('link')}>
+                    <Link to="/courses" className={cx('link')}>
                         <li className={cx('list-item')}>
                             <FaLightbulb className={cx('icon')} />
                             <span className={cx('title')}>Course</span>

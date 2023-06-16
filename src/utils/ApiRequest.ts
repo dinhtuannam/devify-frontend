@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const backendRequest = axios.create({
-    baseURL: 'https://localhost:7264/',
+    baseURL: 'https://localhost:7221/api',
 });
 
 export const getDataRequest = async (path: string, option = {}) => {
@@ -10,6 +10,7 @@ export const getDataRequest = async (path: string, option = {}) => {
         return response.data;
     } catch (e) {
         console.log(e);
+        return null;
     }
 };
 
