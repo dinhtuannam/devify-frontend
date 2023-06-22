@@ -12,7 +12,7 @@ const HomeCourse: React.FC<HomeCourseProps> = ({ title, api, itemQuantity }) => 
     const array: number[] = Array(itemQuantity).fill(1);
 
     const [data, setData] = useState(array);
-    console.log(array, data);
+
     return (
         <Fragment>
             <div className={cx('vertical')}>

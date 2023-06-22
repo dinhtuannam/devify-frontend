@@ -1,6 +1,7 @@
 .wrapper {
     flex-shrink: 0;
     background: var(--background);
+    transition: var(--primary-transition);
     .container {
         width: 96px;
         align-items: center;

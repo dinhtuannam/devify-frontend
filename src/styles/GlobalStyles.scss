@@ -7,27 +7,40 @@
     --primary-border-radius: 999px;
     --primary-max-width: 1920px;
     --content-wrapper: 0px 44px 74px 44px;
+    --primary-transition: 0.2s ease-in;
 }
 
-[data-theme='dark'] {
+[data-theme='Dark'] {
     --background: #0f0f0f;
     --text-color: #fff;
     --content-background: #1c1b1b;
-
+    --primary-opacity: 0.8;
+    // Navbar ====================
     --search-navbar-border: #4a4949;
     --search-navbar-border-focus: #e8e8e8;
-
+    // Footer ====================
     --footer-background: #0f0f0f;
+    // Tippy =====================
+    --tippy-background: #282727;
+    // Chapter-list ==============
+    --chapter-background: #000;
+    --chapter-border: #000;
 }
-[data-theme='light'] {
+[data-theme='Light'] {
     --background: #fff;
     --text-color: #0f0f0f;
     --content-background: #fff;
-
+    --primary-opacity: 1;
+    // Navbar ====================
     --search-navbar-border: #e8e8e8;
     --search-navbar-border-focus: #2a2a2a;
-
+    // Footer ====================
     --footer-background: #181821;
+    // Tippy =====================
+    --tippy-background: #fff;
+    // Chapter-list ==============
+    --chapter-background: #f5f5f5;
+    --chapter-border: #ebebeb;
 }
 * {
     margin: 0;

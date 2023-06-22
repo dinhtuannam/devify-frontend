@@ -11,6 +11,7 @@
     z-index: 100;
     background-color: var(--background);
     font-size: 1.4rem;
+    transition: var(--primary-transition);
 }
 
 .logo {
@@ -79,6 +80,40 @@
         transition: 0.2s ease-in-out;
         &:hover {
             opacity: 1;
+        }
+    }
+}
+.tippy-wrapper {
+    inset: 0px 0px auto auto !important;
+    transform: translate3d(-31.6667px, 60.8333px, 0px);
+}
+.tippy {
+    background-color: var(--tippy-background);
+    margin-top: 4px;
+    min-width: 180px;
+    border-radius: 10px;
+    box-shadow: 0 -4px 32px rgb(0 0 0 / 20%);
+    color: #1d2129;
+    transition: var(--primary-transition);
+    padding: 8px 24px !important;
+
+    .user-item-container {
+        margin-bottom: 12px;
+        .user-item {
+            color: var(--text-color);
+            opacity: 0.8;
+            cursor: pointer;
+        }
+    }
+
+    .user-heading {
+        display: flex;
+        margin-bottom: 12px;
+
+        .username {
+            margin-top: 1px;
+            margin-left: 8px;
+            color: var(--text-color);
         }
     }
 }

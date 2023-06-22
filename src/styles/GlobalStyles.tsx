@@ -1,5 +1,6 @@
 import React, { ReactNode, Fragment } from 'react';
 import './GlobalStyles.scss';
+import './GlobalStyles.css';
 type GlobalStylesProps = {
     children: ReactNode;
 };

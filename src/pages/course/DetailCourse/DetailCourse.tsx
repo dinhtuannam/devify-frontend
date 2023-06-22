@@ -52,7 +52,7 @@ function DetailCourse() {
                                 );
                             })}
                         </div>
-                        <h3 style={{ fontSize: '20px' }}>Nội dung khóa học</h3>
+                        <h3 style={{ fontSize: '20px', color: 'var(--text-color)' }}>Nội dung khóa học</h3>
                         <div className={cx('chapter-list-wrapper')}>
                             {course.data.chapters.map((value, index) => {
                                 return (

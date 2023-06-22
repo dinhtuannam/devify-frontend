@@ -1,0 +1,6 @@
+#tippy-2 {
+    inset: 0px 0px auto auto !important;
+    margin: 0px !important;
+    transform: translate3d(-31.6667px, 60.8333px, 0px) !important;
+    max-width: calc(100vw - 10px);
+}

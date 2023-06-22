@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './NavbarSearch.module.scss';
 import { AiOutlineSearch } from 'react-icons/ai';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, memo } from 'react';
 import useDebounce from '../../../hooks/useDebounce';
 import PopperWrapper from '../PopperWrapper/PopperWrapper';
 import Tippy from '@tippyjs/react';
@@ -14,7 +14,6 @@ function NavbarSearch() {
     //const [searchResult, setSearchResult] = useState([]);
     const debounce = useDebounce(searchValue, 500);
     const tippyRef = useRef<HTMLDivElement>(null);
-
     useEffect(() => {
         if (!debounce.trim()) {
             //setSearchResult([]);
@@ -72,4 +71,4 @@ function NavbarSearch() {
     );
 }
 
-export default NavbarSearch;
+export default memo(NavbarSearch);

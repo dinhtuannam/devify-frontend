@@ -6,6 +6,7 @@ import Footer from '../../components/Footer/Footer';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import styles from './DefaultLayout.module.scss';
 import classNames from 'classnames/bind';
+import { memo } from 'react';
 const cx = classNames.bind(styles);
 type DefaultLayoutProps = {
     children: ReactNode;
@@ -28,4 +29,4 @@ const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
     );
 };
 
-export default DefaultLayout;
+export default memo(DefaultLayout);
