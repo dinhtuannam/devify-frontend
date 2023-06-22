@@ -9,6 +9,26 @@
     --content-wrapper: 0px 44px 74px 44px;
 }
 
+[data-theme='dark'] {
+    --background: #0f0f0f;
+    --text-color: #fff;
+    --content-background: #1c1b1b;
+
+    --search-navbar-border: #4a4949;
+    --search-navbar-border-focus: #e8e8e8;
+
+    --footer-background: #0f0f0f;
+}
+[data-theme='light'] {
+    --background: #fff;
+    --text-color: #0f0f0f;
+    --content-background: #fff;
+
+    --search-navbar-border: #e8e8e8;
+    --search-navbar-border-focus: #2a2a2a;
+
+    --footer-background: #181821;
+}
 * {
     margin: 0;
     padding: 0;

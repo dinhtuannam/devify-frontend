@@ -1,0 +1,32 @@
+.link {
+    text-decoration: none;
+    color: initial;
+    margin-bottom: 4px;
+
+    .list-item {
+        width: 72px;
+        height: 72px;
+        padding: 2px 0px;
+        cursor: pointer;
+        transition: 0.2s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 16px;
+        align-items: center;
+        opacity: 0.8;
+        &:hover {
+            background-color: #e8ebed;
+            opacity: 1;
+        }
+        .title {
+            margin-top: 4px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        .icon {
+            font-size: 24px;
+            color: var(--text-color);
+        }
+    }
+}

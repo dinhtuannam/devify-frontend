@@ -34,7 +34,7 @@ function DetailCourse() {
                         <p className={cx('course-description')}>{course.data.description}</p>
                         <div className={cx('lang-wrapper')}>
                             <span className={cx('course-lang')}>Ngôn ngữ :</span>
-                            {course.data.languages.map((value, index) => {
+                            {course.data.courseLanguages.map((value, index) => {
                                 return (
                                     <span className={cx('course-lang-item')} key={index}>
                                         Ngôn ngữ {value.name}
@@ -44,7 +44,7 @@ function DetailCourse() {
                         </div>
                         <div className={cx('cat-wrapper')}>
                             <span className={cx('course-cat')}>Thể loại :</span>
-                            {course.data.categories.map((value, index) => {
+                            {course.data.courseCategories.map((value, index) => {
                                 return (
                                     <span className={cx('course-cat-item')} key={index}>
                                         {value.categoryName}

@@ -7,7 +7,8 @@
     display: flex;
     justify-content: space-between;
     .heading {
-        color: #242424;
+        color: var(--text-color);
+        //color: #242424;
         font-size: 2.4rem;
         font-weight: 600;
         letter-spacing: 1px;
@@ -67,6 +68,7 @@
 .course-title {
     margin: 10px 0px 6px 0px;
     font-weight: 500;
+    color: var(--text-color);
 }
 .price {
     color: var(--primary-bg-color);

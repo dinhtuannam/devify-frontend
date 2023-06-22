@@ -1,6 +1,6 @@
 .wrapper {
     flex-shrink: 0;
-
+    background: var(--background);
     .container {
         width: 96px;
         align-items: center;
@@ -16,29 +16,6 @@
         .list-container {
             list-style: none;
             margin-top: 16px;
-            .list-item {
-                width: 72px;
-                height: 72px;
-                padding: 2px 0px;
-                cursor: pointer;
-                transition: 0.2s ease-in-out;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                border-radius: 16px;
-                align-items: center;
-                opacity: 0.8;
-                &:hover {
-                    background-color: #e8ebed;
-                    opacity: 1;
-                }
-                .title {
-                    margin-top: 4px;
-                }
-                .icon {
-                    font-size: 24px;
-                }
-            }
         }
     }
 }

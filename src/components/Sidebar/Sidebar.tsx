@@ -1,8 +1,6 @@
 import styles from './Sidebar.module.scss';
 import classNames from 'classnames/bind';
-import { AiFillHome } from 'react-icons/ai';
-import { FaLightbulb, FaRoad, FaBlogger } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import SidebarItem from './SidebarItem/SidebarItem';
 const cx = classNames.bind(styles);
 
 function Sidebar() {
@@ -10,30 +8,10 @@ function Sidebar() {
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
                 <ul className={cx('list-container')}>
-                    <Link to="/" className={cx('link')}>
-                        <li className={cx('list-item')}>
-                            <AiFillHome className={cx('icon')} />
-                            <span className={cx('title')}>Home</span>
-                        </li>
-                    </Link>
-                    <Link to="/courses" className={cx('link')}>
-                        <li className={cx('list-item')}>
-                            <FaLightbulb className={cx('icon')} />
-                            <span className={cx('title')}>Course</span>
-                        </li>
-                    </Link>
-                    <Link to="roadmap" className={cx('link')}>
-                        <li className={cx('list-item')}>
-                            <FaRoad className={cx('icon')} />
-                            <span className={cx('title')}>Roadmap</span>
-                        </li>
-                    </Link>
-                    <Link to="blog" className={cx('link')}>
-                        <li className={cx('list-item')}>
-                            <FaBlogger className={cx('icon')} />
-                            <span className={cx('title')}>Blog</span>
-                        </li>
-                    </Link>
+                    <SidebarItem title="Home" route="/" />
+                    <SidebarItem title="Courses" route="/courses" />
+                    <SidebarItem title="Roadmap" route="/roadmap" />
+                    <SidebarItem title="Blog" route="/blog" />
                 </ul>
             </div>
         </div>

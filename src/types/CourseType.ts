@@ -36,9 +36,9 @@ interface DetailCourse {
     link: string;
     image: string;
     creator: CourseCreator;
-    languages: CourseLanguage[];
+    courseLanguages: CourseLanguage[];
     chapters: CourseChapter[];
-    categories: CourseCategory[];
+    courseCategories: CourseCategory[];
 }
 
 export interface DetailCourseResponse {
