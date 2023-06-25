@@ -13,6 +13,7 @@ function DetailCourse() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [show, setShow] = useState<number[]>([]);
     const { name } = useParams();
+
     useEffect(() => {
         const fetchAPI = async () => {
             const res = await getDetailCourse(name);
@@ -23,13 +24,13 @@ function DetailCourse() {
         };
         fetchAPI();
     }, [name]);
+
     const handleShow = (index: number) => {
         if (show.includes(index)) {
             const updatedNumbers = show.filter((num) => num !== index);
             setShow(updatedNumbers);
         } else setShow((prevNumbers) => [...prevNumbers, index]);
     };
-    console.log(show);
 
     const renderContent = () => {
         return (

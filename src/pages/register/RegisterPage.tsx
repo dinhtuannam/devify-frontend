@@ -1,21 +1,27 @@
-import styles from './LoginPage.module.scss';
+import styles from './RegisterPage.module.scss';
 import classNames from 'classnames/bind';
 import logo from '../../assets/img/logo.png';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import InputFormData from '../../components/Input/InputFormData/InputFormData';
 import InputPassword from '../../components/Input/InputPassword/InputPassword';
 import { Link } from 'react-router-dom';
-import { useState, ChangeEvent, FormEvent } from 'react';
 const cx = classNames.bind(styles);
 
 interface FormData {
     username: string;
     password: string;
+    confirmPassword: string;
+    email: string;
+    phone: string;
 }
 
-function LoginPage() {
+function RegisterPage() {
     const [formData, setFormData] = useState<FormData>({
         username: '',
         password: '',
+        confirmPassword: '',
+        email: '',
+        phone: '',
     });
     const [loading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
@@ -31,10 +37,10 @@ function LoginPage() {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsLoading(true);
-
+        // xử lí
         setTimeout(() => {
             setIsLoading(false);
-            window.location.href = '/';
+            window.location.href = '/login';
         }, 2000);
         console.log(formData);
     };
@@ -43,7 +49,7 @@ function LoginPage() {
         <div className={cx('wrapper')}>
             <div className={cx('heading')}>
                 <img className={cx('logo')} src={logo} alt={'devify logo'} />
-                <h1 className={cx('title')}>Đăng nhập vào Devify</h1>
+                <h1 className={cx('title')}>Đăng kí tài khoản Devify</h1>
             </div>
             <div>
                 <form className={cx('form')} onSubmit={handleSubmit}>
@@ -64,6 +70,32 @@ function LoginPage() {
                         placeholder="Nhập mật khẩu"
                         className="input-form"
                     />
+                    <InputPassword
+                        title="Xác nhận mật khẩu"
+                        name="confirmPassword"
+                        value={formData.confirmPassword}
+                        onChange={handleInputChange}
+                        placeholder="Xác nhận mật khẩu"
+                        className="input-form"
+                    />
+                    <InputFormData
+                        title="Email"
+                        type="password"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="Nhập email"
+                        className="input-form"
+                    />
+                    <InputFormData
+                        title="Số điện thoại"
+                        name="phone"
+                        value={formData.phone}
+                        type="password"
+                        onChange={handleInputChange}
+                        placeholder="Nhập số điện thoại"
+                        className="input-form"
+                    />
                     <div>
                         <span>{error}</span>
                     </div>
@@ -75,13 +107,13 @@ function LoginPage() {
                         </div>
                     ) : (
                         <div className={cx('submit-wrapper')}>
-                            <input value="ĐĂNG NHẬP" type="submit" className={cx('submit-btn')} />
+                            <input value="ĐĂNG KÍ" type="submit" className={cx('submit-btn')} />
                         </div>
                     )}
                     <div style={{ marginTop: '10px', textAlign: 'center', fontSize: '14px' }}>
-                        <span style={{ marginRight: '6px', opacity: '.8' }}>Chưa có tài khoản?</span>
-                        <Link to="/register" className={cx('login-text')}>
-                            Đăng kí
+                        <span style={{ marginRight: '6px', opacity: '.8' }}>Đã có tài khoản?</span>
+                        <Link to="/login" className={cx('login-text')}>
+                            Đăng nhập
                         </Link>
                     </div>
                 </form>
@@ -90,4 +122,4 @@ function LoginPage() {
     );
 }
 
-export default LoginPage;
+export default RegisterPage;
