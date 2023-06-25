@@ -6,13 +6,7 @@ import classNames from 'classnames/bind';
 import styles from './App.module.scss';
 const cx = classNames.bind(styles);
 function App() {
-    const [theme, setTheme] = useLocalStorage<string>('devify theme', 'Light');
-
-    const switchTheme = () => {
-        const newTheme = theme === 'Light' ? 'Dark' : 'Light';
-        setTheme(newTheme);
-    };
-
+    const [theme] = useLocalStorage<string>('devify theme', 'Light');
     return (
         <Router>
             <GlobalStyles>
