@@ -1,10 +1,10 @@
 import { ComponentType } from 'react';
-import { Fragment } from 'react';
+
 // ========== import page =============
 import HomePage from '../pages/home/HomePage';
 import LoginPage from '../pages/login/LoginPage';
 import RegisterPage from '../pages/register/RegisterPage';
-import CoursePage from '../pages/course/CoursePage';
+import CoursesPage from '../pages/course/CoursesPage/CoursesPage';
 import DetailCourse from '../pages/course/DetailCourse/DetailCourse';
 // ========== import layout =============
 import DefaultLayout from '../layouts/DefaultLayout/DefaultLayout';
@@ -18,7 +18,7 @@ type Route = {
 export const PublicRoutes: Route[] = [
     { path: '/', page: HomePage, layout: DefaultLayout },
     { path: '/courses/:name', page: DetailCourse, layout: DefaultLayout },
-    { path: '/courses', page: CoursePage, layout: DefaultLayout },
+    { path: '/courses', page: CoursesPage, layout: DefaultLayout },
     { path: '/login', page: LoginPage, layout: AuthLayout },
     { path: '/register', page: RegisterPage, layout: AuthLayout },
 ];

@@ -3,8 +3,16 @@ import classNames from 'classnames/bind';
 import logo from '../../assets/img/logo.png';
 import InputFormData from '../../components/Input/InputFormData/InputFormData';
 import InputPassword from '../../components/Input/InputPassword/InputPassword';
+import { loginService } from '../../services/AuthService';
+import { getAccountInfoService } from '../../services/AccountService';
+import { authLogin, authLoginResponse, decodeToken } from '../../types/AuthType';
+import { accountInformationResponse, accountInformation } from '../../types/AccountType';
 import { Link } from 'react-router-dom';
 import { useState, ChangeEvent, FormEvent } from 'react';
+import { useCookies } from 'react-cookie';
+import useLocalStorage from 'use-local-storage';
+import jwt_decode from 'jwt-decode';
+
 const cx = classNames.bind(styles);
 
 interface FormData {
@@ -17,6 +25,8 @@ function LoginPage() {
         username: '',
         password: '',
     });
+    const [cookies, setCookies] = useCookies(['devify:AccessToken', 'devify:RefreshToken', 'devify:isLogin']);
+    const [currentUser, setCurrentUser] = useLocalStorage('currentUser', '');
     const [loading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -28,15 +38,44 @@ function LoginPage() {
         }));
     };
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleLogin = async () => {
+        const postData: authLogin = {
+            name: formData.username,
+            password: formData.password,
+        };
+        const res = await loginService(postData);
+        return res;
+    };
+
+    const handleSetStorage = async (res: authLoginResponse) => {
+        // =================== set cookies ======================
+        const accessTokenExp = new Date(Date.now() + 30 * 60 * 1000);
+        setCookies('devify:AccessToken', res.data.accessToken, { expires: accessTokenExp });
+        const refreshTokenExp = new Date(Date.now() + 30 * 60 * 1000);
+        setCookies('devify:RefreshToken', res.data.refreshToken, { expires: refreshTokenExp });
+        const isLoginExp = new Date(Date.now() + 30 * 60 * 1000);
+        setCookies('devify:isLogin', true, { expires: isLoginExp });
+
+        // =================== set localstorage ======================
+        const decodedToken: decodeToken = jwt_decode(res.data.accessToken);
+        if (decodedToken) {
+            const accountInfo: accountInformationResponse = await getAccountInfoService(decodedToken.Id);
+            setCurrentUser(JSON.stringify(accountInfo.data));
+        }
+    };
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsLoading(true);
-
-        setTimeout(() => {
-            setIsLoading(false);
+        const res: authLoginResponse = await handleLogin();
+        if (res.success === true) {
+            setError('');
+            await handleSetStorage(res);
             window.location.href = '/';
-        }, 2000);
-        console.log(formData);
+        } else {
+            setError(res.message);
+        }
+        setIsLoading(false);
     };
 
     return (

@@ -19,6 +19,7 @@ function NavbarSearch() {
             //setSearchResult([]);
             return;
         }
+        console.log('re');
     }, [debounce]);
 
     function HandleHideResult(e: any) {
@@ -35,7 +36,7 @@ function NavbarSearch() {
             setSearchValue(searchValue);
         }
     };
-    console.log(showTippy);
+
     return (
         <Tippy
             onClickOutside={HandleHideResult}
