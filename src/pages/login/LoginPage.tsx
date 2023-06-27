@@ -6,7 +6,7 @@ import InputPassword from '../../components/Input/InputPassword/InputPassword';
 import { loginService } from '../../services/AuthService';
 import { getAccountInfoService } from '../../services/AccountService';
 import { authLogin, authLoginResponse, decodeToken } from '../../types/AuthType';
-import { accountInformationResponse, accountInformation } from '../../types/AccountType';
+import { accountInformationResponse } from '../../types/AccountType';
 import { Link } from 'react-router-dom';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useCookies } from 'react-cookie';
@@ -25,8 +25,8 @@ function LoginPage() {
         username: '',
         password: '',
     });
-    const [cookies, setCookies] = useCookies(['devify:AccessToken', 'devify:RefreshToken', 'devify:isLogin']);
-    const [currentUser, setCurrentUser] = useLocalStorage('currentUser', '');
+    const [, setCookies, removeCookie] = useCookies(['devify:AccessToken', 'devify:RefreshToken', 'devify:isLogin']);
+    const [, setCurrentUser] = useLocalStorage('currentUser', '');
     const [loading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -60,7 +60,19 @@ function LoginPage() {
         const decodedToken: decodeToken = jwt_decode(res.data.accessToken);
         if (decodedToken) {
             const accountInfo: accountInformationResponse = await getAccountInfoService(decodedToken.Id);
-            setCurrentUser(JSON.stringify(accountInfo.data));
+            if (accountInfo != null) {
+                console.log(accountInfo);
+
+                if (accountInfo.success === true) {
+                    setCurrentUser(JSON.stringify(accountInfo.data));
+                    window.location.href = '/';
+                } else {
+                    removeCookie('devify:AccessToken');
+                    removeCookie('devify:RefreshToken');
+                    removeCookie('devify:isLogin');
+                    setError('Đã có lỗi xảy ra, vui lòng thử lại sau');
+                }
+            }
         }
     };
 
@@ -71,7 +83,6 @@ function LoginPage() {
         if (res.success === true) {
             setError('');
             await handleSetStorage(res);
-            window.location.href = '/';
         } else {
             setError(res.message);
         }
