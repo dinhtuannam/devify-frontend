@@ -29,11 +29,11 @@ function App() {
                     };
                     const res: refreshTokenResponse = await refreshTokenService(data);
                     if (res != null && res.success === true) {
-                        const accessTokenExp = new Date(Date.now() + 30 * 60 * 1000);
+                        const accessTokenExp = new Date(Date.now() + 60 * 60 * 1000);
                         setCookies('devify:AccessToken', res.data.accessToken, { expires: accessTokenExp });
                         const refreshTokenExp = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
                         setCookies('devify:RefreshToken', res.data.refreshToken, { expires: refreshTokenExp });
-                        const isLoginExp = new Date(Date.now() + 30 * 60 * 1000);
+                        const isLoginExp = new Date(Date.now() + 60 * 60 * 1000);
                         setCookies('devify:isLogin', true, { expires: isLoginExp });
                     }
                 }
