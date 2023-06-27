@@ -51,7 +51,7 @@ function LoginPage() {
         // =================== set cookies ======================
         const accessTokenExp = new Date(Date.now() + 30 * 60 * 1000);
         setCookies('devify:AccessToken', res.data.accessToken, { expires: accessTokenExp });
-        const refreshTokenExp = new Date(Date.now() + 30 * 60 * 1000);
+        const refreshTokenExp = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
         setCookies('devify:RefreshToken', res.data.refreshToken, { expires: refreshTokenExp });
         const isLoginExp = new Date(Date.now() + 30 * 60 * 1000);
         setCookies('devify:isLogin', true, { expires: isLoginExp });
@@ -61,8 +61,6 @@ function LoginPage() {
         if (decodedToken) {
             const accountInfo: accountInformationResponse = await getAccountInfoService(decodedToken.Id);
             if (accountInfo != null) {
-                console.log(accountInfo);
-
                 if (accountInfo.success === true) {
                     setCurrentUser(JSON.stringify(accountInfo.data));
                     window.location.href = '/';
@@ -80,11 +78,13 @@ function LoginPage() {
         e.preventDefault();
         setIsLoading(true);
         const res: authLoginResponse = await handleLogin();
-        if (res.success === true) {
-            setError('');
-            await handleSetStorage(res);
-        } else {
-            setError(res.message);
+        if (res != null) {
+            if (res.success === true) {
+                setError('');
+                await handleSetStorage(res);
+            } else {
+                setError(res.message);
+            }
         }
         setIsLoading(false);
     };

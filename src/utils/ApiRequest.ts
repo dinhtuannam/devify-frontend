@@ -43,5 +43,6 @@ export const postDataRequest = async (path: string, option = {}, isAuthorize: bo
         return response.data;
     } catch (e) {
         console.log(e);
+        return null;
     }
 };

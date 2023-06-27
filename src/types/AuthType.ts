@@ -24,3 +24,9 @@ export interface decodeToken {
     nbf: number;
     unique_name: string;
 }
+
+export interface refreshTokenResponse {
+    success: boolean;
+    message: string;
+    data: tokenResponse;
+}

@@ -17,7 +17,7 @@ function Navbar() {
     const [showTippy, setShowTippy] = useState(false);
     const [theme, setTheme] = useLocalStorage<string>('devify theme', 'Light');
     const [currentUser] = useLocalStorage<string>('currentUser', '');
-    const [cookies, setCookies] = useCookies();
+    const [cookies, , removeCookie] = useCookies(['devify:AccessToken', 'devify:RefreshToken', 'devify:isLogin']);
     const path = window.location.pathname;
 
     const switchTheme = () => {
@@ -27,6 +27,14 @@ function Navbar() {
 
     const handleTippy = () => {
         setShowTippy(!showTippy);
+    };
+
+    const handleLogout = () => {
+        removeCookie('devify:AccessToken');
+        removeCookie('devify:RefreshToken');
+        removeCookie('devify:isLogin');
+        localStorage.clear();
+        window.location.reload();
     };
 
     const LoginedComponent = () => {
@@ -42,7 +50,7 @@ function Navbar() {
                 <Tippy
                     onClickOutside={() => setShowTippy(false)}
                     interactive
-                    visible={showTippy} // Sử dụng giá trị của state showTippy trực tiếp ở đây
+                    visible={showTippy}
                     render={(attrs) => (
                         <div
                             className={cx('tippy')}
@@ -72,9 +80,9 @@ function Navbar() {
                                     </div>
                                 </li>
                                 <li className={cx('user-item-container')}>
-                                    <a className={cx('user-item')} href="/">
+                                    <div className={cx('user-item')} onClick={handleLogout}>
                                         Đăng xuất
-                                    </a>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
