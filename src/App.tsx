@@ -7,7 +7,7 @@ import styles from './App.module.scss';
 import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import jwt_decode from 'jwt-decode';
-import { decodeToken, refreshTokenResponse, tokenResponse } from './types/AuthType';
+import { decodeToken, refreshTokenResponse, refreshTokenRequest } from './types/AuthType';
 import { refreshTokenService } from './services/AuthService';
 const cx = classNames.bind(styles);
 function App() {
@@ -18,25 +18,37 @@ function App() {
         const handleRefreshToken = async () => {
             const refreshToken = cookies['devify:RefreshToken'];
             const accessToken = cookies['devify:AccessToken'];
-            if (accessToken && refreshToken) {
+            const isLogin = cookies['devify:isLogin'];
+            console.log(refreshToken);
+            console.log(accessToken);
+            console.log(isLogin);
+            if (accessToken && refreshToken && isLogin) {
                 const decodedToken: decodeToken = jwt_decode(accessToken);
                 const currentTimestamp = Math.floor(Date.now() / 1000);
                 if (decodedToken.exp - currentTimestamp <= 600) {
-                    console.log('handle refresh token');
-                    const data: tokenResponse = {
-                        accessToken: accessToken,
+                    console.log('condition 1');
+                    const data: refreshTokenRequest = {
                         refreshToken: refreshToken,
                     };
-                    const res: refreshTokenResponse = await refreshTokenService(data);
-                    if (res != null && res.success === true) {
-                        const accessTokenExp = new Date(Date.now() + 60 * 60 * 1000);
-                        setCookies('devify:AccessToken', res.data.accessToken, { expires: accessTokenExp });
-                        const refreshTokenExp = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-                        setCookies('devify:RefreshToken', res.data.refreshToken, { expires: refreshTokenExp });
-                        const isLoginExp = new Date(Date.now() + 60 * 60 * 1000);
-                        setCookies('devify:isLogin', true, { expires: isLoginExp });
-                    }
+                    handleCallApi(data);
                 }
+            } else if (refreshToken && isLogin && !accessToken) {
+                console.log('condition 2');
+                const data: refreshTokenRequest = {
+                    refreshToken: refreshToken,
+                };
+                handleCallApi(data);
+            }
+        };
+        const handleCallApi = async (token: refreshTokenRequest) => {
+            const res: refreshTokenResponse = await refreshTokenService(token);
+            if (res != null && res.success === true) {
+                const accessTokenExp = new Date(Date.now() + 60 * 60 * 1000);
+                setCookies('devify:AccessToken', res.data.accessToken, { expires: accessTokenExp });
+                const refreshTokenExp = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+                setCookies('devify:RefreshToken', res.data.refreshToken, { expires: refreshTokenExp });
+                const isLoginExp = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+                setCookies('devify:isLogin', true, { expires: isLoginExp });
             }
         };
         handleRefreshToken();

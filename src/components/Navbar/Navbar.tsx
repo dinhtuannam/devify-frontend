@@ -2,11 +2,10 @@ import classNames from 'classnames/bind';
 import styles from './Navbar.module.scss';
 import logo from '../../assets/img/logo.png';
 import { FaBell, FaUserCircle } from 'react-icons/fa';
-import { AiOutlineLeft } from 'react-icons/ai';
+import { AiOutlineLeft, AiOutlineMenu } from 'react-icons/ai';
 import NavbarSearch from './Search/NavbarSearch';
 import { Link } from 'react-router-dom';
-import PopperWrapper from './PopperWrapper/PopperWrapper';
-import { accountInformation } from '../../types/AccountType';
+//import PopperWrapper from './PopperWrapper/PopperWrapper';
 import Tippy from '@tippyjs/react';
 import useLocalStorage from 'use-local-storage';
 import { useState, Fragment } from 'react';
@@ -61,7 +60,7 @@ function Navbar() {
                             <ul className="tippy-wrapper">
                                 <li className={cx('user-heading')}>
                                     <FaUserCircle className={cx('avatar')} />
-                                    <p className={cx('username')}>{JSON.parse(currentUser).username}</p>
+                                    <p className={cx('username')}>{JSON.parse(currentUser)?.username}</p>
                                 </li>
                                 <li className={cx('user-item-container')}>
                                     <a className={cx('user-item')} href="/">
@@ -104,11 +103,16 @@ function Navbar() {
             </Fragment>
         );
     };
-
+    const checkIsLogin = () => {
+        if (cookies['devify:AccessToken'] && cookies['devify:RefreshToken'] && cookies['devify:isLogin'] === 'true')
+            return true;
+        else return false;
+    };
     return (
         <div className={cx('wrapper')}>
             <div className={cx('logo')}>
                 <img className={cx('logo-img')} src={logo} alt="logo" />
+                <AiOutlineMenu className={cx('menu-icon')} />
                 {path === '/' ? (
                     <h4 className={cx('logo-title')}>Devify Academy</h4>
                 ) : (
@@ -119,9 +123,7 @@ function Navbar() {
                 )}
             </div>
             <NavbarSearch />
-            <div className={cx('action')}>
-                {cookies['devify:isLogin'] === 'true' ? LoginedComponent() : unLoginedComponent()}
-            </div>
+            <div className={cx('action')}>{checkIsLogin() === true ? LoginedComponent() : unLoginedComponent()}</div>
         </div>
     );
 }

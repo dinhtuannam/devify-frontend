@@ -30,3 +30,7 @@ export interface refreshTokenResponse {
     message: string;
     data: tokenResponse;
 }
+
+export interface refreshTokenRequest {
+    refreshToken: string;
+}

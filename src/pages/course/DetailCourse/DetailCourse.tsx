@@ -6,6 +6,7 @@ import { getDetailCourse } from '../../../services/CourseService';
 import { useParams } from 'react-router-dom';
 import notfound from '../../../assets/img/notfound.png';
 import Spinner from '../../../components/Loading/Spinner/Spinner';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 const cx = classNames.bind(styles);
 
 function DetailCourse() {

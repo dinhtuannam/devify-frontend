@@ -53,7 +53,7 @@ function LoginPage() {
         setCookies('devify:AccessToken', res.data.accessToken, { expires: accessTokenExp });
         const refreshTokenExp = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
         setCookies('devify:RefreshToken', res.data.refreshToken, { expires: refreshTokenExp });
-        const isLoginExp = new Date(Date.now() + 60 * 60 * 1000);
+        const isLoginExp = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
         setCookies('devify:isLogin', true, { expires: isLoginExp });
 
         // =================== set localstorage ======================

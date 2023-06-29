@@ -1,5 +1,5 @@
 import { postDataRequest } from '../utils/ApiRequest';
-import { authLogin, tokenResponse } from '../types/AuthType';
+import { authLogin, refreshTokenRequest } from '../types/AuthType';
 
 export const loginService = async (data: authLogin) => {
     try {
@@ -11,8 +11,10 @@ export const loginService = async (data: authLogin) => {
     }
 };
 
-export const refreshTokenService = async (data: tokenResponse) => {
+export const refreshTokenService = async (data: refreshTokenRequest) => {
     try {
+        console.log(data);
+
         const path = `/Auth/renew-token`;
         const response = await postDataRequest(path, data);
         return response;

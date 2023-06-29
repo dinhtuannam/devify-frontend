@@ -1,3 +1,4 @@
+@import '../../../styles/GlobalStyles.scss';
 .body {
     display: flex;
     align-items: center;
@@ -13,6 +14,10 @@
         display: flex;
         align-items: center;
         width: 420px;
+        @include respond-to(iphone) {
+            width: 180px;
+            padding: 0 14px 0 6px;
+        }
         &:focus-within {
             border: 2px solid var(--search-navbar-border-focus);
         }
@@ -29,6 +34,7 @@
 
         input.search-input {
             border: none;
+            width: 100%;
             caret-color: #444;
             flex: 1 1;
             height: 100%;
@@ -37,6 +43,11 @@
             background: var(--background);
             color: var(--text-color);
             transition: var(--primary-transition);
+
+            @include respond-to(iphone) {
+                padding: 0px 2px;
+                font-size: 10px;
+            }
         }
     }
 }
