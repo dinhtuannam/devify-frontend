@@ -14,9 +14,16 @@
         display: flex;
         align-items: center;
         width: 420px;
-        @include respond-to(iphone) {
-            width: 180px;
+        @include respond-to-iphone {
+            width: 210px;
             padding: 0 14px 0 6px;
+        }
+        @include respond-to-tablet {
+            width: 300px;
+            padding: 0 14px 0 6px;
+        }
+        @include respond-to-ipad {
+            width: 360px;
         }
         &:focus-within {
             border: 2px solid var(--search-navbar-border-focus);
@@ -44,7 +51,7 @@
             color: var(--text-color);
             transition: var(--primary-transition);
 
-            @include respond-to(iphone) {
+            @include respond-to-iphone {
                 padding: 0px 2px;
                 font-size: 10px;
             }
@@ -68,4 +75,7 @@
     background-color: var(--tippy-background);
     transition: var(--primary-transition);
     color: var(--text-color);
+    @include respond-to-iphone {
+        width: 350px;
+    }
 }

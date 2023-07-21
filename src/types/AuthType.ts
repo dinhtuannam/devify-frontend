@@ -25,12 +25,6 @@ export interface decodeToken {
     unique_name: string;
 }
 
-export interface refreshTokenResponse {
-    success: boolean;
-    message: string;
-    data: tokenResponse;
-}
-
 export interface refreshTokenRequest {
     refreshToken: string;
 }

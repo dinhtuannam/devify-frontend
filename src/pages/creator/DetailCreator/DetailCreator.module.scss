@@ -87,7 +87,7 @@
                 width: 50%;
                 padding: 14px 10px;
 
-                @include respond-to(ipad) {
+                @include respond-to-ipad {
                     width: 100%;
                     justify-content: space-between;
                 }
@@ -96,7 +96,7 @@
                     height: 118px;
                     margin-right: 4px;
                     cursor: pointer;
-                    @include respond-to(ipad) {
+                    @include respond-to-ipad {
                         width: 240px;
                     }
                     .course-img {
@@ -109,13 +109,16 @@
                 .course-information {
                     width: 300px;
 
-                    @include respond-to(ipad) {
+                    @include respond-to-ipad {
                         width: 240px;
                     }
                     .course-title {
                         font-size: 16px;
-                        @include respond-to(ipad) {
+                        @include respond-to-ipad {
                             font-size: 14px;
+                        }
+                        @include respond-to-pc {
+                            margin-bottom: 6px;
                         }
                     }
                     .course-description {
@@ -123,7 +126,7 @@
                         font-weight: 400;
                         text-align: justify;
                         opacity: 0.8;
-                        @include respond-to(ipad) {
+                        @include respond-to-ipad {
                             font-size: 12px;
                             margin-top: 4px;
                         }

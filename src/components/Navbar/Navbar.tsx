@@ -5,22 +5,30 @@ import { FaBell, FaUserCircle } from 'react-icons/fa';
 import { AiOutlineLeft, AiOutlineMenu } from 'react-icons/ai';
 import NavbarSearch from './Search/NavbarSearch';
 import { Link } from 'react-router-dom';
-//import PopperWrapper from './PopperWrapper/PopperWrapper';
+import { currentUserType } from '../../types/AccountType';
 import Tippy from '@tippyjs/react';
+import UseLogout from '../../hooks/useLogout';
 import useLocalStorage from 'use-local-storage';
-import { useState, Fragment } from 'react';
-import { useCookies } from 'react-cookie';
+import { useState, Fragment, useEffect } from 'react';
+import { GetAuthCookies } from '../../helpers/cookiesHelper';
 const cx = classNames.bind(styles);
 
 function Navbar() {
-    const [showTippy, setShowTippy] = useState(false);
+    const [showTippy, setShowTippy] = useState<boolean>(false);
+    const [currentUser, setCurrentUser] = useState<currentUserType | null>(null);
     const [theme, setTheme] = useLocalStorage<string>('devify theme', 'Light');
-    const [currentUser] = useLocalStorage<string>('currentUser', '');
-    const [cookies, , removeCookie] = useCookies(['devify:AccessToken', 'devify:RefreshToken', 'devify:isLogin']);
+    const cookiesData = GetAuthCookies();
+
     const path = window.location.pathname;
 
+    useEffect(() => {
+        const userString: string | null = localStorage.getItem('currentUser');
+        const user: currentUserType | null = userString ? JSON.parse(userString) : null;
+        setCurrentUser(user);
+    }, []);
+
     const switchTheme = () => {
-        const newTheme = theme === 'Light' ? 'Dark' : 'Light';
+        const newTheme: string = theme === 'Light' ? 'Dark' : 'Light';
         setTheme(newTheme);
     };
 
@@ -29,10 +37,7 @@ function Navbar() {
     };
 
     const handleLogout = () => {
-        removeCookie('devify:AccessToken');
-        removeCookie('devify:RefreshToken');
-        removeCookie('devify:isLogin');
-        localStorage.clear();
+        UseLogout();
         window.location.reload();
     };
 
@@ -60,7 +65,7 @@ function Navbar() {
                             <ul className="tippy-wrapper">
                                 <li className={cx('user-heading')}>
                                     <FaUserCircle className={cx('avatar')} />
-                                    <p className={cx('username')}>{JSON.parse(currentUser)?.username}</p>
+                                    <p className={cx('username')}>{currentUser?.username}</p>
                                 </li>
                                 <li className={cx('user-item-container')}>
                                     <a className={cx('user-item')} href="/">
@@ -104,14 +109,16 @@ function Navbar() {
         );
     };
     const checkIsLogin = () => {
-        if (cookies['devify:AccessToken'] && cookies['devify:RefreshToken'] && cookies['devify:isLogin'] === 'true')
+        if (cookiesData.accessTokenCookie && cookiesData.refreshTokenCookie && cookiesData.isLoginCookies === 'true')
             return true;
         else return false;
     };
     return (
         <div className={cx('wrapper')}>
             <div className={cx('logo')}>
-                <img className={cx('logo-img')} src={logo} alt="logo" />
+                <Link to="/">
+                    <img className={cx('logo-img')} src={logo} alt="logo" />
+                </Link>
                 <AiOutlineMenu className={cx('menu-icon')} />
                 {path === '/' ? (
                     <h4 className={cx('logo-title')}>Devify Academy</h4>

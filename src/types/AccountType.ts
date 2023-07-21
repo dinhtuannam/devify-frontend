@@ -5,8 +5,8 @@ export interface accountInformation {
     RoleId: string;
 }
 
-export interface accountInformationResponse {
-    success: boolean;
-    message: string;
-    data: accountInformation;
+export interface currentUserType {
+    id: string;
+    username: string;
+    email: string;
 }

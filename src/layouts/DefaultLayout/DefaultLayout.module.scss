@@ -9,7 +9,7 @@
     padding: 0 40px 0 20px;
     flex: 1 1;
     margin: 0 auto;
-    @include respond-to(iphone) {
+    @include respond-to-iphone {
         max-width: calc(100% - 0px);
         padding: 0 16px;
     }

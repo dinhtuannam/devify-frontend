@@ -1,10 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { accountInformationResponse } from '../../types/AccountType';
+import { accountInformation } from '../../types/AccountType';
+import { ApiResponse } from '../../types/ApiType';
 
 interface authState {
     isLogin: boolean;
     isAdmin: boolean;
-    userData: accountInformationResponse[];
+    userData: ApiResponse<accountInformation>[];
 }
 
 const initialState = {

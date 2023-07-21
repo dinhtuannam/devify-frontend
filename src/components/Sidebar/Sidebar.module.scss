@@ -4,7 +4,7 @@
     flex-shrink: 0;
     background: var(--background);
     transition: var(--primary-transition);
-    @include respond-to(iphone) {
+    @include respond-to-iphone {
         display: none;
     }
     .container {

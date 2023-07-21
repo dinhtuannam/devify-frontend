@@ -1,24 +1,24 @@
 import styles from './DetailCourse.module.scss';
 import classNames from 'classnames/bind';
 import { useState, useEffect, Fragment } from 'react';
-import { DetailCourseResponse } from '../../../types/CourseType';
+import { DetailCourse as DetailCourseType } from '../../../types/CourseType';
+import { ApiResponse } from '../../../types/ApiType';
 import { getDetailCourse } from '../../../services/CourseService';
 import { useParams } from 'react-router-dom';
 import notfound from '../../../assets/img/notfound.png';
 import Spinner from '../../../components/Loading/Spinner/Spinner';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 const cx = classNames.bind(styles);
 
 function DetailCourse() {
-    const [course, setCourse] = useState<DetailCourseResponse>();
+    const [course, setCourse] = useState<ApiResponse<DetailCourseType>>();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [show, setShow] = useState<number[]>([]);
     const { name } = useParams();
 
     useEffect(() => {
         const fetchAPI = async () => {
-            const res = await getDetailCourse(name);
-            if (res != null) setCourse(res);
+            const res: ApiResponse<DetailCourseType> = await getDetailCourse(name);
+            if (res.success !== false) setCourse(res);
             setTimeout(() => {
                 setIsLoading(false);
             }, 100);
@@ -53,13 +53,7 @@ function DetailCourse() {
                             </div>
                             <div className={cx('cat-wrapper')}>
                                 <span className={cx('course-cat')}>Thể loại :</span>
-                                {course.data.courseCategories.map((value, index) => {
-                                    return (
-                                        <span className={cx('course-cat-item')} key={index}>
-                                            {value.categoryName}
-                                        </span>
-                                    );
-                                })}
+                                {course.data?.category?.categoryName}
                             </div>
                             <h3 style={{ fontSize: '20px', color: 'var(--text-color)' }}>Nội dung khóa học</h3>
                             <div className={cx('chapter-list-wrapper')}>

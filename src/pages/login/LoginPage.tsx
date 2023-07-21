@@ -5,13 +5,15 @@ import InputFormData from '../../components/Input/InputFormData/InputFormData';
 import InputPassword from '../../components/Input/InputPassword/InputPassword';
 import { loginService } from '../../services/AuthService';
 import { getAccountInfoService } from '../../services/AccountService';
-import { authLogin, authLoginResponse, decodeToken } from '../../types/AuthType';
-import { accountInformationResponse } from '../../types/AccountType';
+import { authLogin, decodeToken, tokenResponse } from '../../types/AuthType';
+import { ApiResponse } from '../../types/ApiType';
+import { accountInformation } from '../../types/AccountType';
 import { Link } from 'react-router-dom';
-import { useState, ChangeEvent, FormEvent } from 'react';
-import { useCookies } from 'react-cookie';
-import useLocalStorage from 'use-local-storage';
+import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
+import { GetAuthCookies, SetAuthCookies, RemoveAllCookies } from '../../helpers/cookiesHelper';
+import { AuthCookies } from '../../types/CookiesType';
 
 const cx = classNames.bind(styles);
 
@@ -21,14 +23,25 @@ interface FormData {
 }
 
 function LoginPage() {
+    // ============== Login State ========================
     const [formData, setFormData] = useState<FormData>({
         username: '',
         password: '',
     });
-    const [, setCookies, removeCookie] = useCookies(['devify:AccessToken', 'devify:RefreshToken', 'devify:isLogin']);
-    const [, setCurrentUser] = useLocalStorage('currentUser', '');
-    const [loading, setIsLoading] = useState(false);
-    const [error, setError] = useState('');
+    // ============== Get Cookies ========================
+    const cookiesData: AuthCookies = GetAuthCookies();
+    const accessTokenCookie: string | undefined = cookiesData.accessTokenCookie;
+    const refreshTokenCookie: string | undefined = cookiesData.refreshTokenCookie;
+    const isLoginCookie: string | undefined = cookiesData.isLoginCookies;
+
+    // ============== Orther Cookies ========================
+    const [loading, setIsLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string>('');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isLoginCookie === 'true' || accessTokenCookie || refreshTokenCookie) navigate('/');
+    }, []);
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -47,27 +60,20 @@ function LoginPage() {
         return res;
     };
 
-    const handleSetStorage = async (res: authLoginResponse) => {
+    const handleSetStorage = async (res: ApiResponse<tokenResponse>) => {
         // =================== set cookies ======================
-        const accessTokenExp = new Date(Date.now() + 60 * 60 * 1000);
-        setCookies('devify:AccessToken', res.data.accessToken, { expires: accessTokenExp });
-        const refreshTokenExp = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-        setCookies('devify:RefreshToken', res.data.refreshToken, { expires: refreshTokenExp });
-        const isLoginExp = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-        setCookies('devify:isLogin', true, { expires: isLoginExp });
+        SetAuthCookies();
 
         // =================== set localstorage ======================
         const decodedToken: decodeToken = jwt_decode(res.data.accessToken);
         if (decodedToken) {
-            const accountInfo: accountInformationResponse = await getAccountInfoService(decodedToken.Id);
+            const accountInfo: ApiResponse<accountInformation> = await getAccountInfoService(decodedToken.Id);
             if (accountInfo != null) {
                 if (accountInfo.success === true) {
-                    setCurrentUser(JSON.stringify(accountInfo.data));
+                    localStorage.setItem('currentUser', JSON.stringify(accountInfo.data));
                     window.location.href = '/';
                 } else {
-                    removeCookie('devify:AccessToken');
-                    removeCookie('devify:RefreshToken');
-                    removeCookie('devify:isLogin');
+                    RemoveAllCookies();
                     setError('Đã có lỗi xảy ra, vui lòng thử lại sau');
                 }
             }
@@ -77,7 +83,7 @@ function LoginPage() {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsLoading(true);
-        const res: authLoginResponse = await handleLogin();
+        const res: ApiResponse<tokenResponse> = await handleLogin();
         if (res != null) {
             if (res.success === true) {
                 setError('');

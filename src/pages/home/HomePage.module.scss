@@ -9,7 +9,7 @@
 .wrapper {
     padding: var(--content-wrapper);
     margin-top: 70px;
-    @include respond-to(iphone) {
+    @include respond-to-iphone {
         padding: 0px 0px;
         margin-top: 20px;
     }

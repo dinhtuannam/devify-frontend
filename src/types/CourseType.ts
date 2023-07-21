@@ -1,7 +1,7 @@
 interface CourseCreator {
     creatorId: string;
-    name: string;
-    link: string;
+    displayName: string;
+    slug: string;
     image: string;
 }
 
@@ -27,22 +27,16 @@ interface CourseCategory {
     categoryName: string;
 }
 
-interface DetailCourse {
+export interface DetailCourse {
     courseId: string;
     title: string;
     purchased: number;
     price: number;
     description: string;
-    link: string;
+    slug: string;
     image: string;
     creator: CourseCreator;
     courseLanguages: CourseLanguage[];
     chapters: CourseChapter[];
-    courseCategories: CourseCategory[];
-}
-
-export interface DetailCourseResponse {
-    success: boolean;
-    message: string;
-    data: DetailCourse;
+    category: CourseCategory;
 }

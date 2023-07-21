@@ -1,3 +1,4 @@
+@import '../../../styles/GlobalStyles.scss';
 .wrapper {
     max-width: 1920px;
     width: 100%;
@@ -5,9 +6,22 @@
     display: flex;
     margin: 0 auto;
     margin-top: 24px;
+
+    @include respond-to-iphone {
+        flex-direction: column-reverse;
+    }
+    @include respond-to-tablet {
+        flex-direction: column-reverse;
+    }
     .content {
         width: 66.66667%;
 
+        @include respond-to-iphone {
+            width: 100%;
+        }
+        @include respond-to-tablet {
+            width: 100%;
+        }
         .course-title {
             font-size: 3.2rem;
             font-weight: 700;
@@ -64,6 +78,10 @@
                 margin-right: 10px;
                 cursor: pointer;
                 transition: var(--primary-transition);
+                @include respond-to-iphone {
+                    padding: 14px 30px 14px 14px;
+                    margin-right: 0px;
+                }
             }
             .lesson-item {
                 border-bottom: 1px solid rgba(0, 0, 0, 0.03);
@@ -73,6 +91,9 @@
                 line-height: 48px;
                 overflow: hidden;
                 padding: 0 30px 0 48px;
+                @include respond-to-iphone {
+                    padding: 0 30px;
+                }
             }
         }
     }
@@ -89,6 +110,18 @@
         top: 74px;
         z-index: 8;
         flex-shrink: 0;
+        @include respond-to-iphone {
+            position: unset;
+            width: 100%;
+            margin-left: 0px;
+            margin-bottom: 20px;
+        }
+        @include respond-to-tablet {
+            position: unset;
+            width: 100%;
+            margin-left: 0px;
+            margin-bottom: 20px;
+        }
         .course-img {
             border-radius: 16px;
             margin: 2px 0 20px;
@@ -104,6 +137,9 @@
             font-size: 20px;
             opacity: 0.8;
             color: var(--text-color);
+            @include respond-to-iphone {
+                pfont-size: 14px;
+            }
         }
         .buy-btn {
             font-size: 1.6rem;

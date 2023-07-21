@@ -6,11 +6,7 @@ export const backendRequest = axios.create({
     baseURL: baseURL,
 });
 
-export const authorizationRequest = axios.create({
-    baseURL: baseURL,
-});
-
-authorizationRequest.interceptors.request.use(
+backendRequest.interceptors.request.use(
     (config) => {
         const token = Cookies.get('devify:AccessToken');
         if (token) {
@@ -23,23 +19,21 @@ authorizationRequest.interceptors.request.use(
     },
 );
 
-export const getDataRequest = async (path: string, option = {}, isAuthorize: boolean = false) => {
+export const getDataRequest = async (path: string, option = {}) => {
     try {
-        let response;
-        if (isAuthorize === false) response = await backendRequest.get(path, option);
-        else response = await authorizationRequest.get(path, option);
+        let response = await backendRequest.get(path, option);
         return response.data;
-    } catch (e) {
+    } catch (e: any) {
         console.log(e);
-        return null;
+        if (e.response && e.response.data) {
+            return e.response.data;
+        }
     }
 };
 
-export const postDataRequest = async (path: string, option = {}, isAuthorize: boolean = false) => {
+export const postDataRequest = async (path: string, option = {}) => {
     try {
-        let response;
-        if (isAuthorize === false) response = await backendRequest.post(path, option);
-        else response = await authorizationRequest.post(path, option);
+        let response = await backendRequest.post(path, option);
         return response.data;
     } catch (e) {
         console.log(e);
