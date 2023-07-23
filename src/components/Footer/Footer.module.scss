@@ -1,8 +1,12 @@
+@import '../../styles/GlobalStyles.scss';
 .wrapper {
     background-color: var(--footer-background);
     color: #a9b3bb;
     overflow: hidden;
     padding: 68px 0 40px;
+    @include respond-to-iphone {
+        padding-top: 20px;
+    }
 }
 .logo {
     background-color: #181821;
@@ -23,6 +27,9 @@
         margin-left: -12px;
         margin-right: -12px;
         margin-bottom: 48px;
+        @include respond-to-iphone {
+            flex-direction: column;
+        }
         .body-item {
             padding: 0px 12px;
 
@@ -32,6 +39,9 @@
                 align-content: center;
                 font-weight: 600;
                 letter-spacing: 1px;
+                @include respond-to-iphone {
+                    justify-content: center;
+                }
                 .slogan {
                     padding: 10px 0px 0px 8px;
                 }
@@ -43,6 +53,10 @@
                 line-height: 2.2rem;
                 position: relative;
                 padding: 14px 34px 14px 0px;
+                @include respond-to-iphone {
+                    padding-bottom: 14px;
+                    padding-right: 0px;
+                }
             }
             .contact-list a {
                 color: #a9b3bb;
@@ -65,9 +79,21 @@
         display: flex;
         width: 100%;
         justify-content: space-between;
+        @include respond-to-iphone {
+            flex-direction: column;
+            text-align: center;
+        }
         .social-list {
             color: #fff;
             padding-right: 70px;
+            @include respond-to-iphone {
+                text-align: center;
+                margin-top: 8px;
+                padding-right: 0px;
+            }
+            @include respond-to-tablet {
+                padding-right: 40px;
+            }
 
             .icon {
                 margin-left: 6px;
@@ -79,7 +105,15 @@
 }
 .w-20 {
     width: 20%;
+    @include respond-to-iphone {
+        width: 100%;
+        text-align: center;
+    }
 }
 .w-40 {
     width: 40%;
+    @include respond-to-iphone {
+        width: 100%;
+        text-align: center;
+    }
 }

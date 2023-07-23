@@ -44,6 +44,12 @@
         @include respond-to-iphone {
             width: 50%;
         }
+        @include respond-to-tablet {
+            width: 50%;
+        }
+        @include respond-to-ipad {
+            width: 50%;
+        }
     }
 }
 .link {
@@ -75,6 +81,7 @@
 .course-title {
     margin: 10px 0px 6px 0px;
     font-weight: 500;
+    font-size: 1.6rem;
     color: var(--text-color);
 }
 .price {

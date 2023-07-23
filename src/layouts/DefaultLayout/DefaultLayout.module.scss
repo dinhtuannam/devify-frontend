@@ -13,4 +13,8 @@
         max-width: calc(100% - 0px);
         padding: 0 16px;
     }
+    @include respond-to-tablet {
+        max-width: calc(100% - 0px);
+        padding: 0 16px;
+    }
 }

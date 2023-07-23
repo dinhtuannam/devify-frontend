@@ -2,12 +2,6 @@ import Cookies from 'js-cookie';
 import { accessTokenExp, refreshTokenExp, isLoginExp } from '../constants/AuthExp';
 import { AuthCookies } from '../types/CookiesType';
 
-interface authCookies {
-    accessToken: string;
-    refreshToken: string;
-    isLogin: boolean;
-}
-
 export const RemoveAllCookies = () => {
     const allCookies = Cookies.get();
     Object.keys(allCookies).forEach((cookieName) => {
@@ -15,6 +9,11 @@ export const RemoveAllCookies = () => {
     });
 };
 
+interface authCookies {
+    accessToken: string;
+    refreshToken: string;
+    isLogin: boolean;
+}
 export const SetAuthCookies = () => {
     const setAuthCookiesHandler = (props: authCookies) => {
         Cookies.set('devify:AccessToken', props.accessToken, { expires: accessTokenExp, path: '/' });

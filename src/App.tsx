@@ -55,6 +55,7 @@ function App() {
                     isLogin: true,
                 };
                 setAuthCookies(authData);
+                window.location.reload();
             }
             if (res != null && res.success === false) {
                 UseLogout();

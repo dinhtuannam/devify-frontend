@@ -4,10 +4,10 @@ import logo from '../../assets/img/logo.png';
 import InputFormData from '../../components/Input/InputFormData/InputFormData';
 import InputPassword from '../../components/Input/InputPassword/InputPassword';
 import { loginService } from '../../services/AuthService';
-import { getAccountInfoService } from '../../services/AccountService';
+import { getCurrentUserService } from '../../services/AccountService';
 import { authLogin, decodeToken, tokenResponse } from '../../types/AuthType';
 import { ApiResponse } from '../../types/ApiType';
-import { accountInformation } from '../../types/AccountType';
+import { currentUserInformation } from '../../types/AccountType';
 import { Link } from 'react-router-dom';
 import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -37,6 +37,7 @@ function LoginPage() {
     // ============== Orther Cookies ========================
     const [loading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
+    const handleSetAuthCookies = SetAuthCookies();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -62,12 +63,19 @@ function LoginPage() {
 
     const handleSetStorage = async (res: ApiResponse<tokenResponse>) => {
         // =================== set cookies ======================
-        SetAuthCookies();
+        const authData = {
+            accessToken: res.data.accessToken,
+            refreshToken: res.data.refreshToken,
+            isLogin: true,
+        };
+        handleSetAuthCookies(authData);
 
         // =================== set localstorage ======================
         const decodedToken: decodeToken = jwt_decode(res.data.accessToken);
         if (decodedToken) {
-            const accountInfo: ApiResponse<accountInformation> = await getAccountInfoService(decodedToken.Id);
+            const accountInfo: ApiResponse<currentUserInformation> = await getCurrentUserService(decodedToken.Id);
+            console.log(res.data);
+
             if (accountInfo != null) {
                 if (accountInfo.success === true) {
                     localStorage.setItem('currentUser', JSON.stringify(accountInfo.data));

@@ -1,30 +1,25 @@
 import styles from './DetailCourse.module.scss';
 import classNames from 'classnames/bind';
-import { useState, useEffect, Fragment } from 'react';
-import { DetailCourse as DetailCourseType } from '../../../types/CourseType';
-import { ApiResponse } from '../../../types/ApiType';
-import { getDetailCourse } from '../../../services/CourseService';
+import { useState, useEffect, Fragment, memo } from 'react';
 import { useParams } from 'react-router-dom';
 import notfound from '../../../assets/img/notfound.png';
 import Spinner from '../../../components/Loading/Spinner/Spinner';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
+import { getCourseBySlug } from '../../../redux/reducers/course/detailCourse.slice';
+import { AppDispatch } from '../../../redux/store';
+
 const cx = classNames.bind(styles);
 
 function DetailCourse() {
-    const [course, setCourse] = useState<ApiResponse<DetailCourseType>>();
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const stateData = useSelector((state: RootState) => state.detailCourseStore);
+    const dispatch = useDispatch<AppDispatch>();
     const [show, setShow] = useState<number[]>([]);
     const { name } = useParams();
 
     useEffect(() => {
-        const fetchAPI = async () => {
-            const res: ApiResponse<DetailCourseType> = await getDetailCourse(name);
-            if (res.success !== false) setCourse(res);
-            setTimeout(() => {
-                setIsLoading(false);
-            }, 100);
-        };
-        fetchAPI();
-    }, [name]);
+        dispatch(getCourseBySlug(name));
+    }, [name, dispatch]);
 
     const handleShow = (index: number) => {
         if (show.includes(index)) {
@@ -33,17 +28,19 @@ function DetailCourse() {
         } else setShow((prevNumbers) => [...prevNumbers, index]);
     };
 
+    console.log('redner');
+
     const renderContent = () => {
         return (
             <Fragment>
-                {course ? (
+                {stateData.data && stateData.isSuccess ? (
                     <div className={cx('wrapper')}>
                         <div className={cx('content')}>
-                            <h1 className={cx('course-title')}>{course.data.title}</h1>
-                            <p className={cx('course-description')}>{course.data.description}</p>
+                            <h1 className={cx('course-title')}>{stateData.data.title}</h1>
+                            <p className={cx('course-description')}>{stateData.data.description}</p>
                             <div className={cx('lang-wrapper')}>
                                 <span className={cx('course-lang')}>Ngôn ngữ :</span>
-                                {course.data.courseLanguages.map((value, index) => {
+                                {stateData.data.courseLanguages.map((value, index) => {
                                     return (
                                         <span className={cx('course-lang-item')} key={index}>
                                             Ngôn ngữ {value.name}
@@ -53,11 +50,11 @@ function DetailCourse() {
                             </div>
                             <div className={cx('cat-wrapper')}>
                                 <span className={cx('course-cat')}>Thể loại :</span>
-                                {course.data?.category?.categoryName}
+                                {stateData.data.category?.categoryName}
                             </div>
                             <h3 style={{ fontSize: '20px', color: 'var(--text-color)' }}>Nội dung khóa học</h3>
                             <div className={cx('chapter-list-wrapper')}>
-                                {course.data.chapters.map((value, index) => {
+                                {stateData.data.chapters.map((value, index) => {
                                     return (
                                         <div className={cx('chapter-container')} key={index}>
                                             <div className={cx('chapter-item')} onClick={() => handleShow(index)}>
@@ -91,10 +88,10 @@ function DetailCourse() {
                             </div>
                             <div className={cx('price-box')}>
                                 <span style={{ marginRight: '6px' }}>Giá tiền : </span>
-                                <span>{course.data.price}</span>
+                                <span>{stateData.data.price}</span>
                             </div>
                             <div className={cx('purchased-box')}>
-                                <span style={{ marginRight: '6px' }}>{course.data.purchased}</span>
+                                <span style={{ marginRight: '6px' }}>{stateData.data.purchased}</span>
                                 <span>thành viên đã tham gia khóa học</span>
                             </div>
                             <button className={cx('buy-btn')}>Mua ngay</button>
@@ -109,7 +106,7 @@ function DetailCourse() {
         );
     };
 
-    return <Fragment>{isLoading ? <Spinner /> : renderContent()}</Fragment>;
+    return <Fragment>{stateData.isLoading ? <Spinner /> : renderContent()}</Fragment>;
 }
 
-export default DetailCourse;
+export default memo(DetailCourse);
