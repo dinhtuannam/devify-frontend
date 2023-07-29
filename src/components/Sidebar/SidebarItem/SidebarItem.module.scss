@@ -16,7 +16,7 @@
         align-items: center;
         opacity: 0.8;
         &:hover {
-            background-color: #e8ebed;
+            background-color: var(--background-blur-hover);
             opacity: 1;
         }
         .title {

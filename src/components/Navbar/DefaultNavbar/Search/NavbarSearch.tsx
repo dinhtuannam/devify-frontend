@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './NavbarSearch.module.scss';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { useState, useRef, useEffect, memo } from 'react';
-import useDebounce from '../../../hooks/useDebounce';
+import useDebounce from '../../../../hooks/useDebounce';
 import PopperWrapper from '../PopperWrapper/PopperWrapper';
 import Tippy from '@tippyjs/react';
 

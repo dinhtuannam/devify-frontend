@@ -80,11 +80,7 @@ function DetailCourse() {
                         </div>
                         <div className={cx('action')}>
                             <div>
-                                <img
-                                    src="https://files.fullstack.edu.vn/f8-prod/courses/21/63e1bcbaed1dd.png"
-                                    alt="img"
-                                    className={cx('course-img')}
-                                />
+                                <img src={stateData.data.image} alt="img" className={cx('course-img')} />
                             </div>
                             <div className={cx('price-box')}>
                                 <span style={{ marginRight: '6px' }}>Giá tiền : </span>

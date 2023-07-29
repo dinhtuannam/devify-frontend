@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { PublicRoutes } from './routes/PublicRoute';
+import { PrivateRoute } from './routes/PrivateRoute';
 import GlobalStyles from './styles/GlobalStyles';
 import useLocalStorage from 'use-local-storage';
 import classNames from 'classnames/bind';
@@ -62,7 +63,7 @@ function App() {
             }
         };
         handleRefreshToken();
-    }, []);
+    }, [setAuthCookies]);
 
     return (
         <Router>
@@ -70,6 +71,21 @@ function App() {
                 <div className={cx('App')} data-theme={theme}>
                     <Routes>
                         {PublicRoutes.map((value, index) => {
+                            const Page = value.page;
+                            const Layout = value.layout;
+                            return (
+                                <Route
+                                    path={value.path}
+                                    element={
+                                        <Layout>
+                                            <Page />
+                                        </Layout>
+                                    }
+                                    key={value.path}
+                                />
+                            );
+                        })}
+                        {PrivateRoute.map((value, index) => {
                             const Page = value.page;
                             const Layout = value.layout;
                             return (

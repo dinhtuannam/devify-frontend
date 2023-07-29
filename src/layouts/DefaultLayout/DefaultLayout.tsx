@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Navbar from '../../components/Navbar/Navbar';
+import Navbar from '../../components/Navbar/DefaultNavbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import styles from './DefaultLayout.module.scss';

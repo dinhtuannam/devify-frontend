@@ -3,7 +3,7 @@ import { authLogin, refreshTokenRequest } from '../types/AuthType';
 
 export const loginService = async (data: authLogin) => {
     try {
-        const path = `/Auth/login`;
+        const path = `/auth/login`;
         const response = await postDataRequest(path, data);
         console.log(response);
 
@@ -16,7 +16,7 @@ export const loginService = async (data: authLogin) => {
 export const refreshTokenService = async (data: refreshTokenRequest) => {
     try {
         console.log(data);
-        const path = `/Auth/renew-token`;
+        const path = `/auth/renew-token`;
         const response = await postDataRequest(path, data);
         return response;
     } catch (e) {

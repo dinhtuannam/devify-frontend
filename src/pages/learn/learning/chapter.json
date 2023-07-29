@@ -1,0 +1,242 @@
+{
+    "chapters": [
+        {
+            "chapterId": "1dsad32r3",
+            "name": "Chapter 1 - HTML Attributes",
+            "description": "Chapter 1 Description - HTML Attributes",
+            "lessons": [
+                {
+                    "lessonId": "9c57a877-af0d-4b32-bb79-0a9f8e5c144e",
+                    "name": "Lesson 1 - Introduction to the div tag"
+                },
+                {
+                    "lessonId": "a04338e8-6807-4f7b-8e2e-3c0ff23e791f",
+                    "name": "Lesson 2 - What is an Element?"
+                }
+            ]
+        },
+        {
+            "chapterId": "br135b24ds",
+            "name": "Chapter 2 - CSS Properties",
+            "description": "Chapter 2 Description - CSS Properties",
+            "lessons": [
+                {
+                    "lessonId": "f0ad8033-65da-4dc4-ba87-84309f57b9e9",
+                    "name": "Lesson 3 - Introduction to Margin"
+                },
+                {
+                    "lessonId": "8b6a5d5b-7911-4b20-9776-34f2e6ef7e2f",
+                    "name": "Lesson 4 - Introduction to Padding"
+                },
+                {
+                    "lessonId": "1da2f76e-8436-4f54-9b3c-889f6a2f5e2d",
+                    "name": "Lesson 5 - Introduction to Border"
+                }
+            ]
+        },
+        {
+            "chapterId": "b3243nyhfdbfd",
+            "name": "Chapter 3 - HTML Attributes",
+            "description": "Chapter 3 Description - HTML Attributes",
+            "lessons": [
+                {
+                    "lessonId": "9c57a877-af0d-4b32-bb79-0a9f8e5c144e",
+                    "name": "Lesson 1 - Introduction to the div tag"
+                },
+                {
+                    "lessonId": "a04338e8-6807-4f7b-8e2e-3c0ff23e791f",
+                    "name": "Lesson 2 - What is an Element?"
+                }
+            ]
+        },
+        {
+            "chapterId": "nỵwfa32",
+            "name": "Chapter 4 - CSS Properties",
+            "description": "Chapter 4 Description - CSS Properties",
+            "lessons": [
+                {
+                    "lessonId": "f0ad8033-65da-4dc4-ba87-84309f57b9e9",
+                    "name": "Lesson 3 - Introduction to Margin"
+                },
+                {
+                    "lessonId": "8b6a5d5b-7911-4b20-9776-34f2e6ef7e2f",
+                    "name": "Lesson 4 - Introduction to Padding"
+                },
+                {
+                    "lessonId": "1da2f76e-8436-4f54-9b3c-889f6a2f5e2d",
+                    "name": "Lesson 5 - Introduction to Border"
+                }
+            ]
+        },
+        {
+            "chapterId": "n23r23dsa",
+            "name": "Chapter 5 - HTML Attributes",
+            "description": "Chapter 5 Description - HTML Attributes",
+            "lessons": [
+                {
+                    "lessonId": "9c57a877-af0d-4b32-bb79-0a9f8e5c144e",
+                    "name": "Lesson 1 - Introduction to the div tag"
+                },
+                {
+                    "lessonId": "a04338e8-6807-4f7b-8e2e-3c0ff23e791f",
+                    "name": "Lesson 2 - What is an Element?"
+                }
+            ]
+        },
+        {
+            "chapterId": "n235523ras",
+            "name": "Chapter 6 - CSS Properties",
+            "description": "Chapter 6 Description - CSS Properties",
+            "lessons": [
+                {
+                    "lessonId": "f0ad8033-65da-4dc4-ba87-84309f57b9e9",
+                    "name": "Lesson 3 - Introduction to Margin"
+                },
+                {
+                    "lessonId": "8b6a5d5b-7911-4b20-9776-34f2e6ef7e2f",
+                    "name": "Lesson 4 - Introduction to Padding"
+                },
+                {
+                    "lessonId": "1da2f76e-8436-4f54-9b3c-889f6a2f5e2d",
+                    "name": "Lesson 5 - Introduction to Border"
+                }
+            ]
+        },
+        {
+            "chapterId": "21vasdassc",
+            "name": "Chapter 7 - HTML Attributes",
+            "description": "Chapter 7 Description - HTML Attributes",
+            "lessons": [
+                {
+                    "lessonId": "9c57a877-af0d-4b32-bb79-0a9f8e5c144e",
+                    "name": "Lesson 1 - Introduction to the div tag"
+                },
+                {
+                    "lessonId": "a04338e8-6807-4f7b-8e2e-3c0ff23e791f",
+                    "name": "Lesson 2 - What is an Element?"
+                }
+            ]
+        },
+        {
+            "chapterId": "2n53rsadsadsa",
+            "name": "Chapter 8 - CSS Properties",
+            "description": "Chapter 8 Description - CSS Properties",
+            "lessons": [
+                {
+                    "lessonId": "f0ad8033-65da-4dc4-ba87-84309f57b9e9",
+                    "name": "Lesson 3 - Introduction to Margin"
+                },
+                {
+                    "lessonId": "8b6a5d5b-7911-4b20-9776-34f2e6ef7e2f",
+                    "name": "Lesson 4 - Introduction to Padding"
+                },
+                {
+                    "lessonId": "1da2f76e-8436-4f54-9b3c-889f6a2f5e2d",
+                    "name": "Lesson 5 - Introduction to Border"
+                }
+            ]
+        },
+        {
+            "chapterId": "t43btr3dasdsad",
+            "name": "Chapter 9 - HTML Attributes",
+            "description": "Chapter 9 Description - HTML Attributes",
+            "lessons": [
+                {
+                    "lessonId": "9c57a877-af0d-4b32-bb79-0a9f8e5c144e",
+                    "name": "Lesson 1 - Introduction to the div tag"
+                },
+                {
+                    "lessonId": "a04338e8-6807-4f7b-8e2e-3c0ff23e791f",
+                    "name": "Lesson 2 - What is an Element?"
+                }
+            ]
+        },
+        {
+            "chapterId": "63n4fsddaz",
+            "name": "Chapter 10 - CSS Properties",
+            "description": "Chapter 10 Description - CSS Properties",
+            "lessons": [
+                {
+                    "lessonId": "f0ad8033-65da-4dc4-ba87-84309f57b9e9",
+                    "name": "Lesson 3 - Introduction to Margin"
+                },
+                {
+                    "lessonId": "8b6a5d5b-7911-4b20-9776-34f2e6ef7e2f",
+                    "name": "Lesson 4 - Introduction to Padding"
+                },
+                {
+                    "lessonId": "1da2f76e-8436-4f54-9b3c-889f6a2f5e2d",
+                    "name": "Lesson 5 - Introduction to Border"
+                }
+            ]
+        },
+        {
+            "chapterId": "n624m624ax",
+            "name": "Chapter 11 - HTML Attributes",
+            "description": "Chapter 11 Description - HTML Attributes",
+            "lessons": [
+                {
+                    "lessonId": "9c57a877-af0d-4b32-bb79-0a9f8e5c144e",
+                    "name": "Lesson 1 - Introduction to the div tag"
+                },
+                {
+                    "lessonId": "a04338e8-6807-4f7b-8e2e-3c0ff23e791f",
+                    "name": "Lesson 2 - What is an Element?"
+                }
+            ]
+        },
+        {
+            "chapterId": "r3n2r32fdszdcz",
+            "name": "Chapter 12 - CSS Properties",
+            "description": "Chapter 12 Description - CSS Properties",
+            "lessons": [
+                {
+                    "lessonId": "f0ad8033-65da-4dc4-ba87-84309f57b9e9",
+                    "name": "Lesson 3 - Introduction to Margin"
+                },
+                {
+                    "lessonId": "8b6a5d5b-7911-4b20-9776-34f2e6ef7e2f",
+                    "name": "Lesson 4 - Introduction to Padding"
+                },
+                {
+                    "lessonId": "1da2f76e-8436-4f54-9b3c-889f6a2f5e2d",
+                    "name": "Lesson 5 - Introduction to Border"
+                }
+            ]
+        },
+        {
+            "chapterId": "n1dsazcxz8546",
+            "name": "Chapter 13 - HTML Attributes",
+            "description": "Chapter 13 Description - HTML Attributes",
+            "lessons": [
+                {
+                    "lessonId": "9c57a877-af0d-4b32-bb79-0a9f8e5c144e",
+                    "name": "Lesson 1 - Introduction to the div tag"
+                },
+                {
+                    "lessonId": "a04338e8-6807-4f7b-8e2e-3c0ff23e791f",
+                    "name": "Lesson 2 - What is an Element?"
+                }
+            ]
+        },
+        {
+            "chapterId": "dwand23n6845",
+            "name": "Chapter 14 - CSS Properties",
+            "description": "Chapter 14 Description - CSS Properties",
+            "lessons": [
+                {
+                    "lessonId": "f0ad8033-65da-4dc4-ba87-84309f57b9e9",
+                    "name": "Lesson 3 - Introduction to Margin"
+                },
+                {
+                    "lessonId": "8b6a5d5b-7911-4b20-9776-34f2e6ef7e2f",
+                    "name": "Lesson 4 - Introduction to Padding"
+                },
+                {
+                    "lessonId": "1da2f76e-8436-4f54-9b3c-889f6a2f5e2d",
+                    "name": "Lesson 5 - Introduction to Border"
+                }
+            ]
+        }
+    ]
+}

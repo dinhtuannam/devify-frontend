@@ -1,0 +1,60 @@
+.wrapper {
+    height: 50px;
+    width: 100%;
+    background-color: #373d48;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    padding: 0px 22px;
+
+    .back-container {
+        margin-right: 14px;
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: #fff;
+        opacity: 0.8;
+        transition: 0.2s ease-in-out;
+        &:hover {
+            opacity: 1;
+        }
+        .back-icon {
+            margin-top: 3px;
+        }
+    }
+    .logo-container {
+        width: 30px;
+        height: 30px;
+
+        .logo {
+            width: 100%;
+        }
+    }
+    .title {
+        color: #fff;
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-left: 16px;
+        overflow: hidden;
+    }
+    .action {
+        font-size: 1.3rem;
+        margin-left: auto;
+        color: #fff;
+        display: flex;
+        opacity: 0.8;
+        cursor: pointer;
+        .lesson {
+            font-size: 1.6rem;
+            margin-right: 4px;
+        }
+        .theme-icon {
+            font-size: 1.6rem;
+            margin-right: 4px;
+        }
+    }
+}
+.action-item {
+    display: flex;
+    margin-left: 12px;
+}

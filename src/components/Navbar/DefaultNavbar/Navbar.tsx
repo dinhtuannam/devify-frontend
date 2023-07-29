@@ -1,16 +1,16 @@
 import classNames from 'classnames/bind';
 import styles from './Navbar.module.scss';
-import logo from '../../assets/img/logo.png';
+import logo from '../../../assets/img/logo.png';
 import { FaBell, FaUserCircle } from 'react-icons/fa';
 import { AiOutlineLeft, AiOutlineMenu } from 'react-icons/ai';
 import NavbarSearch from './Search/NavbarSearch';
 import { Link } from 'react-router-dom';
-import { currentUserType } from '../../types/AccountType';
+import { currentUserType } from '../../../types/AccountType';
 import Tippy from '@tippyjs/react';
-import UseLogout from '../../hooks/useLogout';
+import UseLogout from '../../../hooks/useLogout';
 import useLocalStorage from 'use-local-storage';
 import { useState, Fragment, useEffect } from 'react';
-import { GetAuthCookies } from '../../helpers/cookiesHelper';
+import { GetAuthCookies } from '../../../helpers/cookiesHelper';
 const cx = classNames.bind(styles);
 
 function Navbar() {
