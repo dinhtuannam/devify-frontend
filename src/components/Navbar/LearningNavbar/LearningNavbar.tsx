@@ -4,23 +4,20 @@ import logo from '../../../assets/img/logo.png';
 import { Link } from 'react-router-dom';
 import { GiOpenBook } from 'react-icons/gi';
 import { AiOutlineDoubleLeft as BackIcon } from 'react-icons/ai';
-import useLocalStorage from 'use-local-storage';
+import useTheme from '../../../hooks/useTheme';
 import { BsFillSunFill as LightIcon, BsFillMoonStarsFill as DarkIcon } from 'react-icons/bs';
 const cx = classNames.bind(styles);
 
 function LearningNavbar() {
-    const [theme, setTheme] = useLocalStorage<string>('devify theme', 'Light');
-    const switchTheme = () => {
-        const newTheme: string = theme === 'Light' ? 'Dark' : 'Light';
-        setTheme(newTheme);
-    };
+    const { theme, switchTheme } = useTheme();
+
     return (
         <div className={cx('wrapper')}>
             <Link to={'/'} className={cx('back-container')}>
                 <BackIcon className={cx('back-icon')} />
             </Link>
             <div className={cx('logo-container')}>
-                <img src={logo} className={cx('logo')} />
+                <img src={logo} className={cx('logo')} alt="img" />
             </div>
             <div className={cx('title')}>Xây Dựng Website với ReactJS</div>
             <div className={cx('action')}>

@@ -1,0 +1,14 @@
+.wrapper {
+    + .wrapper {
+        margin-top: 12px;
+    }
+}
+
+.item {
+    color: var(--text-color);
+    opacity: 0.8;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    flex: 1 1;
+}

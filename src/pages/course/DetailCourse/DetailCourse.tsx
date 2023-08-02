@@ -1,6 +1,6 @@
 import styles from './DetailCourse.module.scss';
 import classNames from 'classnames/bind';
-import { useState, useEffect, Fragment, memo } from 'react';
+import { useEffect, Fragment, memo } from 'react';
 import { useParams } from 'react-router-dom';
 import notfound from '../../../assets/img/notfound.png';
 import Spinner from '../../../components/Loading/Spinner/Spinner';
@@ -8,27 +8,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { getCourseBySlug } from '../../../redux/reducers/course/detailCourse.slice';
 import { AppDispatch } from '../../../redux/store';
+import useSelectedItem from '../../../hooks/useSelectedItem';
+import DefaultButton from '../../../components/Button/DefaultButton/DefaultButton';
 
 const cx = classNames.bind(styles);
 
 function DetailCourse() {
     const stateData = useSelector((state: RootState) => state.detailCourseStore);
     const dispatch = useDispatch<AppDispatch>();
-    const [show, setShow] = useState<number[]>([]);
+    const { selectItem, handleSelectItem } = useSelectedItem();
     const { name } = useParams();
 
     useEffect(() => {
         dispatch(getCourseBySlug(name));
     }, [name, dispatch]);
-
-    const handleShow = (index: number) => {
-        if (show.includes(index)) {
-            const updatedNumbers = show.filter((num) => num !== index);
-            setShow(updatedNumbers);
-        } else setShow((prevNumbers) => [...prevNumbers, index]);
-    };
-
-    console.log('redner');
 
     const renderContent = () => {
         return (
@@ -57,12 +50,17 @@ function DetailCourse() {
                                 {stateData.data.chapters.map((value, index) => {
                                     return (
                                         <div className={cx('chapter-container')} key={index}>
-                                            <div className={cx('chapter-item')} onClick={() => handleShow(index)}>
+                                            <div
+                                                className={cx('chapter-item')}
+                                                onClick={() => handleSelectItem(value.chapterId)}
+                                            >
                                                 <span>{value.name}</span>
                                             </div>
                                             <div
                                                 style={
-                                                    show.includes(index) ? { display: 'block' } : { display: 'none' }
+                                                    selectItem.includes(value.chapterId)
+                                                        ? { display: 'block' }
+                                                        : { display: 'none' }
                                                 }
                                             >
                                                 {value.lessons.map((value, index) => {
@@ -90,7 +88,10 @@ function DetailCourse() {
                                 <span style={{ marginRight: '6px' }}>{stateData.data.purchased}</span>
                                 <span>thành viên đã tham gia khóa học</span>
                             </div>
-                            <button className={cx('buy-btn')}>Mua ngay</button>
+                            {/* <button className={cx('buy-btn')}>Mua ngay</button> */}
+                            <DefaultButton primary large>
+                                Mua ngay
+                            </DefaultButton>
                         </div>
                     </div>
                 ) : (

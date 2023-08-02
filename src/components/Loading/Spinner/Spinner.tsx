@@ -1,10 +1,10 @@
 import { BeatLoader } from 'react-spinners';
 import styles from './Spinner.module.scss';
 import classNames from 'classnames/bind';
-import useLocalStorage from 'use-local-storage';
+import useTheme from '../../../hooks/useTheme';
 const cx = classNames.bind(styles);
 function Spinner() {
-    const [theme] = useLocalStorage<string>('devify theme', 'Light');
+    const { theme } = useTheme();
     return (
         <div className={cx('wrapper')}>
             <div>

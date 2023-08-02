@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { PublicRoutes } from './routes/PublicRoute';
 import { PrivateRoute } from './routes/PrivateRoute';
 import GlobalStyles from './styles/GlobalStyles';
-import useLocalStorage from 'use-local-storage';
 import classNames from 'classnames/bind';
 import styles from './App.module.scss';
 import { useEffect } from 'react';
@@ -13,10 +12,11 @@ import { ApiResponse } from './types/ApiType';
 import { refreshTokenService } from './services/AuthService';
 import { GetAuthCookies, SetAuthCookies } from './helpers/cookiesHelper';
 import { AuthCookies } from './types/CookiesType';
+import useTheme from './hooks/useTheme';
 
 const cx = classNames.bind(styles);
 function App() {
-    const [theme] = useLocalStorage<string>('devify theme', 'Light');
+    const { theme } = useTheme();
     const setAuthCookies = SetAuthCookies();
 
     useEffect(() => {
@@ -58,7 +58,7 @@ function App() {
                 setAuthCookies(authData);
                 window.location.reload();
             }
-            if (res != null && res.success === false) {
+            if (res == null || res?.success === false) {
                 UseLogout();
             }
         };

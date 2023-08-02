@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { DetailCourse } from '../../../types/CourseType';
-import { getDetailCourse } from '../../../services/CourseService';
+import { getDetailCourseService } from '../../../services/CourseService';
 import { ApiResponse } from '../../../types/ApiType';
 interface detailCourseState {
     isLoading: boolean;
@@ -17,7 +17,7 @@ const initialState: detailCourseState = {
 };
 
 export const getCourseBySlug = createAsyncThunk('product/getCourseBySlug', async (slug: string | undefined) => {
-    const response = await getDetailCourse(slug); // Thêm dấu ngoặc đơn để gọi hàm
+    const response = await getDetailCourseService(slug);
     return response;
 });
 
@@ -33,9 +33,9 @@ export const detailCourseSlice = createSlice({
             })
             .addCase(getCourseBySlug.fulfilled, (state, action: PayloadAction<ApiResponse<DetailCourse>>) => {
                 state.isLoading = false;
-                state.isSuccess = action.payload.success;
-                state.message = action.payload.message;
-                state.data = action.payload.data;
+                state.isSuccess = action.payload?.success;
+                state.message = action.payload?.message;
+                state.data = action.payload?.data;
             })
             .addCase(getCourseBySlug.rejected, (state, action) => {
                 state.isLoading = false;

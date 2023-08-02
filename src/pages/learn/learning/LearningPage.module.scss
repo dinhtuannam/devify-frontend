@@ -14,18 +14,7 @@
         overflow-y: overlay;
         overscroll-behavior: contain;
         transition: var(--primary-transition);
-        .video-wrapper {
-            background-color: #000;
-            padding: 0 8.5%;
-            width: 100%;
-            display: flex;
-            height: 418px;
-            .video {
-                border: none;
-                margin: 0 auto;
-                width: 100%;
-            }
-        }
+
         .information {
             min-height: 400px;
             padding: 0 8.5%;
@@ -38,77 +27,6 @@
                 font-size: 1.3rem;
                 margin-bottom: 36px;
                 opacity: 0.8;
-            }
-        }
-    }
-    .track {
-        border-left: 1px solid #e7e7e7;
-        bottom: 0px;
-        margin-top: 50px;
-        position: fixed;
-        right: 0;
-        top: 0;
-        width: 23%;
-        z-index: 2;
-        background: var(--content-background);
-        transition: var(--primary-transition);
-        .track-header {
-            align-items: center;
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 16px;
-            .track-heading {
-                font-size: 1.8rem;
-                line-height: 1.4;
-                margin: 0;
-                font-weight: 600;
-                color: var(--text-color);
-            }
-        }
-
-        .track-body {
-            overflow-y: overlay;
-            overscroll-behavior: contain;
-            height: calc(100vh - 100px);
-
-            .track-item {
-                background-color: var(--content-background);
-                transition: var(--primary-transition);
-                border-bottom: 1px solid #dedfe0;
-                display: flex;
-                cursor: pointer;
-                flex-direction: column;
-                flex-wrap: wrap;
-                justify-content: space-between;
-                padding: 8px 20px;
-                z-index: 2;
-                .track-title {
-                    color: var(--text-color);
-                    font-size: 1.6rem;
-                    font-weight: 600;
-                    margin: 0;
-                }
-                .track-description {
-                    color: var(--text-color);
-                    font-size: 1.2rem;
-                    font-weight: 400;
-                    margin-top: 4px;
-                }
-            }
-
-            .track-sub-item {
-                padding: 10px 24px;
-                transition: all 0.2s ease-in-out;
-                cursor: pointer;
-                &:hover {
-                    background-color: var(--background-blur-hover);
-                }
-                .sub-item-title {
-                    color: var(--text-color);
-                    font-size: 1.4rem;
-                    font-weight: 400;
-                    line-height: 1.4;
-                }
             }
         }
     }

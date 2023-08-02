@@ -8,17 +8,18 @@ import { Link } from 'react-router-dom';
 import { currentUserType } from '../../../types/AccountType';
 import Tippy from '@tippyjs/react';
 import UseLogout from '../../../hooks/useLogout';
-import useLocalStorage from 'use-local-storage';
 import { useState, Fragment, useEffect } from 'react';
-import { GetAuthCookies } from '../../../helpers/cookiesHelper';
+import useCheckLogin from '../../../hooks/useCheckLogin';
+import useTheme from '../../../hooks/useTheme';
+import DefaultButton from '../../Button/DefaultButton/DefaultButton';
+import MenuItem from '../../Menu/MenuItem/MenuItem';
 const cx = classNames.bind(styles);
 
 function Navbar() {
     const [showTippy, setShowTippy] = useState<boolean>(false);
     const [currentUser, setCurrentUser] = useState<currentUserType | null>(null);
-    const [theme, setTheme] = useLocalStorage<string>('devify theme', 'Light');
-    const cookiesData = GetAuthCookies();
-
+    const { theme, switchTheme } = useTheme();
+    const isLoginCheck = useCheckLogin();
     const path = window.location.pathname;
 
     useEffect(() => {
@@ -26,11 +27,6 @@ function Navbar() {
         const user: currentUserType | null = userString ? JSON.parse(userString) : null;
         setCurrentUser(user);
     }, []);
-
-    const switchTheme = () => {
-        const newTheme: string = theme === 'Light' ? 'Dark' : 'Light';
-        setTheme(newTheme);
-    };
 
     const handleTippy = () => {
         setShowTippy(!showTippy);
@@ -63,31 +59,17 @@ function Navbar() {
                             style={showTippy ? { display: 'block' } : { display: 'none' }}
                         >
                             <ul className="tippy-wrapper">
-                                <li className={cx('user-heading')}>
+                                <MenuItem to="/">
                                     <FaUserCircle className={cx('avatar')} />
                                     <p className={cx('username')}>{currentUser?.username}</p>
-                                </li>
-                                <li className={cx('user-item-container')}>
-                                    <a className={cx('user-item')} href="/">
-                                        Trang cá nhân
-                                    </a>
-                                </li>
-                                <li className={cx('user-item-container')}>
-                                    <a className={cx('user-item')} href="/">
-                                        Cài đặt
-                                    </a>
-                                </li>
-                                <li className={cx('user-item-container')}>
-                                    <div className={cx('user-item')} onClick={switchTheme}>
-                                        <span style={{ marginRight: 6 }}>Chế độ :</span>
-                                        <span>{theme}</span>
-                                    </div>
-                                </li>
-                                <li className={cx('user-item-container')}>
-                                    <div className={cx('user-item')} onClick={handleLogout}>
-                                        Đăng xuất
-                                    </div>
-                                </li>
+                                </MenuItem>
+                                <MenuItem to="/profile">Trang cá nhân</MenuItem>
+                                <MenuItem href="/setting">Cài đặt</MenuItem>
+                                <MenuItem onClick={switchTheme}>
+                                    <span style={{ marginRight: 6 }}>Chế độ :</span>
+                                    <span>{theme}</span>
+                                </MenuItem>
+                                <MenuItem onClick={handleLogout}>Đăng xuất</MenuItem>
                             </ul>
                         </div>
                     )}
@@ -102,17 +84,16 @@ function Navbar() {
     const unLoginedComponent = () => {
         return (
             <Fragment>
-                <Link to={'/login'} className={cx('login-btn')}>
+                <DefaultButton href="/register" outline medium>
+                    Register
+                </DefaultButton>
+                <DefaultButton href="/login" primary medium>
                     Login
-                </Link>
+                </DefaultButton>
             </Fragment>
         );
     };
-    const checkIsLogin = () => {
-        if (cookiesData.accessTokenCookie && cookiesData.refreshTokenCookie && cookiesData.isLoginCookies === 'true')
-            return true;
-        else return false;
-    };
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('logo')}>
@@ -130,7 +111,7 @@ function Navbar() {
                 )}
             </div>
             <NavbarSearch />
-            <div className={cx('action')}>{checkIsLogin() === true ? LoginedComponent() : unLoginedComponent()}</div>
+            <div className={cx('action')}>{isLoginCheck === true ? LoginedComponent() : unLoginedComponent()}</div>
         </div>
     );
 }

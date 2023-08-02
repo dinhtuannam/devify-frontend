@@ -21,7 +21,7 @@ function HomeSlider() {
     return (
         <div className={cx('slider')}>
             <Slider {...settings}>
-                <div className={cx('slider-item')}>
+                <div className={cx('slider-item', 'bg-1')}>
                     <div className={cx('slider-left')}>
                         <h2 className={cx('title')}>F8 trên facebook</h2>
                         <p className={cx('description')}>F8 được nhắc mọi nơi , ở đâu có cơ hội làm việc cho nghề IT</p>
@@ -31,7 +31,10 @@ function HomeSlider() {
                     </div>
                     <img src={banner_1} alt="img" />
                 </div>
-                <div className={cx('slider-item')}>
+                <div
+                    className={cx('slider-item', 'bg-2')}
+                    style={{ background: 'linear-gradient(to right, rgb(118, 18, 255), rgb(5, 178, 255))' }}
+                >
                     <div className={cx('slider-left')}>
                         <h2 className={cx('title')}>F8 trên facebook</h2>
                         <p className={cx('description')}>F8 được nhắc mọi nơi , ở đâu có cơ hội làm việc cho nghề IT</p>
@@ -41,7 +44,10 @@ function HomeSlider() {
                     </div>
                     <img src={banner_2} alt="img" />
                 </div>
-                <div className={cx('slider-item')}>
+                <div
+                    className={cx('slider-item', 'bg-3')}
+                    style={{ background: 'linear-gradient(to right, rgb(118, 18, 255), rgb(5, 178, 255))' }}
+                >
                     <div className={cx('slider-left')}>
                         <h2 className={cx('title')}>F8 trên facebook</h2>
                         <p className={cx('description')}>F8 được nhắc mọi nơi , ở đâu có cơ hội làm việc cho nghề IT</p>

@@ -2,7 +2,6 @@
     width: 100%;
     transition: 0.2s ease-in-out;
     .slider-item {
-        background: linear-gradient(to right, rgb(0, 126, 254), rgb(6, 195, 254));
         border-radius: 16px;
         height: 270px;
         overflow: hidden;
@@ -40,4 +39,16 @@
             }
         }
     }
+}
+
+.bg-1 {
+    background: linear-gradient(to right, rgb(0, 126, 254), rgb(6, 195, 254));
+}
+
+.bg-2 {
+    background: linear-gradient(to right, rgb(118, 18, 255), rgb(5, 178, 255));
+}
+
+.bg-3 {
+    background: linear-gradient(to right, rgb(254, 33, 94), rgb(255, 148, 2));
 }

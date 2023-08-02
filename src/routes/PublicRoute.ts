@@ -7,6 +7,7 @@ import RegisterPage from '../pages/register/RegisterPage';
 import CoursesPage from '../pages/course/CoursesPage/CoursesPage';
 import DetailCourse from '../pages/course/DetailCourse/DetailCourse';
 import DetailCreator from '../pages/creator/DetailCreator/DetailCreator';
+import NotFound from '../pages/error/NotFound/NotFound';
 // ========== import layout =============
 import DefaultLayout from '../layouts/DefaultLayout/DefaultLayout';
 import AuthLayout from '../layouts/AuthLayout/AuthLayout';
@@ -23,4 +24,5 @@ export const PublicRoutes: Route[] = [
     { path: '/creator/:name', page: DetailCreator, layout: DefaultLayout },
     { path: '/login', page: LoginPage, layout: AuthLayout },
     { path: '/register', page: RegisterPage, layout: AuthLayout },
+    { path: '/not-found', page: NotFound, layout: DefaultLayout },
 ];

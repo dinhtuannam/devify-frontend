@@ -40,3 +40,14 @@ export interface DetailCourse {
     chapters: CourseChapter[];
     category: CourseCategory;
 }
+
+export interface LearningCourseType {
+    courseId: string;
+    title: string;
+    description: string;
+    slug: string;
+    image: string;
+    totalChapter: number;
+    totalLesson: number;
+    chapters: CourseChapter[];
+}

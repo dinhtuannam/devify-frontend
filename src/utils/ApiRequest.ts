@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { ApiResponse } from '../types/ApiType';
 const baseURL = 'https://localhost:7221/api';
 
 export const backendRequest = axios.create({
@@ -28,6 +29,7 @@ export const getDataRequest = async (path: string, option = {}) => {
         if (e.response && e.response.data) {
             return e.response.data;
         }
+        return null;
     }
 };
 
