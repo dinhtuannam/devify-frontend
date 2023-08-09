@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './DetailCreator.module.scss';
 import banner_creator from '../../../assets/img/banner/banner_creator.png';
+import ContentWrapper from '../../../components/Wrapper/ContentWrapper/ContentWrapper';
 const cx = classNames.bind(styles);
 
 function DetailCreator() {
@@ -25,7 +26,12 @@ function DetailCreator() {
                     </div>
                 </div>
             </div>
-            <div className={cx('content')}>
+            <ContentWrapper primary borderRadius>
+                <div>
+                    <h2>Thông tin</h2>
+                </div>
+            </ContentWrapper>
+            <ContentWrapper primary borderRadius>
                 <div className={cx('course-list')}>
                     <h2>Khóa học :</h2>
                     <div className={cx('course-wrapper')}>
@@ -99,7 +105,7 @@ function DetailCreator() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </ContentWrapper>
         </div>
     );
 }

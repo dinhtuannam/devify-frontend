@@ -14,14 +14,12 @@ interface authCookies {
     refreshToken: string;
     isLogin: boolean;
 }
-export const SetAuthCookies = () => {
-    const setAuthCookiesHandler = (props: authCookies) => {
-        Cookies.set('devify:AccessToken', props.accessToken, { expires: accessTokenExp, path: '/' });
-        Cookies.set('devify:RefreshToken', props.refreshToken, { expires: refreshTokenExp, path: '/' });
-        Cookies.set('devify:isLogin', 'true', { expires: isLoginExp, path: '/' });
-    };
+export const SetAuthCookies = (props: authCookies) => {
+    console.log(props);
 
-    return setAuthCookiesHandler;
+    Cookies.set('devify:AccessToken', props.accessToken, { expires: accessTokenExp, path: '/' });
+    Cookies.set('devify:RefreshToken', props.refreshToken, { expires: refreshTokenExp, path: '/' });
+    Cookies.set('devify:isLogin', 'true', { expires: isLoginExp, path: '/' });
 };
 
 export const GetAuthCookies = () => {

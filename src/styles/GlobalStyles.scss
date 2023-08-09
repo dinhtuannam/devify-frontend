@@ -101,4 +101,19 @@ body {
     font-family: 'Roboto', sans-serif;
     font-family: 'Ubuntu', sans-serif;
     font-size: 1.6rem;
+    ::-webkit-scrollbar {
+        width: 0; /* Set width to zero */
+        height: 0; /* Set height to zero */
+    }
+
+    /* Pseudo-element to mimic the custom scrollbar */
+    ::-webkit-scrollbar-thumb {
+        background: #888; /* Change this color to match your design */
+        border-radius: 6px;
+    }
+
+    /* Pseudo-element on hover to mimic the custom scrollbar thumb */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; /* Change this color to match your design */
+    }
 }

@@ -1,0 +1,31 @@
+@import '../../../styles/GlobalStyles.scss';
+
+.wrapper {
+    width: 100%;
+    padding: 0px 44px 0px 44px;
+    transition: var(--primary-transition);
+    margin-bottom: 30px;
+    + .wrapper {
+        margin: 20px 0p 20px 0px;
+    }
+
+    @include respond-to-iphone {
+        padding: 0px 0px !important;
+    }
+    @include respond-to-tablet {
+        padding: 0px 0px !important;
+    }
+}
+
+.primary {
+    background-color: var(--detail-creator-course-bg);
+    color: var(--text-color);
+}
+
+.full {
+    min-height: 100vh;
+}
+
+.borderRadius {
+    border-radius: 10px;
+}

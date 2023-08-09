@@ -17,7 +17,6 @@ import useTheme from './hooks/useTheme';
 const cx = classNames.bind(styles);
 function App() {
     const { theme } = useTheme();
-    const setAuthCookies = SetAuthCookies();
 
     useEffect(() => {
         const handleRefreshToken = async () => {
@@ -55,7 +54,7 @@ function App() {
                     refreshToken: res.data.refreshToken,
                     isLogin: true,
                 };
-                setAuthCookies(authData);
+                SetAuthCookies(authData);
                 window.location.reload();
             }
             if (res == null || res?.success === false) {
@@ -63,7 +62,7 @@ function App() {
             }
         };
         handleRefreshToken();
-    }, [setAuthCookies]);
+    }, [SetAuthCookies]);
 
     return (
         <Router>

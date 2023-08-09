@@ -1,3 +1,4 @@
+import { currentUserType } from './AccountType';
 export interface authLogin {
     name: string;
     password: string;
@@ -27,4 +28,10 @@ export interface decodeToken {
 
 export interface refreshTokenRequest {
     refreshToken: string;
+}
+
+export interface loginResponse {
+    accessToken: string;
+    refreshToken: string;
+    info: currentUserType;
 }

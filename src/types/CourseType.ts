@@ -15,7 +15,7 @@ interface CourseLesson {
     name: string;
 }
 
-interface CourseChapter {
+export interface CourseChapter {
     chapterId: string;
     name: string;
     description: string;

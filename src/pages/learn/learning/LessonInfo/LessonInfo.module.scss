@@ -1,0 +1,29 @@
+.content {
+    bottom: 0px;
+    left: 0;
+    margin-top: 50px;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    position: fixed !important;
+    top: 0;
+    width: 77%;
+    background: var(--content-background);
+    overflow-y: overlay;
+    overscroll-behavior: contain;
+    transition: var(--primary-transition);
+
+    .information {
+        min-height: 400px;
+        padding: 0 8.5%;
+        color: var(--text-color);
+        .title {
+            font-size: 2.8rem;
+            margin: 48px 0 8px;
+        }
+        .date {
+            font-size: 1.3rem;
+            margin-bottom: 36px;
+            opacity: 0.8;
+        }
+    }
+}
