@@ -1,0 +1,21 @@
+@import '../../styles/GlobalStyles.scss';
+
+.container {
+    display: flex;
+    min-height: calc(100vh - 66px);
+}
+.content-wrapper {
+    max-width: 1920px;
+    padding: 0 20px 0 20px;
+    flex: 1 1;
+    width: 100%;
+    margin: 0 auto;
+    @include respond-to-iphone {
+        max-width: calc(100% - 0px);
+        padding: 0 16px;
+    }
+    @include respond-to-tablet {
+        max-width: calc(100% - 0px);
+        padding: 0 16px;
+    }
+}

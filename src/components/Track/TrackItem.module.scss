@@ -1,0 +1,15 @@
+.item {
+    cursor: pointer;
+    display: flex;
+    padding: 0.8rem 0;
+    min-width: 18rem;
+    max-width: 60rem;
+    .item-title {
+        margin-left: 0.8rem;
+        font-size: 1.3rem;
+        opacity: 0.8;
+        &:hover {
+            opacity: 1;
+        }
+    }
+}

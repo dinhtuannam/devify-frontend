@@ -1,0 +1,25 @@
+.wrapper {
+    transition: 0.1s ease-in;
+    cursor: pointer;
+
+    .checkbox {
+        margin-left: 4px;
+    }
+
+    .text {
+        margin-left: 6px;
+    }
+}
+
+.primary {
+    color: var(--text-color);
+    font-size: 1.4rem;
+}
+
+.opacity {
+    opacity: 0.8;
+
+    &:hover {
+        opacity: 1;
+    }
+}

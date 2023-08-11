@@ -1,0 +1,7 @@
+@import '../../../styles/GlobalStyles.scss';
+
+.wrapper {
+    display: flex;
+    margin-top: 40px;
+    min-height: calc(100vh - 66px);
+}
