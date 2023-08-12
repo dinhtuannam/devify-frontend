@@ -27,7 +27,7 @@ export const getDataRequest = async (path: string, option = {}) => {
         if (e.response && e.response.data) {
             return e.response.data;
         }
-        return null;
+        throw e;
     }
 };
 

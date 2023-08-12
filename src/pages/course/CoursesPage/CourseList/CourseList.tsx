@@ -4,6 +4,7 @@ import styles from './CourseList.module.scss';
 import classNames from 'classnames/bind';
 import CourseCard from '../../../../components/Card/CourseCard/CourseCard';
 import ListWrapper from '../../../../components/Wrapper/ListWrapper/ListWrapper';
+import TrackSkeleton from '../../../../components/Skeleton/TrackSkeleton/TrackSkeleton';
 const cx = classNames.bind(styles);
 
 function CourseList() {
