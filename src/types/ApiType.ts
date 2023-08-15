@@ -4,3 +4,8 @@ export interface ApiResponse<T> {
     data: T;
     errCode: string;
 }
+
+export interface DataList<T> {
+    items: T;
+    totalRecords: number;
+}

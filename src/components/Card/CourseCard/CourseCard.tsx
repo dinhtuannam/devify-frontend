@@ -1,25 +1,26 @@
 import styles from './CourseCard.module.scss';
 import classNames from 'classnames/bind';
+import PriceFormatter from '../../../helpers/convertHelper';
 const cx = classNames.bind(styles);
 
 interface CourseCardProps {
     id: string;
     title: string;
     category?: string;
-    price?: string;
+    img?: string;
+    price?: number;
     href?: string;
     to?: string;
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({ title, category, price, href, to, id }) => {
+const CourseCard: React.FC<CourseCardProps> = ({ title, category, price, img, href, to, id }) => {
+    const priceFormatter = PriceFormatter.getInstance();
+    let formatPrice;
+    if (price) formatPrice = priceFormatter.formatPrice(price);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('img-wrapper')}>
-                <img
-                    className={cx('img')}
-                    src="https://files.fullstack.edu.vn/f8-prod/courses/15/62f13d2424a47.png"
-                    alt="img"
-                />
+                <img className={cx('img')} src={img} alt="img" />
             </div>
             <h3 className={cx('course-title')}>{title}</h3>
             {category && (
@@ -28,7 +29,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ title, category, price, href, t
                 </div>
             )}
             <div className={cx('price-wrapper')}>
-                <span className={cx('price')}>{price}</span>
+                <span className={cx('price')}>{formatPrice}</span>
             </div>
         </div>
     );

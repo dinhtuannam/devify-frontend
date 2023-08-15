@@ -2,8 +2,8 @@ import TrackItem from '../../../../components/Track/TrackItem';
 import styles from './FilterTrack.module.scss';
 import classNames from 'classnames/bind';
 import CheckboxItem from '../../../../components/Checkbox/CheckboxItem';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { CategoryType } from '../../../../types/CategoryType';
 import { LanguageType } from '../../../../types/LanguageType';
 import { LevelType } from '../../../../types/LevelType';
@@ -12,6 +12,7 @@ import { getAllCategoryService } from '../../../../services/CategoryService';
 import { getAllLanguageService } from '../../../../services/LanguageService';
 import TrackSkeleton from '../../../../components/Skeleton/TrackSkeleton/TrackSkeleton';
 import { getAllLevelService } from '../../../../services/LevelService';
+
 const cx = classNames.bind(styles);
 
 interface FilterState {
@@ -20,20 +21,39 @@ interface FilterState {
     level: string[];
 }
 
-interface FilterData {
-    category: CategoryType[];
-    language: LanguageType[];
-    level: LevelType[];
-}
-
 function FilterTrack() {
-    //const [data, setData] = useState<FilterData>();
+    const [searchParams] = useSearchParams();
     const [filter, setFilter] = useState<FilterState>({
         category: [],
         language: [],
         level: [],
     });
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const categories = searchParams.getAll('cat');
+        const languages = searchParams.getAll('lang');
+        const levels = searchParams.getAll('lvl');
+
+        if (categories?.length > 0) {
+            setFilter((prevFilter) => ({
+                ...prevFilter,
+                category: categories,
+            }));
+        }
+        if (languages?.length > 0) {
+            setFilter((prevFilter) => ({
+                ...prevFilter,
+                language: languages,
+            }));
+        }
+        if (levels?.length > 0) {
+            setFilter((prevFilter) => ({
+                ...prevFilter,
+                level: levels,
+            }));
+        }
+    }, []);
 
     const [categoryData, languageData, levelData] = useQueries({
         queries: [
@@ -60,7 +80,7 @@ function FilterTrack() {
 
     const handleFilter = () => {
         let path = '/courses';
-        const params = []; // Mảng lưu trữ các giá trị đã mã hóa
+        const params = [];
 
         if (filter.category.length > 0) {
             const catParams = filter.category.map((cat) => `cat=${encodeURIComponent(cat)}`).join('&');

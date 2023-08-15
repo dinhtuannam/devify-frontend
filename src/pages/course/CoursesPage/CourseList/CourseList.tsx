@@ -1,43 +1,64 @@
 import { useSearchParams } from 'react-router-dom';
-import { useEffect } from 'react';
 import styles from './CourseList.module.scss';
 import classNames from 'classnames/bind';
 import CourseCard from '../../../../components/Card/CourseCard/CourseCard';
 import ListWrapper from '../../../../components/Wrapper/ListWrapper/ListWrapper';
-import TrackSkeleton from '../../../../components/Skeleton/TrackSkeleton/TrackSkeleton';
+import { getfilterCourseService } from '../../../../services/CourseService';
+import { useQuery } from '@tanstack/react-query';
+import Spinner from '../../../../components/Loading/Spinner/Spinner';
+import NotFound from '../../../error/NotFound/NotFound';
+
 const cx = classNames.bind(styles);
 
 function CourseList() {
     const [searchParams] = useSearchParams();
+    const categories = searchParams.getAll('cat');
+    const languages = searchParams.getAll('lang');
+    const levels = searchParams.getAll('lvl');
+    const searchQuery = searchParams.get('query');
+    const pageString = searchParams.get('page');
+    const currentPage = pageString !== null ? parseInt(pageString, 10) : 1;
 
-    useEffect(() => {
-        const categories = searchParams.getAll('cat');
-        const languages = searchParams.getAll('lang');
-        const levels = searchParams.getAll('lvl');
+    const { data, isLoading } = useQuery(
+        ['filter-course', categories, languages, levels, searchQuery, currentPage],
+        async () => {
+            return await getfilterCourseService({
+                query: searchQuery,
+                page: currentPage,
+                lvl: levels,
+                cat: categories,
+                lang: languages,
+            });
+        },
+        {
+            staleTime: 60 * 1000,
+            cacheTime: 60 * 1000,
+        },
+    );
 
-        // Do something with the extracted parameters
-        console.log('Categories:', categories);
-        console.log('Languages:', languages);
-        console.log('Levels:', levels);
-
-        // You can set these values to your state or perform other actions as needed
-    }, [searchParams]);
     return (
         <div className={cx('wrapper')}>
+            {isLoading && <Spinner />}
+            {data?.data.items.length === 0 && <NotFound />}
             <ListWrapper row wrap>
-                <CourseCard title="HTML CSS PRO" price="1.200.000" id="2" />
-                <CourseCard title="HTML CSS PRO" price="1.200.000" id="2" />
-                <CourseCard title="HTML CSS PRO" price="1.200.000" id="2" />
-                <CourseCard title="HTML CSS PRO" price="1.200.000" id="2" />
-                <CourseCard title="HTML CSS PRO" price="1.200.000" id="2" />
-                <CourseCard title="HTML CSS PRO" price="1.200.000" id="2" />
-                <CourseCard title="HTML CSS PRO" price="1.200.000" id="2" />
-                <CourseCard title="HTML CSS PRO" price="1.200.000" id="2" />
-                <CourseCard title="HTML CSS PRO" price="1.200.000" id="2" />
-                <CourseCard title="HTML CSS PRO" price="1.200.000" id="2" />
-                <CourseCard title="HTML CSS PRO" price="1.200.000" id="2" />
-                <CourseCard title="HTML CSS PRO" price="1.200.000" id="2" />
+                {data?.data?.items &&
+                    data?.data.items.map((item, _) => {
+                        return (
+                            <CourseCard
+                                img={item.image}
+                                title={item.title}
+                                price={item.price}
+                                id={item.courseId}
+                                key={item.courseId}
+                            />
+                        );
+                    })}
             </ListWrapper>
+            {data?.data?.items?.length !== 0 && (
+                <div>
+                    <ul></ul>
+                </div>
+            )}
         </div>
     );
 }
