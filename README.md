@@ -1,3 +1,21 @@
+# Introduce
+Online Learning Website ( Frontend )
+- Using the Demo Account <br>
+. Username: Customer <br>
+. Password: Nam@123 <br>
+
+- Key Features
+. Registration and login functionality. <br>
+. Search courses. <br>
+. Filter courses by categories, dev languages , levels . <br>
+. Watch courses online. <br>
+
+- Technologies Used
+. Front-end: ReactJS, Typescript, React-query, React Router, Axios, Redux Toolkit. <br>
+. Back-end: ASP.NET Core API , EF Core, JWT , Identity , CQRS , AutoMapper <br>
+. Database: SQL Server. <br>
+. Orther: Redis caching , Firebase <br>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
