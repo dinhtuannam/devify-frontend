@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import styles from './CourseList.module.scss';
 import classNames from 'classnames/bind';
 import CourseCard from '../../../../components/Card/CourseCard/CourseCard';
@@ -7,11 +7,13 @@ import { getfilterCourseService } from '../../../../services/CourseService';
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../../../../components/Loading/Spinner/Spinner';
 import NotFound from '../../../error/NotFound/NotFound';
+import Paging from '../../../../components/Paging/Paging';
 
 const cx = classNames.bind(styles);
 
 function CourseList() {
     const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
     const categories = searchParams.getAll('cat');
     const languages = searchParams.getAll('lang');
     const levels = searchParams.getAll('lvl');
@@ -36,6 +38,31 @@ function CourseList() {
         },
     );
 
+    const handlePageChange = (page: number) => {
+        let path = '/courses';
+        const queryStringParams: string[] = [];
+        if (page) queryStringParams.push(`page=${encodeURIComponent(page)}`);
+        if (categories) categories.forEach((cat) => queryStringParams.push(`cat=${encodeURIComponent(cat)}`));
+        if (languages) languages.forEach((lang) => queryStringParams.push(`lang=${encodeURIComponent(lang)}`));
+        if (levels) levels.forEach((lvl) => queryStringParams.push(`lvl=${encodeURIComponent(lvl)}`));
+        const queryString = queryStringParams.join('&');
+        navigate((path += `?${queryString}`));
+    };
+
+    const PagingComponent = () => {
+        if (!data?.data?.totalRecords) return;
+        return (
+            <div className={cx('paging-bar')}>
+                <Paging
+                    currentPage={currentPage}
+                    totalRecords={data?.data?.totalRecords}
+                    pageSize={12}
+                    pageChange={handlePageChange}
+                />
+            </div>
+        );
+    };
+
     return (
         <div className={cx('wrapper')}>
             {isLoading && <Spinner />}
@@ -54,11 +81,7 @@ function CourseList() {
                         );
                     })}
             </ListWrapper>
-            {data?.data?.items?.length !== 0 && (
-                <div>
-                    <ul></ul>
-                </div>
-            )}
+            {data?.data?.totalRecords !== 0 && PagingComponent()}
         </div>
     );
 }
