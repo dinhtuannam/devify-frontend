@@ -4,7 +4,7 @@ Online Learning Website ( Frontend )
 . Username: Customer <br>
 . Password: Nam@123 <br>
 
-- Key Features
+- Key Features <br>
 . Registration and login functionality. <br>
 . Search courses. <br>
 . Filter courses by categories, dev languages , levels . <br>
