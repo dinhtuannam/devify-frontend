@@ -1,5 +1,5 @@
 # Introduce
-Online Learning Website ( Frontend )
+Online Learning Website ( Frontend )<br>
 - Using the Demo Account <br>
 . Username: Customer <br>
 . Password: Nam@123 <br>
@@ -10,7 +10,7 @@ Online Learning Website ( Frontend )
 . Filter courses by categories, dev languages , levels . <br>
 . Watch courses online. <br>
 
-- Technologies Used
+- Technologies Used<br>
 . Front-end: ReactJS, Typescript, React-query, React Router, Axios, Redux Toolkit. <br>
 . Back-end: ASP.NET Core API , EF Core, JWT , Identity , CQRS , AutoMapper <br>
 . Database: SQL Server. <br>
