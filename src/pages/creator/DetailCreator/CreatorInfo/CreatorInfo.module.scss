@@ -1,0 +1,28 @@
+.wrapper {
+    padding: 20px 0px;
+    .content {
+        font-size: 2rem;
+        color: var(--text-color) !important;
+        .about-me {
+            margin-bottom: 12px;
+            margin-top: 12px;
+            opacity: 0.8;
+        }
+        .url {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            .icon {
+                margin-right: 10px;
+            }
+            .link {
+                color: var(--text-color) !important;
+                opacity: 0.8;
+                transition: 0.2s ease;
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
