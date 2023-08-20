@@ -72,6 +72,8 @@ function CourseList() {
                     data?.data.items.map((item, _) => {
                         return (
                             <CourseCard
+                                to={`/courses/${item.slug}`}
+                                itemPerRow={3}
                                 img={item.image}
                                 title={item.title}
                                 price={item.price}

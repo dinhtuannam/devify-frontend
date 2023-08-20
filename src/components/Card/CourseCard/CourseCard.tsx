@@ -1,24 +1,37 @@
 import styles from './CourseCard.module.scss';
 import classNames from 'classnames/bind';
 import PriceFormatter from '../../../helpers/convertHelper';
+import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 interface CourseCardProps {
     id: string;
     title: string;
     category?: string;
+    itemPerRow: number;
     img?: string;
     price?: number;
     href?: string;
     to?: string;
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({ title, category, price, img, href, to, id }) => {
+const CourseCard: React.FC<CourseCardProps> = ({ title, category, price, img, itemPerRow, href, to, id }) => {
     const priceFormatter = PriceFormatter.getInstance();
+    const widthItem = Math.round(100 / itemPerRow) + '%';
     let formatPrice;
     if (price) formatPrice = priceFormatter.formatPrice(price);
+    let Comp: any = 'div';
+    if (to) {
+        Comp = Link;
+    } else if (href) {
+        Comp = 'a';
+    }
+    const WrapProps = {
+        href,
+        to,
+    };
     return (
-        <div className={cx('wrapper')}>
+        <Comp className={cx('wrapper')} style={{ width: widthItem }} {...WrapProps}>
             <div className={cx('img-wrapper')}>
                 <img className={cx('img')} src={img} alt="img" />
             </div>
@@ -31,7 +44,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ title, category, price, img, hr
             <div className={cx('price-wrapper')}>
                 <span className={cx('price')}>{formatPrice}</span>
             </div>
-        </div>
+        </Comp>
     );
 };
 

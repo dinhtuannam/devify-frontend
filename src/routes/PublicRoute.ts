@@ -12,6 +12,9 @@ import NotFound from '../pages/error/NotFound/NotFound';
 import DefaultLayout from '../layouts/DefaultLayout/DefaultLayout';
 import AuthLayout from '../layouts/AuthLayout/AuthLayout';
 import NoSidebarLayout from '../layouts/NoSidebarLayout/NoSidebarLayout';
+import BadRequest from '../pages/error/BadRequest/BadRequest';
+import CartPage from '../pages/cart/CartPage';
+import SuccessPage from '../pages/cart/success/SuccessPage';
 type Route = {
     path: string;
     page: ComponentType<any>;
@@ -26,4 +29,7 @@ export const PublicRoutes: Route[] = [
     { path: '/login', page: LoginPage, layout: AuthLayout },
     { path: '/register', page: RegisterPage, layout: AuthLayout },
     { path: '/not-found', page: NotFound, layout: DefaultLayout },
+    { path: '/bad-request', page: BadRequest, layout: DefaultLayout },
+    { path: '/cart/success', page: SuccessPage, layout: DefaultLayout },
+    { path: '/cart', page: CartPage, layout: NoSidebarLayout },
 ];

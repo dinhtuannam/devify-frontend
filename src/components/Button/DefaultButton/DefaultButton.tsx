@@ -14,15 +14,15 @@ interface IDefaultButtonProps {
     large?: boolean;
     disabled?: boolean;
     children?: ReactNode;
+    onClick?: (event: React.MouseEvent<HTMLElement>) => void;
     [passProps: string]: any;
 }
 
 function DefaultButton(props: IDefaultButtonProps) {
-    const { primary, href, disabled, to, small, medium, large, outline, children, passProps } = props;
+    const { primary, href, disabled, to, small, medium, large, outline, children, onClick } = props;
     const BtnProps = {
         href,
         to,
-        passProps,
     };
     let Comp: any = 'button';
     const classes = cx('wrapper', {
@@ -37,10 +37,10 @@ function DefaultButton(props: IDefaultButtonProps) {
         Comp = Link;
     } else if (props.href) {
         Comp = 'a';
-    }
+    } else Comp = 'button';
 
     return (
-        <Comp className={classes} {...BtnProps}>
+        <Comp className={classes} {...BtnProps} onClick={onClick}>
             <span>{children}</span>
         </Comp>
     );

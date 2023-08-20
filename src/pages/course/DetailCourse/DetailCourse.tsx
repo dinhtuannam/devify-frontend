@@ -10,7 +10,7 @@ import { getCourseBySlug } from '../../../redux/reducers/course/detailCourse.sli
 import { AppDispatch } from '../../../redux/store';
 import useSelectedItem from '../../../hooks/useSelectedItem';
 import DefaultButton from '../../../components/Button/DefaultButton/DefaultButton';
-
+import { paymentService } from '../../../services/PaymentService';
 const cx = classNames.bind(styles);
 
 function DetailCourse() {
@@ -22,6 +22,11 @@ function DetailCourse() {
     useEffect(() => {
         dispatch(getCourseBySlug(name));
     }, [name, dispatch]);
+
+    const handlePay = async () => {
+        const res = await paymentService();
+        window.location.href = res;
+    };
 
     const renderContent = () => {
         return (
@@ -77,7 +82,7 @@ function DetailCourse() {
                             </div>
                         </div>
                         <div className={cx('action')}>
-                            <div>
+                            <div style={{ width: '100%' }}>
                                 <img src={stateData.data.image} alt="img" className={cx('course-img')} />
                             </div>
                             <div className={cx('price-box')}>
@@ -88,8 +93,7 @@ function DetailCourse() {
                                 <span style={{ marginRight: '6px' }}>{stateData.data.purchased}</span>
                                 <span>thành viên đã tham gia khóa học</span>
                             </div>
-                            {/* <button className={cx('buy-btn')}>Mua ngay</button> */}
-                            <DefaultButton primary large>
+                            <DefaultButton primary large onClick={handlePay}>
                                 Mua ngay
                             </DefaultButton>
                         </div>

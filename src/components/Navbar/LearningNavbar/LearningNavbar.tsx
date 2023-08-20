@@ -6,10 +6,13 @@ import { GiOpenBook } from 'react-icons/gi';
 import { AiOutlineDoubleLeft as BackIcon } from 'react-icons/ai';
 import useTheme from '../../../hooks/useTheme';
 import { BsFillSunFill as LightIcon, BsFillMoonStarsFill as DarkIcon } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
 const cx = classNames.bind(styles);
 
 function LearningNavbar() {
     const { theme, switchTheme } = useTheme();
+    const courseState = useSelector((state: RootState) => state.learningCourseStore);
 
     return (
         <div className={cx('wrapper')}>
@@ -19,11 +22,11 @@ function LearningNavbar() {
             <div className={cx('logo-container')}>
                 <img src={logo} className={cx('logo')} alt="img" />
             </div>
-            <div className={cx('title')}>Xây Dựng Website với ReactJS</div>
+            <div className={cx('title')}>{courseState.data?.title}</div>
             <div className={cx('action')}>
                 <div className={cx('action-item')}>
                     <GiOpenBook className={cx('lesson')} />
-                    <span className={cx('action-title')}>120 bài học</span>
+                    <span className={cx('action-title')}>{courseState.data?.totalLesson} bài học</span>
                 </div>
                 <div className={cx('action-item')} onClick={switchTheme}>
                     {theme === 'Light' ? (

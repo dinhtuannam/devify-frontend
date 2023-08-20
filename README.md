@@ -1,20 +1,51 @@
 # Introduce
+
 Online Learning Website ( Frontend )<br>
-- Using the Demo Account <br>
-. Username: Customer <br>
-. Password: Nam@123 <br>
 
-- Key Features <br>
-. Registration and login functionality. <br>
-. Search courses. <br>
-. Filter courses by categories, dev languages , levels . <br>
-. Watch courses online. <br>
+-   Using the Demo Account <br>
+    . Username: Customer <br>
+    . Password: Nam@123 <br>
 
-- Technologies Used<br>
-. Front-end: ReactJS, Typescript, React-query, React Router, Axios, Redux Toolkit. <br>
-. Back-end: ASP.NET Core API , EF Core, JWT , Identity , CQRS , AutoMapper <br>
-. Database: SQL Server. <br>
-. Orther: Redis caching , Firebase <br>
+-   Key Features <br>
+    . Registration and login functionality. <br>
+    . Search courses. <br>
+    . Filter courses by categories, dev languages , levels . <br>
+    . Watch courses online. <br>
+
+-   Technologies Used<br>
+    . Front-end: ReactJS, Typescript, React-query, React Router, Axios, Redux Toolkit. <br>
+    . Back-end: ASP.NET Core API , EF Core, JWT , Identity , CQRS , AutoMapper <br>
+    . Database: SQL Server. <br>
+    . Orther: Redis caching , Firebase <br>
+
+# VnPay test account
+
+1
+Ngân hàng: NCB<br>
+Số thẻ: 9704198526191432198<br>
+Tên chủ thẻ:NGUYEN VAN A<br>
+Ngày phát hành:07/15<br>
+Mật khẩu OTP:123456<br>
+
+2
+Loại thẻ quốc tế VISA (3DS)<br>
+Số thẻ: 4456530000001096<br>
+CVC/CVV: 123<br>
+Tên chủ thẻ:NGUYEN VAN A<br>
+Ngày hết hạn:12/23<br>
+Email:test@gmail.com<br>
+Địa chỉ:22 Lang Ha<br>
+Thành phố:Ha Noi<br>
+
+3
+Loại thẻ quốc tế MasterCard (No 3DS)<br>
+Số thẻ: 5200000000001005<br>
+CVC/CVV: 123<br>
+Tên chủ thẻ:NGUYEN VAN A<br>
+Ngày hết hạn:12/23<br>
+Email:test@gmail.com<br>
+Địa chỉ:22 Lang Ha<br>
+Thành phố:Ha Noi<br>
 
 # Getting Started with Create React App
 

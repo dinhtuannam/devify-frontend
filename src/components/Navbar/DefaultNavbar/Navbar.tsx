@@ -4,7 +4,7 @@ import logo from '../../../assets/img/logo.png';
 import { FaBell, FaUserCircle } from 'react-icons/fa';
 import { AiOutlineLeft, AiOutlineMenu } from 'react-icons/ai';
 import NavbarSearch from './Search/NavbarSearch';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { currentUserType } from '../../../types/AccountType';
 import Tippy from '@tippyjs/react';
 import UseLogout from '../../../hooks/useLogout';
@@ -21,6 +21,7 @@ function Navbar() {
     const { theme, switchTheme } = useTheme();
     const isLoginCheck = useCheckLogin();
     const path = window.location.pathname;
+    const navigate = useNavigate();
 
     useEffect(() => {
         const userString: string | null = localStorage.getItem('currentUser');
@@ -104,10 +105,10 @@ function Navbar() {
                 {path === '/' ? (
                     <h4 className={cx('logo-title')}>Devify Academy</h4>
                 ) : (
-                    <Link to="/" className={cx('back')}>
+                    <div className={cx('back')} onClick={() => navigate(-1)}>
                         <AiOutlineLeft style={{ marginTop: '1px' }} />
                         <span>QUAY LẠI</span>
-                    </Link>
+                    </div>
                 )}
             </div>
             <NavbarSearch />
