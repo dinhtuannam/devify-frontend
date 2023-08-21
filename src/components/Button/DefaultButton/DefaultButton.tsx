@@ -14,7 +14,7 @@ interface IDefaultButtonProps {
     large?: boolean;
     disabled?: boolean;
     children?: ReactNode;
-    onClick?: (event: React.MouseEvent<HTMLElement>) => void;
+    onClick?: (param: any) => void;
     [passProps: string]: any;
 }
 

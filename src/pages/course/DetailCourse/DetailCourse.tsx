@@ -11,9 +11,11 @@ import { AppDispatch } from '../../../redux/store';
 import useSelectedItem from '../../../hooks/useSelectedItem';
 import DefaultButton from '../../../components/Button/DefaultButton/DefaultButton';
 import { paymentService } from '../../../services/PaymentService';
+import CartLibrary from '../../../libraries/CartLibrary';
 const cx = classNames.bind(styles);
 
 function DetailCourse() {
+    const { addToCart } = CartLibrary();
     const stateData = useSelector((state: RootState) => state.detailCourseStore);
     const dispatch = useDispatch<AppDispatch>();
     const { selectItem, handleSelectItem } = useSelectedItem();
@@ -93,7 +95,10 @@ function DetailCourse() {
                                 <span style={{ marginRight: '6px' }}>{stateData.data.purchased}</span>
                                 <span>thành viên đã tham gia khóa học</span>
                             </div>
-                            <DefaultButton primary large onClick={handlePay}>
+                            {/* <DefaultButton primary large onClick={handlePay}>
+                                Mua ngay
+                            </DefaultButton> */}
+                            <DefaultButton primary large onClick={() => addToCart(stateData.data)}>
                                 Mua ngay
                             </DefaultButton>
                         </div>

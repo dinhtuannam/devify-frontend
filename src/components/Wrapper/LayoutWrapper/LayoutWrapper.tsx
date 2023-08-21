@@ -5,13 +5,15 @@ const cx = classNames.bind(styles);
 
 interface IContentWrapperProps {
     children: ReactNode;
+    medium?: boolean;
     center?: boolean;
 }
 
 function LayoutWrapper(props: IContentWrapperProps) {
-    const { children, center } = props;
+    const { children, center, medium } = props;
     const classes = cx('wrapper', {
         center,
+        medium,
     });
     return <div className={classes}>{children}</div>;
 }

@@ -35,8 +35,10 @@ export const postDataRequest = async (path: string, option = {}) => {
     try {
         let response = await backendRequest.post(path, option);
         return response.data;
-    } catch (e) {
-        console.log(e);
-        return null;
+    } catch (e: any) {
+        if (e.response && e.response.data) {
+            return e.response.data;
+        }
+        throw e;
     }
 };

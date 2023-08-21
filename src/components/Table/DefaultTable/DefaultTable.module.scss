@@ -1,0 +1,24 @@
+.wrapper {
+    overflow-x: auto;
+    width: 100%;
+    background-color: var(--detail-creator-course-bg);
+    padding: 12px 0px;
+    margin-top: 24px;
+    border-radius: 12px;
+}
+
+.table {
+    border-collapse: collapse;
+    border-spacing: 20px;
+    font-size: 2rem;
+    margin: 0 auto;
+    color: var(--text-color);
+    min-width: 500px;
+    .tr {
+        .td {
+            min-width: 140px;
+            text-align: center;
+            padding: 12px 12px;
+        }
+    }
+}

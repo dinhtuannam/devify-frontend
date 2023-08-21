@@ -31,5 +31,5 @@ export const PublicRoutes: Route[] = [
     { path: '/not-found', page: NotFound, layout: DefaultLayout },
     { path: '/bad-request', page: BadRequest, layout: DefaultLayout },
     { path: '/cart/success', page: SuccessPage, layout: DefaultLayout },
-    { path: '/cart', page: CartPage, layout: NoSidebarLayout },
+    { path: '/cart', page: CartPage, layout: DefaultLayout },
 ];
