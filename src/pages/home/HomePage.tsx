@@ -8,8 +8,18 @@ function HomePage() {
         <div className={cx('container')}>
             <HomeSlider />
             <div className={cx('wrapper')}>
-                <HomeCourse title="Khóa học Pro" api="sa" itemQuantity={4} />
-                <HomeCourse title="Khóa học miễn phí" api="sa" itemQuantity={10} />
+                <HomeCourse
+                    title="Khóa học lập trình web"
+                    api="sa"
+                    itemQuantity={8}
+                    link={'/courses?cat=Web%20Development'}
+                />
+                <HomeCourse
+                    title="Khóa học lập trình android"
+                    api="sa"
+                    itemQuantity={8}
+                    link={'/courses?cat=Mobile%20Development'}
+                />
             </div>
         </div>
     );

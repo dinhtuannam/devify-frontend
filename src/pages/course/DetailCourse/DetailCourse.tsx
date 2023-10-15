@@ -95,12 +95,12 @@ function DetailCourse() {
                                 <span style={{ marginRight: '6px' }}>{stateData.data.purchased}</span>
                                 <span>thành viên đã tham gia khóa học</span>
                             </div>
-                            {/* <DefaultButton primary large onClick={handlePay}>
-                                Mua ngay
-                            </DefaultButton> */}
-                            <DefaultButton primary large onClick={() => addToCart(stateData.data)}>
+                            <DefaultButton primary large onClick={handlePay}>
                                 Mua ngay
                             </DefaultButton>
+                            {/* <DefaultButton primary large onClick={() => addToCart(stateData.data)}>
+                                Thêm vào giỏ hàng
+                            </DefaultButton> */}
                         </div>
                     </div>
                 ) : (

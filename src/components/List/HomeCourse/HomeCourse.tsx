@@ -1,14 +1,16 @@
 import React, { useState, Fragment } from 'react';
 import classNames from 'classnames/bind';
 import styles from './HomeCourse.module.scss';
+import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
 type HomeCourseProps = {
     title: string;
     api: string;
     itemQuantity: number;
+    link?: string | null;
 };
 
-const HomeCourse: React.FC<HomeCourseProps> = ({ title, api, itemQuantity }) => {
+const HomeCourse: React.FC<HomeCourseProps> = ({ title, api, itemQuantity, link }) => {
     const array: number[] = Array(itemQuantity).fill(1);
 
     const [data, setData] = useState(array);
@@ -19,7 +21,11 @@ const HomeCourse: React.FC<HomeCourseProps> = ({ title, api, itemQuantity }) => 
                 <div>
                     <div className={cx('heading-wrap')}>
                         <h2 className={cx('heading')}>{title}</h2>
-                        <h2 className={cx('more')}>Xem thêm</h2>
+                        {link && (
+                            <Link to={link} className={cx('more')}>
+                                Xem thêm
+                            </Link>
+                        )}
                     </div>
                 </div>
                 <div className={cx('body')}>
