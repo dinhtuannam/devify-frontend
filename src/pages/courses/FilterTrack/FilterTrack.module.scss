@@ -1,0 +1,51 @@
+@import '../../../styles/GlobalStyles.scss';
+.wrapper {
+    width: 28rem;
+    padding-right: 4rem;
+    margin-right: 0.8rem;
+    max-height: 240rem;
+    background-color: var(--content-background);
+    transition: var(--primary-transition);
+    @include respond-to-iphone {
+        display: none;
+    }
+    @include respond-to-tablet {
+        display: none;
+    }
+    @include respond-to-ipad {
+        display: none;
+    }
+
+    .track {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 1.6rem 0;
+        background: var(--chapter-background);
+        transition: var(--primary-transition);
+        cursor: pointer;
+        border-radius: 10px;
+        .track-title {
+            font-weight: 600;
+            letter-spacing: 0.6;
+            margin-left: 0.8rem;
+            color: var(--text-color);
+        }
+    }
+
+    .item {
+        cursor: pointer;
+        display: flex;
+        padding: 0.8rem 0;
+        min-width: 18rem;
+        max-width: 60rem;
+    }
+}
+.item-title {
+    margin-left: 0.8rem;
+    font-size: 1.3rem;
+    opacity: 0.8;
+    &:hover {
+        opacity: 1;
+    }
+}

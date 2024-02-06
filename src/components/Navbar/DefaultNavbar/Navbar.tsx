@@ -5,7 +5,7 @@ import { FaBell, FaUserCircle } from 'react-icons/fa';
 import { AiOutlineLeft, AiOutlineMenu } from 'react-icons/ai';
 import NavbarSearch from './Search/NavbarSearch';
 import { Link, useNavigate } from 'react-router-dom';
-import { currentUserType } from '../../../types/AccountType';
+import { currentUserType } from '../../../types/UserType';
 import Tippy from '@tippyjs/react';
 import UseLogout from '../../../hooks/useLogout';
 import { useState, Fragment, useEffect } from 'react';
@@ -35,7 +35,6 @@ function Navbar() {
 
     const handleLogout = () => {
         UseLogout();
-        window.location.reload();
     };
 
     const LoginedComponent = () => {

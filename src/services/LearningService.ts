@@ -1,8 +1,8 @@
 import { getDataRequest } from '../utils/ApiRequest';
 
-export const getLearningCourseService = async (slug: string | undefined) => {
+export const getLearningCourseService = async (code: string | undefined) => {
     try {
-        const path = `/course/${slug}/learning`;
+        const path = `/course/${code}/get-learning-info`;
         const response = await getDataRequest(path);
         return response;
     } catch (e) {

@@ -1,12 +1,13 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { ApiResponse } from '../../../types/ApiType';
-import { LearningCourseType } from '../../../types/LearningType';
+import { CourseLearningInfo } from '../../../types/LearningType';
 import { getLearningCourseService } from '../../../services/LearningService';
 import { AsyncState } from '../../../types/StateType';
 
-const initialState: AsyncState<LearningCourseType> = {
+const initialState: AsyncState<CourseLearningInfo> = {
     isLoading: false,
-    isSuccess: true,
+    code: 0,
+    result: true,
     message: '',
     data: null,
 };
@@ -24,20 +25,22 @@ export const learningCourseSlice = createSlice({
         builder
             .addCase(getLearningCourseThunk.pending, (state) => {
                 state.isLoading = true;
-                state.isSuccess = true;
+                state.result = true;
             })
             .addCase(
                 getLearningCourseThunk.fulfilled,
-                (state, action: PayloadAction<ApiResponse<LearningCourseType>>) => {
+                (state, action: PayloadAction<ApiResponse<CourseLearningInfo>>) => {
                     state.isLoading = false;
-                    state.isSuccess = action.payload?.success;
+                    state.result = action.payload?.result;
                     state.message = action.payload?.message;
+                    state.code = action.payload?.code;
                     state.data = action.payload?.data;
                 },
             )
             .addCase(getLearningCourseThunk.rejected, (state, action) => {
                 state.isLoading = false;
-                state.isSuccess = false;
+                state.result = false;
+                state.code = 400;
             });
     },
 });

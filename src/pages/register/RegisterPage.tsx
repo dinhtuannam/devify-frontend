@@ -35,14 +35,18 @@ function RegisterPage() {
     };
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setIsLoading(true);
-        // xử lí
-        setTimeout(() => {
+        try {
+            e.preventDefault();
+            setIsLoading(true);
+            setTimeout(() => {
+                window.location.href = '/login';
+            }, 2000);
             setIsLoading(false);
-            window.location.href = '/login';
-        }, 2000);
-        console.log(formData);
+        } catch (e) {
+            console.log('[Register] -> failed');
+            setIsLoading(false);
+            setError('Something wrong please try again !');
+        }
     };
 
     return (

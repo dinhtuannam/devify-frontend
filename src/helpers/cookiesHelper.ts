@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
-import { accessTokenExp, refreshTokenExp, isLoginExp } from '../constants/AuthExp';
-import { AuthCookies } from '../types/CookiesType';
+import { AuthCookies } from '../types/AuthType';
+import { accessTokenUtil, isLoginUtil, refreshTokenUtil } from '../utils/AuthUtils';
 
 export const RemoveAllCookies = () => {
     const allCookies = Cookies.get();
@@ -9,23 +9,10 @@ export const RemoveAllCookies = () => {
     });
 };
 
-interface authCookies {
-    accessToken: string;
-    refreshToken: string;
-    isLogin: boolean;
-}
-export const SetAuthCookies = (props: authCookies) => {
-    console.log(props);
-
-    Cookies.set('devify:AccessToken', props.accessToken, { expires: accessTokenExp, path: '/' });
-    Cookies.set('devify:RefreshToken', props.refreshToken, { expires: refreshTokenExp, path: '/' });
-    Cookies.set('devify:isLogin', 'true', { expires: isLoginExp, path: '/' });
-};
-
 export const GetAuthCookies = () => {
-    const accessTokenCookie: string | undefined = Cookies.get('devify:AccessToken');
-    const refreshTokenCookie: string | undefined = Cookies.get('devify:RefreshToken');
-    const isLoginCookies: string | undefined = Cookies.get('devify:isLogin');
+    const accessTokenCookie: string | undefined = Cookies.get(accessTokenUtil);
+    const refreshTokenCookie: string | undefined = Cookies.get(refreshTokenUtil);
+    const isLoginCookies: string | undefined = Cookies.get(isLoginUtil);
 
     const data: AuthCookies = {
         accessTokenCookie,

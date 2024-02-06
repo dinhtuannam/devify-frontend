@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { DetailCourse } from '../../../types/CourseType';
-import { getDetailCourseService } from '../../../services/CourseService';
+import { getViewCourseService } from '../../../services/CourseService';
 import { ApiResponse } from '../../../types/ApiType';
 interface detailCourseState {
     isLoading: boolean;
@@ -17,7 +17,7 @@ const initialState: detailCourseState = {
 };
 
 export const getCourseBySlug = createAsyncThunk('product/getCourseBySlug', async (slug: string | undefined) => {
-    const response = await getDetailCourseService(slug);
+    const response = await getViewCourseService(slug);
     return response;
 });
 
@@ -33,7 +33,7 @@ export const detailCourseSlice = createSlice({
             })
             .addCase(getCourseBySlug.fulfilled, (state, action: PayloadAction<ApiResponse<DetailCourse>>) => {
                 state.isLoading = false;
-                state.isSuccess = action.payload?.success;
+                state.isSuccess = action.payload?.result;
                 state.message = action.payload?.message;
                 state.data = action.payload?.data;
             })

@@ -4,12 +4,11 @@ import logo from '../../assets/img/logo.png';
 import InputFormData from '../../components/Input/InputFormData/InputFormData';
 import InputPassword from '../../components/Input/InputPassword/InputPassword';
 import { loginService } from '../../services/AuthService';
-import { authLogin, loginResponse } from '../../types/AuthType';
+import { LoginPayload, LoginResponse } from '../../types/AuthType';
 import { ApiResponse } from '../../types/ApiType';
 import { Link } from 'react-router-dom';
 import { useState, FormEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SetAuthCookies } from '../../helpers/cookiesHelper';
 import useInputChange from '../../hooks/useInputChange';
 import { GetAuthCookies } from '../../helpers/cookiesHelper';
 const cx = classNames.bind(styles);
@@ -32,8 +31,8 @@ function LoginPage() {
     }, [navigate]);
 
     const handleLogin = async () => {
-        const postData: authLogin = {
-            name: formData.username,
+        const postData: LoginPayload = {
+            username: formData.username,
             password: formData.password,
         };
         const res = await loginService(postData);
@@ -41,24 +40,26 @@ function LoginPage() {
     };
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setIsLoading(true);
-        const res: ApiResponse<loginResponse> = await handleLogin();
-        if (res?.success === true) {
-            setError('');
-            const authData = {
-                accessToken: res.data.accessToken,
-                refreshToken: res.data.refreshToken,
-                isLogin: true,
-            };
-            SetAuthCookies(authData);
-            localStorage.setItem('currentUser', JSON.stringify(res.data.info));
-            window.location.href = '/';
-        } else {
-            setError(res.message);
-        }
+        try {
+            e.preventDefault();
+            setIsLoading(true);
+            const res: ApiResponse<LoginResponse> = await handleLogin();
+            if (res.result === true) {
+                setError('');
+                console.log(res.data.info);
 
-        setIsLoading(false);
+                localStorage.setItem('currentUser', JSON.stringify(res.data.info));
+                window.location.href = '/';
+            } else {
+                setError(res.message);
+            }
+
+            setIsLoading(false);
+        } catch (e) {
+            console.log('[Login] -> failed');
+            setIsLoading(false);
+            setError('Something wrong please try again !');
+        }
     };
 
     return (

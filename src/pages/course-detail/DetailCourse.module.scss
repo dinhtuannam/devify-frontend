@@ -1,0 +1,161 @@
+@import '../../styles/GlobalStyles.scss';
+.wrapper {
+    max-width: 1920px;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    margin: 0 auto;
+    margin-top: 24px;
+
+    @include respond-to-iphone {
+        flex-direction: column-reverse;
+    }
+    @include respond-to-tablet {
+        flex-direction: column-reverse;
+    }
+    .content {
+        width: 66.66667%;
+
+        @include respond-to-iphone {
+            width: 100%;
+        }
+        @include respond-to-tablet {
+            width: 100%;
+        }
+        .course-title {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-top: 16px;
+            min-height: 33px;
+            margin-bottom: 22px;
+            color: var(--text-color);
+        }
+        .course-description {
+            color: rgba(0, 0, 0, 0.8);
+            font-size: 1.6rem;
+            line-height: 1.6;
+            color: var(--text-color);
+            max-width: 1000px;
+            opacity: var(--primary-opacity);
+        }
+        .lang-wrapper {
+            margin: 12px 0px;
+            color: var(--text-color);
+            .course-lang {
+                margin-right: 12px;
+                font-weight: 600;
+            }
+            .course-lang-item {
+                margin: 8px 0px;
+                opacity: var(--primary-opacity);
+            }
+        }
+        .cat-wrapper {
+            color: var(--text-color);
+            margin: 12px 0px 12px 0px;
+            .course-cat {
+                margin-right: 12px;
+                font-weight: 600;
+            }
+            .course-cat-item {
+                margin-right: 10px;
+                opacity: var(--primary-opacity);
+            }
+        }
+        .chapter-list-wrapper {
+            margin: 20px 0px;
+            .chapter-item {
+                box-shadow: none;
+                margin-bottom: 12px;
+                color: var(--text-color);
+                font-size: 1.6rem;
+                font-weight: 400;
+                background: var(--chapter-background);
+                border: 1px solid var(--chaptet-border);
+                border-radius: 6px;
+                z-index: 1;
+                padding: 14px 30px 14px 48px;
+                margin-right: 10px;
+                cursor: pointer;
+                transition: var(--primary-transition);
+                @include respond-to-iphone {
+                    padding: 14px 30px 14px 14px;
+                    margin-right: 0px;
+                }
+            }
+            .lesson-item {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+                color: var(--text-color);
+                opacity: var(--primary-opacity);
+                font-size: 1.4rem;
+                line-height: 48px;
+                overflow: hidden;
+                padding: 0 30px 0 48px;
+                @include respond-to-iphone {
+                    padding: 0 30px;
+                }
+            }
+        }
+    }
+    .action {
+        width: 33.33333%;
+        background: transparent;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 60px;
+        margin-left: 24px;
+        padding-bottom: 20px;
+        position: sticky;
+        top: 74px;
+        z-index: 8;
+        flex-shrink: 0;
+        @include respond-to-iphone {
+            position: unset;
+            width: 100%;
+            margin-left: 0px;
+            margin-bottom: 20px;
+        }
+        @include respond-to-tablet {
+            position: unset;
+            width: 100%;
+            margin-left: 0px;
+            margin-bottom: 20px;
+        }
+        .course-img {
+            border-radius: 16px;
+            margin: 2px 0 20px;
+            width: calc(100% - 2px);
+        }
+        .price-box {
+            margin-bottom: 10px;
+            font-size: 24px;
+            color: var(--text-color);
+        }
+        .purchased-box {
+            margin-bottom: 6px;
+            font-size: 20px;
+            opacity: 0.8;
+            color: var(--text-color);
+            @include respond-to-iphone {
+                pfont-size: 14px;
+            }
+        }
+        .buy-btn {
+            font-size: 1.6rem;
+            margin-top: 16px;
+            min-width: 180px;
+            padding: 10px 16px;
+            background-color: var(--primary-bg-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 999px !important;
+            outline: none;
+            cursor: pointer;
+            color: #fff;
+            transition: 0.2s ease-in-out;
+            &:hover {
+                opacity: 0.9;
+            }
+        }
+    }
+}

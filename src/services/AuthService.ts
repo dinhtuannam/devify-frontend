@@ -1,9 +1,9 @@
 import { postDataRequest } from '../utils/ApiRequest';
-import { authLogin, refreshTokenRequest } from '../types/AuthType';
+import { LoginPayload } from '../types/AuthType';
 
-export const loginService = async (data: authLogin) => {
+export const loginService = async (data: LoginPayload) => {
     try {
-        const path = `/auth/login`;
+        const path = `/account/sign-in`;
         const response = await postDataRequest(path, data);
         return response;
     } catch (e) {
@@ -11,10 +11,10 @@ export const loginService = async (data: authLogin) => {
     }
 };
 
-export const refreshTokenService = async (data: refreshTokenRequest) => {
+export const refreshTokenService = async (token: string) => {
     try {
-        const path = `/auth/renew-token`;
-        const response = await postDataRequest(path, data);
+        const path = `/account/${token}/renew-token`;
+        const response = await postDataRequest(path, token);
         return response;
     } catch (e) {
         console.log(e);

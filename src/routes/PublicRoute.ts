@@ -4,17 +4,18 @@ import { ComponentType } from 'react';
 import HomePage from '../pages/home/HomePage';
 import LoginPage from '../pages/login/LoginPage';
 import RegisterPage from '../pages/register/RegisterPage';
-import CoursesPage from '../pages/course/CoursesPage/CoursesPage';
-import DetailCourse from '../pages/course/DetailCourse/DetailCourse';
-import DetailCreator from '../pages/creator/DetailCreator/DetailCreator';
+import CoursesPage from '../pages/courses/CoursesPage';
+import DetailCourse from '../pages/course-detail/DetailCourse';
+import DetailCreator from '../pages/creator-detail/DetailCreator';
 import NotFound from '../pages/error/NotFound/NotFound';
 // ========== import layout =============
 import DefaultLayout from '../layouts/DefaultLayout/DefaultLayout';
 import AuthLayout from '../layouts/AuthLayout/AuthLayout';
 import NoSidebarLayout from '../layouts/NoSidebarLayout/NoSidebarLayout';
 import BadRequest from '../pages/error/BadRequest/BadRequest';
-import CartPage from '../pages/cart/CartPage';
-import SuccessPage from '../pages/cart/success/SuccessPage';
+import BlogPage from '../pages/blog/BlogPage';
+import RoadmapPage from '../pages/roadmap/RoadmapPage';
+
 type Route = {
     path: string;
     page: ComponentType<any>;
@@ -30,6 +31,6 @@ export const PublicRoutes: Route[] = [
     { path: '/register', page: RegisterPage, layout: AuthLayout },
     { path: '/not-found', page: NotFound, layout: DefaultLayout },
     { path: '/bad-request', page: BadRequest, layout: DefaultLayout },
-    { path: '/cart/success', page: SuccessPage, layout: DefaultLayout },
-    { path: '/cart', page: CartPage, layout: DefaultLayout },
+    { path: '/blog', page: BlogPage, layout: DefaultLayout },
+    { path: '/roadmap', page: RoadmapPage, layout: DefaultLayout },
 ];

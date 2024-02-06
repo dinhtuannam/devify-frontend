@@ -1,21 +1,23 @@
-import { ApiResponse } from '../types/ApiType';
+import { ApiResponse, DataList } from '../types/ApiType';
+import { CourseItem } from '../types/CourseType';
 import { CreatorCoursesDTO, DetailCreatorPublicDTO } from '../types/CreatorType';
+import { UserItem } from '../types/UserType';
 import { getDataRequest } from '../utils/ApiRequest';
 
-export const getCreatorBySlug = async (slug: string | undefined) => {
+export const getCreator = async (code: string | undefined) => {
     try {
-        const path = `/creator/slug/${slug}`;
-        const response: ApiResponse<DetailCreatorPublicDTO> = await getDataRequest(path);
+        const path = `/account/${code}/get-user`;
+        const response: ApiResponse<UserItem> = await getDataRequest(path);
         return response;
     } catch (e) {
         console.log(e);
     }
 };
 
-export const getCreatorCoursesBySlug = async (slug: string | undefined) => {
+export const getCreatorCourses = async (code: string | undefined) => {
     try {
-        const path = `/creator/slug/${slug}/courses`;
-        const response: ApiResponse<CreatorCoursesDTO[]> = await getDataRequest(path);
+        const path = `/account/${code}/get-creator-courses`;
+        const response: ApiResponse<DataList<CourseItem>> = await getDataRequest(path);
         return response;
     } catch (e) {
         console.log(e);

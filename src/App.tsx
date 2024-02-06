@@ -4,65 +4,11 @@ import { PrivateRoute } from './routes/PrivateRoute';
 import GlobalStyles from './styles/GlobalStyles';
 import classNames from 'classnames/bind';
 import styles from './App.module.scss';
-import { useEffect } from 'react';
-import jwt_decode from 'jwt-decode';
-import { decodeToken, tokenResponse, refreshTokenRequest } from './types/AuthType';
-import UseLogout from './hooks/useLogout';
-import { ApiResponse } from './types/ApiType';
-import { refreshTokenService } from './services/AuthService';
-import { GetAuthCookies, SetAuthCookies } from './helpers/cookiesHelper';
-import { AuthCookies } from './types/CookiesType';
 import useTheme from './hooks/useTheme';
 
 const cx = classNames.bind(styles);
 function App() {
     const { theme } = useTheme();
-
-    useEffect(() => {
-        const handleRefreshToken = async () => {
-            const cookies: AuthCookies = GetAuthCookies();
-            const refreshToken: string | undefined = cookies.refreshTokenCookie;
-            const accessToken: string | undefined = cookies.accessTokenCookie;
-            const isLogin: string | undefined = cookies.isLoginCookies;
-
-            if (accessToken && refreshToken && isLogin) {
-                const decodedToken: decodeToken = jwt_decode(accessToken);
-                const currentTimestamp: number = Math.floor(Date.now() / 1000);
-
-                if (decodedToken.exp - currentTimestamp <= 600) {
-                    console.log('condition 1');
-                    const data: refreshTokenRequest = {
-                        refreshToken: refreshToken,
-                    };
-                    handleCallApi(data);
-                }
-            } else if (!refreshToken || !isLogin) {
-                UseLogout();
-            } else if (refreshToken && isLogin && !accessToken) {
-                console.log('condition 2');
-                const data: refreshTokenRequest = {
-                    refreshToken: refreshToken,
-                };
-                handleCallApi(data);
-            }
-        };
-        const handleCallApi = async (token: refreshTokenRequest) => {
-            const res: ApiResponse<tokenResponse> = await refreshTokenService(token);
-            if (res != null && res.success === true) {
-                const authData = {
-                    accessToken: res.data.accessToken,
-                    refreshToken: res.data.refreshToken,
-                    isLogin: true,
-                };
-                SetAuthCookies(authData);
-                window.location.reload();
-            }
-            if (res == null || res?.success === false) {
-                UseLogout();
-            }
-        };
-        handleRefreshToken();
-    }, [SetAuthCookies]);
 
     return (
         <Router>

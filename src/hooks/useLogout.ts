@@ -1,10 +1,9 @@
-import Cookies from 'js-cookie';
-
+import { RemoveAllCookies } from '../helpers/cookiesHelper';
 function UseLogout() {
-    Cookies.remove('devify:AccessToken', { path: '/' });
-    Cookies.remove('devify:RefreshToken', { path: '/' });
-    Cookies.remove('devify:isLogin', { path: '/' });
+    RemoveAllCookies();
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('devify theme');
+    window.location.reload();
 }
 
 export default UseLogout;

@@ -1,11 +1,11 @@
 import { DataList } from '../types/ApiType';
-import { SearchCourseListType } from '../types/CourseType';
+import { CourseItem } from '../types/CourseType';
 import { getDataRequest } from '../utils/ApiRequest';
 import { ApiResponse } from '../types/ApiType';
 
-export const getDetailCourseService = async (name: string | undefined) => {
+export const getViewCourseService = async (code: string | undefined) => {
     try {
-        const path = `/course/slug/${name}`;
+        const path = `/course/${code}/get-view-info-course`;
         const response = await getDataRequest(path);
         return response;
     } catch (e) {
@@ -23,7 +23,7 @@ interface FilterCourse {
 
 export const getfilterCourseService = async (params: FilterCourse) => {
     try {
-        let path = '/course/search/';
+        let path = '/course/get-all-course';
 
         const queryStringParams: string[] = [];
         if (params.query) queryStringParams.push(`query=${encodeURIComponent(params.query)}`);
@@ -37,7 +37,7 @@ export const getfilterCourseService = async (params: FilterCourse) => {
         if (queryString) {
             path += `?${queryString}`;
         }
-        const response: ApiResponse<DataList<SearchCourseListType[]>> = await getDataRequest(path);
+        const response: ApiResponse<DataList<CourseItem>> = await getDataRequest(path);
         console.log(response);
 
         return response;

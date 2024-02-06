@@ -1,15 +1,5 @@
-import { CourseChapter } from './CourseType';
-
-export interface LearningCourseType {
-    courseId: string;
-    title: string;
-    description: string;
-    slug: string;
-    image: string;
-    totalChapter?: number;
-    totalLesson?: number;
-    chapters: CourseChapter[];
-}
+import { CourseCreatorAttribute } from './CourseType';
+import { DetailChapter } from './ChapterType';
 
 export interface LearningLessonType {
     lessonId: string;
@@ -19,4 +9,18 @@ export interface LearningLessonType {
     courseId: string;
     courseTitle: string;
     courseSlug?: string;
+}
+
+export interface CourseLearningInfo {
+    code: string;
+    title: string;
+    des: string;
+    image: string;
+    createTime: string;
+    updateTime: string;
+    isOwner: boolean;
+    totalChapter: number;
+    totalLesson: number;
+    creator: CourseCreatorAttribute;
+    chapters: DetailChapter[];
 }

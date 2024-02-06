@@ -1,37 +1,22 @@
-import { currentUserType } from './AccountType';
-export interface authLogin {
-    name: string;
+import { UserItem } from './UserType';
+
+export interface LoginPayload {
+    username: string;
     password: string;
 }
 
-export interface authLoginResponse {
-    success: boolean;
-    message: string;
-    data: tokenResponse;
-}
-
-export interface tokenResponse {
+export interface TokenItem {
     accessToken: string;
     refreshToken: string;
 }
 
-export interface decodeToken {
-    Id: string;
-    RoleId: string;
-    email: string;
-    exp: number;
-    iat: number;
-    jti: string;
-    nbf: number;
-    unique_name: string;
+export interface LoginResponse {
+    token: TokenItem;
+    info: UserItem;
 }
 
-export interface refreshTokenRequest {
-    refreshToken: string;
-}
-
-export interface loginResponse {
-    accessToken: string;
-    refreshToken: string;
-    info: currentUserType;
+export interface AuthCookies {
+    accessTokenCookie: string | undefined;
+    refreshTokenCookie: string | undefined;
+    isLoginCookies: string | undefined;
 }

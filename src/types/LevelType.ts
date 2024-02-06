@@ -1,8 +1,5 @@
-import { Timestamps } from './CommomType';
-
-export interface LevelType extends Timestamps {
-    courseLevelId: string;
-    levelName: string;
-    levelDescription: string;
-    status: number;
+export interface LevelItem {
+    code: string;
+    name: string;
+    des: string;
 }

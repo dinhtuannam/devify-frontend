@@ -1,11 +1,13 @@
 export interface ApiResponse<T> {
-    success: boolean;
+    result: boolean;
     message: string;
     data: T;
-    errCode: string;
+    code: number;
 }
 
 export interface DataList<T> {
-    items: T;
-    totalRecords: number;
+    datas: T[];
+    totalItem: number;
+    totalPage: number;
+    page: number;
 }

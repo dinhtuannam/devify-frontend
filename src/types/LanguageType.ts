@@ -1,7 +1,5 @@
-import { Timestamps } from './CommomType';
-
-export interface LanguageType extends Timestamps {
-    languageId: string;
+export interface LanguageItem {
+    code: string;
     name: string;
-    status: number;
+    des: string;
 }

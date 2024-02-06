@@ -1,0 +1,86 @@
+@import '../../styles/GlobalStyles.scss';
+
+.wrapper {
+    min-height: 100vh;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    margin-top: 66px;
+    .banner {
+        background: top/cover no-repeat;
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
+        margin-top: -66px;
+        padding-top: 28%;
+        position: relative;
+        width: 100%;
+        margin-bottom: 90px;
+    }
+}
+
+.user {
+    align-items: flex-end;
+    bottom: -70px;
+    display: flex;
+    left: 40px;
+    position: absolute;
+    z-index: 1;
+    @include respond-to-iphone {
+        bottom: -53px;
+        left: 12px;
+    }
+    .user-avatar {
+        align-items: center;
+        background-color: #fff;
+        border-radius: 50%;
+        display: flex;
+        height: 172px;
+        justify-content: center;
+        width: 172px;
+        @include respond-to-iphone {
+            width: 5em;
+            height: 5em;
+        }
+        .avatar {
+            background: transparent;
+            border-radius: 50%;
+            font-size: var(--font-size);
+
+            .avatar-img {
+                border-radius: 50%;
+                height: 8em;
+                width: 8em;
+                object-fit: cover;
+
+                @include respond-to-iphone {
+                    width: 4em;
+                    height: 4em;
+                }
+            }
+        }
+    }
+
+    .user-name {
+        font-size: 2.8rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+        margin-left: 16px;
+        text-align: center;
+
+        .name {
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+    }
+}
+
+.course-list {
+    transition: var(--primary-transition);
+    background-color: var(--detail-creator-course-bg);
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+    padding: 18px 14px;
+    word-break: break-word;
+    color: var(--text-color);
+}
