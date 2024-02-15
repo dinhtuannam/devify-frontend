@@ -3,7 +3,7 @@ import { LoginPayload } from '../types/AuthType';
 
 export const loginService = async (data: LoginPayload) => {
     try {
-        const path = `/account/sign-in`;
+        const path = `/User/sign-in`;
         const response = await postDataRequest(path, data);
         return response;
     } catch (e) {
@@ -13,7 +13,7 @@ export const loginService = async (data: LoginPayload) => {
 
 export const refreshTokenService = async (token: string) => {
     try {
-        const path = `/account/${token}/renew-token`;
+        const path = `/User/${token}/renew-token`;
         const response = await postDataRequest(path, token);
         return response;
     } catch (e) {

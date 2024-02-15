@@ -1,8 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: ['./src/**/*.{js,jsx,ts,tsx}'],
+    darkMode: 'class',
     theme: {
         extend: {
+            backgroundColor: {
+                'light-content': '#f1eeee',
+                'dark-content': '#313232',
+            },
             colors: {
                 'dark-blue': '#001F3E',
                 'controller-dark-gray': '#232323',
@@ -18,6 +23,9 @@ module.exports = {
             },
             boxShadow: {
                 utopia: '4px 4px 4px 4px rgba(0, 0, 0, 0.3)',
+            },
+            maxWidth: {
+                container: '1920px',
             },
         },
         screens: {

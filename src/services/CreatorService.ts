@@ -6,7 +6,7 @@ import { getDataRequest } from '../utils/ApiRequest';
 
 export const getCreator = async (code: string | undefined) => {
     try {
-        const path = `/account/${code}/get-user`;
+        const path = `/User/${code}/get-user`;
         const response: ApiResponse<UserItem> = await getDataRequest(path);
         return response;
     } catch (e) {
@@ -16,7 +16,7 @@ export const getCreator = async (code: string | undefined) => {
 
 export const getCreatorCourses = async (code: string | undefined) => {
     try {
-        const path = `/account/${code}/get-creator-courses`;
+        const path = `/User/${code}/get-creator-courses`;
         const response: ApiResponse<DataList<CourseItem>> = await getDataRequest(path);
         return response;
     } catch (e) {

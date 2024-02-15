@@ -24,3 +24,10 @@ export interface UserItem {
     createTime: string;
     updateTime: string;
 }
+
+export interface UserShortInfo {
+    code: string;
+    username: string;
+    displayName: string;
+    image: string;
+}

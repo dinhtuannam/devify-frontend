@@ -35,7 +35,7 @@ function DetailCreator() {
             },
         ],
     });
-    console.log(creatorData.data, coursesData.data);
+
     if (creatorData.isError || coursesData.isError || creatorData.data?.data == null) {
         navigate('/not-found');
     }

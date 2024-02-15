@@ -46,7 +46,7 @@ backendRequest.interceptors.request.use(
                             clearTimeout(timeoutId);
                             resolve();
                         } else {
-                            setTimeout(checkStatus, 1000);
+                            setTimeout(checkStatus, 2000);
                         }
                     };
 
@@ -72,7 +72,7 @@ backendRequest.interceptors.request.use(
 
 const renewAccessToken = async (token: string) => {
     try {
-        const response = await fetch(`${baseURL}/account/${token}/renew-token`, {
+        const response = await fetch(`${baseURL}/User/${token}/renew-token`, {
             method: 'POST',
             credentials: 'include',
             headers: {
@@ -86,6 +86,8 @@ const renewAccessToken = async (token: string) => {
             accessToken: '',
             refreshToken: '',
         };
+
+        console.log(response);
 
         if (!response.ok) {
             localStorage.clear();
@@ -124,6 +126,18 @@ export const getDataRequest = async (path: string, option = {}) => {
 export const postDataRequest = async (path: string, option = {}) => {
     try {
         let response = await backendRequest.post(path, option);
+        return response.data;
+    } catch (e: any) {
+        if (e.response && e.response.data) {
+            return e.response.data;
+        }
+        throw e;
+    }
+};
+
+export const deleteDataRequest = async (path: string, option = {}) => {
+    try {
+        let response = await backendRequest.delete(path, option);
         return response.data;
     } catch (e: any) {
         if (e.response && e.response.data) {

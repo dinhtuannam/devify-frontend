@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './Navbar.module.scss';
 import logo from '../../../assets/img/logo.png';
-import { FaBell, FaUserCircle } from 'react-icons/fa';
+import { FaBell, FaUserCircle, FaShoppingCart } from 'react-icons/fa';
 import { AiOutlineLeft, AiOutlineMenu } from 'react-icons/ai';
 import NavbarSearch from './Search/NavbarSearch';
 import { Link, useNavigate } from 'react-router-dom';
@@ -40,9 +40,12 @@ function Navbar() {
     const LoginedComponent = () => {
         return (
             <Fragment>
-                <div>
+                <Link to="/inventory">
                     <button className={cx('mylearn')}>Khóa học của tôi</button>
-                </div>
+                </Link>
+                <Link to="/cart">
+                    <FaShoppingCart className={cx('alert')} />
+                </Link>
                 <div>
                     <FaBell className={cx('alert')} />
                 </div>

@@ -10,28 +10,63 @@ import { getCourseBySlug } from '../../redux/reducers/course/detailCourse.slice'
 import { AppDispatch } from '../../redux/store';
 import useSelectedItem from '../../hooks/useSelectedItem';
 import DefaultButton from '../../components/Button/DefaultButton/DefaultButton';
-import { paymentService } from '../../services/PaymentService';
+import { addItemToCartRedux } from '../../redux/reducers/cart/userCart.slice';
+import { ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
+import useCheckLogin from '../../hooks/useCheckLogin';
+import 'react-toastify/dist/ReactToastify.css';
 
 const cx = classNames.bind(styles);
 
 function DetailCourse() {
     const stateData = useSelector((state: RootState) => state.detailCourseStore);
     const dispatch = useDispatch<AppDispatch>();
+    const stateCart = useSelector((state: RootState) => state.userCartStore);
     const { selectItem, handleSelectItem } = useSelectedItem();
     const { name } = useParams();
+    const isLoginCheck = useCheckLogin();
 
     useEffect(() => {
         dispatch(getCourseBySlug(name));
     }, [name, dispatch]);
 
-    const handlePay = async () => {
-        const res = await paymentService();
-        window.location.href = res;
+    useEffect(() => {
+        if (stateCart.loading === false && stateCart.result === true) {
+            toast.success('Đã thêm sản phẩm vào giỏ hàng!', {
+                position: 'bottom-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+        if (stateCart.loading === false && stateCart.result === false) {
+            toast.error(stateCart.message, {
+                position: 'bottom-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+    }, [stateCart]);
+
+    const handleAddCart = (course: string) => {
+        if (isLoginCheck) {
+            dispatch(addItemToCartRedux(course));
+        } else {
+            window.location.href = '/login';
+        }
     };
 
     const renderContent = () => {
         return (
             <Fragment>
+                <ToastContainer />
                 {stateData.data && stateData.isSuccess ? (
                     <div className={cx('wrapper')}>
                         <div className={cx('content')}>
@@ -111,8 +146,8 @@ function DetailCourse() {
                                 <span style={{ marginRight: '6px' }}>{stateData.data.purchases}</span>
                                 <span>thành viên đã tham gia khóa học</span>
                             </div>
-                            <DefaultButton primary large onClick={handlePay}>
-                                Mua ngay
+                            <DefaultButton primary large onClick={() => handleAddCart(stateData.data!.code)}>
+                                Thêm vào giỏ hàng
                             </DefaultButton>
                             {/* <DefaultButton primary large onClick={() => addToCart(stateData.data)}>
                                 Thêm vào giỏ hàng

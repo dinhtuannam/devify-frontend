@@ -5,10 +5,19 @@ import GlobalStyles from './styles/GlobalStyles';
 import classNames from 'classnames/bind';
 import styles from './App.module.scss';
 import useTheme from './hooks/useTheme';
+import { useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 function App() {
     const { theme } = useTheme();
+
+    useEffect(() => {
+        if (theme === 'Dark') {
+            window.document.body.classList.add('dark');
+        } else {
+            window.document.body.classList.remove('dark');
+        }
+    }, [theme]);
 
     return (
         <Router>
