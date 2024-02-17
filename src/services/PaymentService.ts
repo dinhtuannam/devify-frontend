@@ -1,15 +1,10 @@
+import { ApiResponse } from '../types/ApiType';
 import { postDataRequest } from '../utils/ApiRequest';
 
-export const paymentService = async () => {
-    try {
-        const response = await postDataRequest('/payment/vnpay', {
-            OrderType: 'abc',
-            Amount: 300000,
-            OrderDescription: 'abc',
-            Name: 'abc',
-        });
-        return response;
-    } catch (e) {
-        console.log(e);
+export const checkoutService = async () => {
+    const response: ApiResponse<string> = await postDataRequest('/payment/vnpay');
+    if (response.code === 200) {
+        window.location.href = response.data;
     }
+    return response;
 };

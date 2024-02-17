@@ -7,11 +7,16 @@ import { useEffect, useState } from 'react';
 import {
     addDiscountToCartRedux,
     getUserCartRedux,
+    removeDiscountFromCartRedux,
     removeItemFromCartRedux,
 } from '../../redux/reducers/cart/userCart.slice';
+import { TiDelete } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
 import Spinner from '../../components/Loading/Spinner/Spinner';
 import { ToastContainer, toast } from 'react-toastify';
+import { removeDiscountFromCart } from '../../services/CartService';
+import { ApiResponse } from '../../types/ApiType';
+import { checkoutService } from '../../services/PaymentService';
 
 function CartPage() {
     const dispatch = useDispatch<AppDispatch>();
@@ -52,6 +57,27 @@ function CartPage() {
     const handleDiscount = () => {
         if (input !== '') {
             dispatch(addDiscountToCartRedux(input));
+        }
+    };
+
+    const handleRemoveDiscount = () => {
+        if (state.data.discount.code !== '') {
+            dispatch(removeDiscountFromCartRedux(state.data.discount.code));
+        }
+    };
+
+    const checkOut = async () => {
+        const res = await checkoutService();
+        if (res.code !== 200) {
+            toast.error(res.message, {
+                position: 'bottom-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
     };
 
@@ -96,6 +122,18 @@ function CartPage() {
                             <span className="opacity-80 font-semibold tracking-wider">Thành tiền: </span>
                             <span>{state.data.total.toLocaleString('en-US')}đ</span>
                         </div>
+                        {state.data.discount.code !== '' && (
+                            <div className="flex justify-between mb-4">
+                                <span className="opacity-80 font-semibold tracking-wider">Thẻ giảm giá: </span>
+                                <div className="flex items-center">
+                                    <span>{state.data.discount.name}</span>
+                                    <TiDelete
+                                        className="text-4xl cursor-pointer hover:text-red-500 hover:scale-105 transition"
+                                        onClick={handleRemoveDiscount}
+                                    />
+                                </div>
+                            </div>
+                        )}
                         <div className="flex mt-6 h-12">
                             <button className="apply-btn" onClick={handleDiscount}>
                                 Áp dụng
@@ -108,7 +146,9 @@ function CartPage() {
                             />
                         </div>
                         <div className="flex mt-6 h-12">
-                            <button className="checkout-btn">Thanh toán</button>
+                            <button className="checkout-btn" onClick={checkOut}>
+                                Thanh toán
+                            </button>
                         </div>
                         <div className="mt-6 text-xl tracking-wide opacity-75">
                             <p className="leading-8">

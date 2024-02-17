@@ -41,6 +41,7 @@ export interface DetailCourse {
     image: string;
     isactivated: boolean;
     issale: boolean;
+    owner: boolean;
     createTime: string;
     updateTime: string;
     creator: CourseCreatorAttribute;

@@ -9,17 +9,28 @@ interface CourseCardProps {
     title: string;
     category?: string;
     itemPerRow: number;
+    isSale: boolean;
+    salePrice: number;
     img?: string;
     price?: number;
     href?: string;
     to?: string;
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({ title, category, price, img, itemPerRow, href, to, id }) => {
+const CourseCard: React.FC<CourseCardProps> = ({
+    title,
+    category,
+    price,
+    img,
+    itemPerRow,
+    href,
+    to,
+    id,
+    isSale,
+    salePrice,
+}) => {
     const priceFormatter = PriceFormatter.getInstance();
     const widthItem = Math.round(100 / itemPerRow) + '%';
-    let formatPrice;
-    if (price) formatPrice = priceFormatter.formatPrice(price);
     let Comp: any = 'div';
     if (to) {
         Comp = Link;
@@ -42,7 +53,14 @@ const CourseCard: React.FC<CourseCardProps> = ({ title, category, price, img, it
                 </div>
             )}
             <div className={cx('price-wrapper')}>
-                <span className={cx('price')}>{formatPrice}</span>
+                {isSale ? (
+                    <p>
+                        <span className={cx('sale-price')}>{price!.toLocaleString('en-US')}đ</span>
+                        <span className={cx('price')}>{salePrice.toLocaleString('en-US')}đ</span>
+                    </p>
+                ) : (
+                    <span className={cx('price')}>{price!.toLocaleString('en-US')}đ</span>
+                )}
             </div>
         </Comp>
     );

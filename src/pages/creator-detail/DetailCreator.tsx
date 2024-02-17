@@ -69,6 +69,8 @@ function DetailCreator() {
                                         itemPerRow={3}
                                         img={item.image}
                                         title={item.title}
+                                        salePrice={item.salePrice}
+                                        isSale={item.issale}
                                         price={item.price}
                                         id={item.code}
                                         key={item.code}

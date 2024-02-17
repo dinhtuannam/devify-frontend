@@ -6,6 +6,7 @@ import classNames from 'classnames/bind';
 import styles from './App.module.scss';
 import useTheme from './hooks/useTheme';
 import { useEffect } from 'react';
+import Auth from './routes/AuthRoute';
 
 const cx = classNames.bind(styles);
 function App() {
@@ -43,15 +44,17 @@ function App() {
                             const Page = value.page;
                             const Layout = value.layout;
                             return (
-                                <Route
-                                    path={value.path}
-                                    element={
-                                        <Layout>
-                                            <Page />
-                                        </Layout>
-                                    }
-                                    key={value.path}
-                                />
+                                <Route element={<Auth />} key="key">
+                                    <Route
+                                        path={value.path}
+                                        element={
+                                            <Layout>
+                                                <Page />
+                                            </Layout>
+                                        }
+                                        key={value.path}
+                                    />
+                                </Route>
                             );
                         })}
                     </Routes>

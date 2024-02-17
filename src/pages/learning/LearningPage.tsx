@@ -23,6 +23,9 @@ function LearningPage() {
         if (state.result === false && state.code === 404) {
             window.location.href = '/not-found';
         }
+        if (state.result === false && state.code === 403) {
+            window.location.href = '/forbidden';
+        }
     }, [state]);
 
     return (

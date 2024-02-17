@@ -1,7 +1,7 @@
 import styles from './DetailCourse.module.scss';
 import classNames from 'classnames/bind';
 import { useEffect, Fragment, memo } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import notfound from '../../assets/img/notfound.png';
 import Spinner from '../../components/Loading/Spinner/Spinner';
 import { useDispatch, useSelector } from 'react-redux';
@@ -71,6 +71,12 @@ function DetailCourse() {
                     <div className={cx('wrapper')}>
                         <div className={cx('content')}>
                             <h1 className={cx('course-title')}>{stateData.data.title}</h1>
+                            <Link
+                                to={`/creator/${stateData.data.creator.code}`}
+                                className="dark:text-white underline text-3xl font-semibold hover:text-blue-600 transition"
+                            >
+                                {stateData.data.creator.username}
+                            </Link>
                             <p className={cx('course-description')}>{stateData.data.des}</p>
 
                             <div className={cx('cat-wrapper')}>
@@ -81,12 +87,12 @@ function DetailCourse() {
                                 <span className={cx('course-lang')}>Ngôn ngữ :</span>
                                 {stateData.data.languages.map((value, index) => {
                                     return (
-                                        <div>
+                                        <>
                                             <br></br>
                                             <span className={cx('course-lang-item')} key={index}>
                                                 - {value.name}
                                             </span>
-                                        </div>
+                                        </>
                                     );
                                 })}
                             </div>
@@ -94,12 +100,12 @@ function DetailCourse() {
                                 <span className={cx('course-lang')}>Trình độ :</span>
                                 {stateData.data.level.map((value, index) => {
                                     return (
-                                        <div>
+                                        <>
                                             <br></br>
                                             <span className={cx('course-lang-item')} key={index}>
                                                 - {value.name}
                                             </span>
-                                        </div>
+                                        </>
                                     );
                                 })}
                             </div>
@@ -140,18 +146,26 @@ function DetailCourse() {
                             </div>
                             <div className={cx('price-box')}>
                                 <span style={{ marginRight: '6px' }}>Giá tiền : </span>
-                                <span>{stateData.data.price}</span>
+                                <span>
+                                    {stateData.data.issale
+                                        ? stateData.data.salePrice.toLocaleString('en-US')
+                                        : stateData.data.price.toLocaleString('en-US')}
+                                    đ
+                                </span>
                             </div>
                             <div className={cx('purchased-box')}>
                                 <span style={{ marginRight: '6px' }}>{stateData.data.purchases}</span>
                                 <span>thành viên đã tham gia khóa học</span>
                             </div>
-                            <DefaultButton primary large onClick={() => handleAddCart(stateData.data!.code)}>
-                                Thêm vào giỏ hàng
-                            </DefaultButton>
-                            {/* <DefaultButton primary large onClick={() => addToCart(stateData.data)}>
-                                Thêm vào giỏ hàng
-                            </DefaultButton> */}
+                            {stateData.data.owner === false ? (
+                                <DefaultButton primary large onClick={() => handleAddCart(stateData.data!.code)}>
+                                    Thêm vào giỏ hàng
+                                </DefaultButton>
+                            ) : (
+                                <DefaultButton primary large href={`/learning/${stateData.data.code}`}>
+                                    Xem ngay
+                                </DefaultButton>
+                            )}
                         </div>
                     </div>
                 ) : (

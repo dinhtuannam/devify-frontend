@@ -6,7 +6,7 @@ import ListWrapper from '../../../components/Wrapper/ListWrapper/ListWrapper';
 import { getfilterCourseService } from '../../../services/CourseService';
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../../../components/Loading/Spinner/Spinner';
-import NotFound from '../../error/NotFound/NotFound';
+import NotFound from '../../status/NotFound/NotFound';
 import Paging from '../../../components/Paging/Paging';
 
 const cx = classNames.bind(styles);
@@ -75,6 +75,8 @@ function CourseList() {
                                 to={`/courses/${item.code}`}
                                 itemPerRow={3}
                                 img={item.image}
+                                isSale={item.issale}
+                                salePrice={item.salePrice}
                                 title={item.title}
                                 price={item.price}
                                 id={item.code}
