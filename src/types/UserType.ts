@@ -1,3 +1,5 @@
+import { CourseItem } from './CourseType';
+
 export interface currentUserInformation {
     Id: string;
     UserName: string;
@@ -30,4 +32,9 @@ export interface UserShortInfo {
     username: string;
     displayName: string;
     image: string;
+}
+
+export interface UserProfile {
+    information: UserItem;
+    courses: CourseItem[];
 }

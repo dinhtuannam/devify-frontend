@@ -3,5 +3,5 @@ export interface AsyncState<T> {
     result: boolean;
     message: string;
     code: number;
-    data: T | null;
+    data: T;
 }

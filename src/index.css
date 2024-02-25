@@ -5,3 +5,21 @@
 .transition {
     @apply transition-all duration-200 ease-in;
 }
+.sm-border {
+    @apply rounded-lg border-2;
+}
+
+.med-border {
+    @apply rounded-2xl  border-2;
+}
+
+.circle {
+    @apply rounded-[50%];
+}
+.flex-all-center {
+    @apply flex justify-center items-center;
+}
+
+.full-shadow {
+    @apply ring-2 shadow-md rounded-md;
+}

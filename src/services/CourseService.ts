@@ -1,16 +1,18 @@
 import { DataList } from '../types/ApiType';
-import { CourseItem } from '../types/CourseType';
+import { CourseItem, DetailCourse } from '../types/CourseType';
 import { getDataRequest } from '../utils/ApiRequest';
 import { ApiResponse } from '../types/ApiType';
 
 export const getViewCourseService = async (code: string | undefined) => {
-    try {
-        const path = `/course/${code}/get-view-info-course`;
-        const response = await getDataRequest(path);
-        return response;
-    } catch (e) {
-        console.log(e);
-    }
+    const path = `/course/${code}/get-view-info-course`;
+    const response: ApiResponse<DetailCourse> = await getDataRequest(path);
+    return response;
+};
+
+export const getDetailCourseService = async (code: string) => {
+    const path = `/course/${code}/get-course`;
+    const response: ApiResponse<DetailCourse> = await getDataRequest(path);
+    return response;
 };
 
 interface FilterCourse {

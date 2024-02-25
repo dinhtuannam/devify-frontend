@@ -50,3 +50,15 @@ export interface DetailCourse {
     level: CourseAttribute[];
     chapters: DetailChapter[];
 }
+
+export interface UpdateCourse {
+    code: string;
+    title: string;
+    des: string;
+    price: number;
+    salePrice: number;
+    category: string;
+    issale: boolean;
+    languages: string[];
+    levels: string[];
+}

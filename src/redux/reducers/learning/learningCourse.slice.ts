@@ -4,12 +4,31 @@ import { CourseLearningInfo } from '../../../types/LearningType';
 import { getLearningCourseService } from '../../../services/LearningService';
 import { AsyncState } from '../../../types/StateType';
 
+const EmptyCourseLearningInfo: CourseLearningInfo = {
+    code: '',
+    title: '',
+    des: '',
+    image: '',
+    createTime: '',
+    updateTime: '',
+    isOwner: false,
+    totalChapter: 0,
+    totalLesson: 0,
+    creator: {
+        code: '',
+        displayName: '',
+        username: '',
+        image: '',
+    },
+    chapters: [],
+};
+
 const initialState: AsyncState<CourseLearningInfo> = {
     isLoading: false,
     code: 0,
     result: true,
     message: '',
-    data: null,
+    data: EmptyCourseLearningInfo,
 };
 
 export const getLearningCourseThunk = createAsyncThunk('get-learing-course', async (slug: string | undefined) => {

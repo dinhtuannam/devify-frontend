@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input-text {
+    @apply w-[70%]
+    border-black
+    border-2
+    bg-transparent
+    rounded-md
+    outline-none
+    text-black
+    px-4 py-2
+    dark:border-white
+    dark:text-white;
+}
+
+.info-container {
+    @apply flex
+    
+    mb-6;
+}
+
+.course-des {
+    @apply w-[30%]
+    text-3xl
+    font-bold
+    dark:text-white
+    py-3;
+}
+
+.add-btn {
+    @apply ml-6 border-2 
+    border-black rounded-md 
+    px-4 py-2 
+    tracking-wider text-3xl font-semibold 
+    cursor-pointer 
+    hover:bg-black 
+    hover:text-white
+    transition
+    dark:!border-white
+    dark:text-white
+    dark:hover:bg-white
+    dark:hover:text-black;
+}
+
+.update-btn {
+    @apply w-full h-16 text-3xl font-semibold tracking-wider 
+    border-b-black text-black
+    dark:border-b-white dark:text-white;
+}

@@ -22,13 +22,13 @@ function DetailCreator() {
     const [creatorData, coursesData] = useQueries({
         queries: [
             {
-                queryKey: ['detail-creator-info'],
+                queryKey: ['detail-creator-info', name],
                 queryFn: () => getCreator(name),
                 staleTime: 10 * 60 * 1000,
                 cacheTime: 10 * 60 * 1000,
             },
             {
-                queryKey: ['coureses-by-creator'],
+                queryKey: ['coureses-by-creator', name],
                 queryFn: () => getCreatorCourses(name),
                 staleTime: 10 * 60 * 1000,
                 cacheTime: 10 * 60 * 1000,

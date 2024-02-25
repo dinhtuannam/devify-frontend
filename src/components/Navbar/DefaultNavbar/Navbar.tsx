@@ -67,7 +67,6 @@ function Navbar() {
                                     <p className={cx('username')}>{currentUser?.username}</p>
                                 </MenuItem>
                                 <MenuItem to="/profile">Trang cá nhân</MenuItem>
-                                <MenuItem href="/setting">Cài đặt</MenuItem>
                                 <MenuItem onClick={switchTheme}>
                                     <span style={{ marginRight: 6 }}>Chế độ :</span>
                                     <span>{theme}</span>

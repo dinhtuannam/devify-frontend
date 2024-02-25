@@ -1,6 +1,5 @@
 import { ApiResponse, DataList } from '../types/ApiType';
 import { CourseItem } from '../types/CourseType';
-import { CreatorCoursesDTO, DetailCreatorPublicDTO } from '../types/CreatorType';
 import { UserItem } from '../types/UserType';
 import { getDataRequest } from '../utils/ApiRequest';
 

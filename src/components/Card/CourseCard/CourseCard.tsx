@@ -15,6 +15,7 @@ interface CourseCardProps {
     price?: number;
     href?: string;
     to?: string;
+    update?: boolean;
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({
@@ -25,14 +26,14 @@ const CourseCard: React.FC<CourseCardProps> = ({
     itemPerRow,
     href,
     to,
-    id,
     isSale,
     salePrice,
+    update,
+    id,
 }) => {
-    const priceFormatter = PriceFormatter.getInstance();
     const widthItem = Math.round(100 / itemPerRow) + '%';
     let Comp: any = 'div';
-    if (to) {
+    if (to && !update) {
         Comp = Link;
     } else if (href) {
         Comp = 'a';
@@ -45,6 +46,16 @@ const CourseCard: React.FC<CourseCardProps> = ({
         <Comp className={cx('wrapper')} style={{ width: widthItem }} {...WrapProps}>
             <div className={cx('img-wrapper')}>
                 <img className={cx('img')} src={img} alt="img" />
+                {update && (
+                    <>
+                        <Link to={to || '/courses'} className={cx('update-btn')}>
+                            Chỉnh sửa
+                        </Link>
+                        <Link to={`/courses/${id}`} className={cx('link-btn')}>
+                            Chi tiết
+                        </Link>
+                    </>
+                )}
             </div>
             <h3 className={cx('course-title')}>{title}</h3>
             {category && (

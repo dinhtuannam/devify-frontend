@@ -86,6 +86,7 @@
         .social-list {
             color: #fff;
             padding-right: 70px;
+            display: flex;
             @include respond-to-iphone {
                 text-align: center;
                 margin-top: 8px;

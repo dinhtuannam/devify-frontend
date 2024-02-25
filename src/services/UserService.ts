@@ -1,5 +1,6 @@
 import { ApiResponse } from '../types/ApiType';
 import { CourseItem } from '../types/CourseType';
+import { UserProfile } from '../types/UserType';
 import { getDataRequest } from '../utils/ApiRequest';
 
 export const getCurrentUserService = async (id: string) => {
@@ -22,4 +23,13 @@ export const getInventoryService = async () => {
     } catch (e) {
         console.log(e);
     }
+};
+
+export const getUserProfileService = async () => {
+    const path = `/User/get-profile`;
+    const response: ApiResponse<UserProfile> = await getDataRequest(path, {});
+    if (response.code === 401) {
+        window.location.href = '/login';
+    }
+    return response;
 };

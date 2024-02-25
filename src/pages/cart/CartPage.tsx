@@ -14,8 +14,6 @@ import { TiDelete } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
 import Spinner from '../../components/Loading/Spinner/Spinner';
 import { ToastContainer, toast } from 'react-toastify';
-import { removeDiscountFromCart } from '../../services/CartService';
-import { ApiResponse } from '../../types/ApiType';
 import { checkoutService } from '../../services/PaymentService';
 
 function CartPage() {
@@ -163,7 +161,7 @@ function CartPage() {
                 </div>
             ) : (
                 <div className="mt-10">
-                    <img src={empty} className="mx-auto" />
+                    <img src={empty} className="mx-auto" alt="img" />
                     <div className="text-4xl text-center">
                         <span className="opacity-80 pr-4">Giỏ hàng đang trống.</span>
                         <Link className="font-bold cursor-pointer hover:opacity-80" to={'/courses'}>
