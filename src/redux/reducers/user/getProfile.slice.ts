@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { ApiResponse } from '../../../types/ApiType';
 import { AsyncState } from '../../../types/StateType';
-import { UserProfile } from '../../../types/UserType';
-import { getUserProfileService } from '../../../services/UserService';
+import { UpdateUser, UserItem, UserProfile } from '../../../types/UserType';
+import { editUserService, getUserProfileService } from '../../../services/UserService';
 
 const EmptyUserProfile: UserProfile = {
     information: {
@@ -27,6 +27,7 @@ const initialState: AsyncState<UserProfile> = {
     result: false,
     message: '',
     data: EmptyUserProfile,
+    alert: false,
 };
 
 export const getUserProfileThunk = createAsyncThunk('getUserProfileThunk', async () => {
@@ -34,15 +35,25 @@ export const getUserProfileThunk = createAsyncThunk('getUserProfileThunk', async
     return response;
 });
 
+export const updateUserThunk = createAsyncThunk('updateUserThunk', async (data: UpdateUser) => {
+    const response = await editUserService(data);
+    return response;
+});
+
 export const getUserProfileSlice = createSlice({
     name: 'get-user-profile',
     initialState,
-    reducers: {},
+    reducers: {
+        showAlert: (state) => {
+            state.alert = false;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getUserProfileThunk.pending, (state) => {
                 state.isLoading = true;
                 state.result = false;
+                state.alert = false;
             })
             .addCase(getUserProfileThunk.fulfilled, (state, action: PayloadAction<ApiResponse<UserProfile>>) => {
                 state.isLoading = false;
@@ -50,14 +61,39 @@ export const getUserProfileSlice = createSlice({
                 state.message = action.payload?.message;
                 state.code = action.payload?.code;
                 state.data = action.payload?.data;
+                state.alert = false;
             })
             .addCase(getUserProfileThunk.rejected, (state, action) => {
                 state.isLoading = false;
                 state.result = false;
                 state.code = 400;
+                state.alert = false;
+            })
+
+            .addCase(updateUserThunk.pending, (state) => {
+                state.isLoading = true;
+                state.result = false;
+                state.alert = false;
+            })
+            .addCase(updateUserThunk.fulfilled, (state, action: PayloadAction<ApiResponse<UserItem>>) => {
+                state.isLoading = false;
+                state.result = action.payload?.result;
+                state.message = action.payload?.message;
+                state.code = action.payload?.code;
+                state.alert = true;
+                if (state.result) {
+                    state.data.information = action.payload.data;
+                }
+            })
+            .addCase(updateUserThunk.rejected, (state, action) => {
+                state.isLoading = false;
+                state.result = false;
+                state.code = 400;
+                state.alert = false;
             });
     },
 });
 
+export const { showAlert } = getUserProfileSlice.actions;
 const userProfileReducer = getUserProfileSlice.reducer;
 export default userProfileReducer;

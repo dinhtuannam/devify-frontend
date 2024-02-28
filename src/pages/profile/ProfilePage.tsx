@@ -3,17 +3,29 @@ import { FaAngleDoubleRight } from 'react-icons/fa';
 import ListWrapper from '../../components/Wrapper/ListWrapper/ListWrapper';
 import CourseCard from '../../components/Card/CourseCard/CourseCard';
 import useSelectedItem from '../../hooks/useSelectedItem';
-import { useEffect } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../redux/store';
-import { getUserProfileThunk } from '../../redux/reducers/user/getProfile.slice';
+import { getUserProfileThunk, showAlert, updateUserThunk } from '../../redux/reducers/user/getProfile.slice';
 import { CourseItem } from '../../types/CourseType';
 import Spinner from '../../components/Loading/Spinner/Spinner';
+import { UpdateUser, UserItem } from '../../types/UserType';
+import { showToast } from '../../hooks/useToast';
+import { ToastContainer } from 'react-toastify';
 
 function ProfilePage() {
     const { selectItem, handleSelectItem } = useSelectedItem();
     const dispatch = useDispatch<AppDispatch>();
     const state = useSelector((state: RootState) => state.userProfileStore);
+    const [data, setData] = useState<UserItem>(state.data.information);
+
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setData((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+    };
 
     useEffect(() => {
         dispatch(getUserProfileThunk());
@@ -21,8 +33,32 @@ function ProfilePage() {
         handleSelectItem('information');
     }, []);
 
+    useEffect(() => {
+        if (state.result && state.data.information) {
+            setData(state.data.information);
+        }
+        if (state.alert) {
+            showToast(state.result, state.message);
+            dispatch(showAlert());
+        }
+    }, [state]);
+
+    const handleEditUser = () => {
+        const req: UpdateUser = {
+            code: data.code,
+            username: data.username,
+            displayName: data.displayName,
+            email: data.email,
+            social: data.social,
+            about: data.about,
+            role: data.role,
+        };
+        dispatch(updateUserThunk(req));
+    };
+
     return (
         <div className="max-w-screen-lg mx-auto min-h-screen px-4 py-12">
+            <ToastContainer />
             {state.isLoading ? (
                 <Spinner />
             ) : (
@@ -33,7 +69,7 @@ function ProfilePage() {
                     </div>
 
                     <div
-                        className="mt-10 mb-20 mx-auto w-[50%]"
+                        className="mt-10 mb-20 mx-auto w-[65%]"
                         style={selectItem.includes('information') ? { display: 'block' } : { display: 'none' }}
                     >
                         <div className="flex items-center">
@@ -49,64 +85,97 @@ function ProfilePage() {
                             <p className="cursor-pointer mx-8 text-3xl font-semibold hover:underline hover:!text-blue-500 transition dark:text-white ">
                                 Cập nhật ảnh đại diện
                             </p>
-                            <button className="update-btn">Thay đổi thông tin</button>
+                            <button className="update-btn">Thay đổi mật khẩu</button>
                         </div>
                         <div className="mt-8">
                             <div className="info-container">
                                 <p className="user-des">Tên đăng nhập: </p>
-                                <span className="user-info">{state.data.information.username}</span>
+                                <input
+                                    value={data.username}
+                                    className="user-info"
+                                    type="text"
+                                    name="username"
+                                    onChange={(e) => handleInputChange(e)}
+                                />
                             </div>
                             <div className="info-container">
                                 <p className="user-des">Tên hiển thị: </p>
-                                <span className="user-info">{state.data.information.displayName}</span>
+                                <input
+                                    value={data.displayName}
+                                    className="user-info"
+                                    type="text"
+                                    name="displayName"
+                                    onChange={(e) => handleInputChange(e)}
+                                />
                             </div>
                             <div className="info-container">
                                 <p className="user-des">Email: </p>
-                                <span className="user-info">{state.data.information.email}</span>
+                                <input
+                                    value={data.email}
+                                    type="email"
+                                    className="user-info"
+                                    name="email"
+                                    onChange={(e) => handleInputChange(e)}
+                                />
                             </div>
-                            {state.data.information.about && (
-                                <div className="info-container">
-                                    <p className="user-des">Mô tả</p>
-                                    <span className="user-info">{state.data.information.about}</span>
-                                </div>
-                            )}
-                            {state.data.information.social && (
-                                <div className="info-container">
-                                    <p className="user-des">Mạng xã hội</p>
-                                    <span className="user-info">{state.data.information.social}</span>
-                                </div>
-                            )}
+                            <div className="info-container">
+                                <p className="user-des">Mô tả: </p>
+                                <input
+                                    value={data.about}
+                                    type="text"
+                                    className="user-info"
+                                    name="about"
+                                    onChange={(e) => handleInputChange(e)}
+                                />
+                            </div>
+                            <div className="info-container">
+                                <p className="user-des">Mạng xã hội: </p>
+                                <input
+                                    value={data.social}
+                                    type="text"
+                                    className="user-info"
+                                    name="social"
+                                    onChange={(e) => handleInputChange(e)}
+                                />
+                            </div>
                         </div>
+                        <button className="update-btn mt-4" onClick={handleEditUser}>
+                            Cập nhật
+                        </button>
                     </div>
-                    <div className="title-container" onClick={() => handleSelectItem('courses')}>
-                        <FaAngleDoubleRight className="dark:text-white mr-6 text-4xl" />
-                        <h2 className="font-semibold dark:text-white">Khóa học của bạn</h2>
-                    </div>
-                    <div
-                        className="py-8"
-                        style={selectItem.includes('courses') ? { display: 'block' } : { display: 'none' }}
-                    >
-                        {state.isLoading && <Spinner />}
-                        <ListWrapper row wrap>
-                            {state.data.courses.length > 0 &&
-                                state.data.courses.map((item: CourseItem, _) => {
-                                    return (
-                                        <CourseCard
-                                            to={`/course/update/${item.code}`}
-                                            itemPerRow={4}
-                                            img={item.image}
-                                            title={item.title}
-                                            salePrice={item.salePrice}
-                                            isSale={item.issale}
-                                            price={item.price}
-                                            id={item.code}
-                                            key={item.code}
-                                            update
-                                        />
-                                    );
-                                })}
-                        </ListWrapper>
-                    </div>
+                    {state.data.information.role !== 'customer' && (
+                        <>
+                            <div className="title-container" onClick={() => handleSelectItem('courses')}>
+                                <FaAngleDoubleRight className="dark:text-white mr-6 text-4xl" />
+                                <h2 className="font-semibold dark:text-white">Khóa học của bạn</h2>
+                            </div>
+                            <div
+                                className="py-8"
+                                style={selectItem.includes('courses') ? { display: 'block' } : { display: 'none' }}
+                            >
+                                {state.isLoading && <Spinner />}
+                                <ListWrapper row wrap>
+                                    {state.data.courses.length > 0 &&
+                                        state.data.courses.map((item: CourseItem, _) => {
+                                            return (
+                                                <CourseCard
+                                                    to={`/course/update/${item.code}`}
+                                                    itemPerRow={4}
+                                                    img={item.image}
+                                                    title={item.title}
+                                                    salePrice={item.salePrice}
+                                                    isSale={item.issale}
+                                                    price={item.price}
+                                                    id={item.code}
+                                                    key={item.code}
+                                                    update
+                                                />
+                                            );
+                                        })}
+                                </ListWrapper>
+                            </div>
+                        </>
+                    )}
                 </>
             )}
         </div>

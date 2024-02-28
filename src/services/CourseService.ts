@@ -15,7 +15,7 @@ export const getDetailCourseService = async (code: string) => {
     return response;
 };
 
-interface FilterCourse {
+export interface FilterCourse {
     query: string | null;
     page: number | null;
     cat?: string[];

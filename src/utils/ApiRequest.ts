@@ -135,6 +135,18 @@ export const postDataRequest = async (path: string, option = {}) => {
     }
 };
 
+export const putDataRequest = async (path: string, option = {}) => {
+    try {
+        let response = await backendRequest.put(path, option);
+        return response.data;
+    } catch (e: any) {
+        if (e.response && e.response.data) {
+            return e.response.data;
+        }
+        throw e;
+    }
+};
+
 export const deleteDataRequest = async (path: string, option = {}) => {
     try {
         let response = await backendRequest.delete(path, option);

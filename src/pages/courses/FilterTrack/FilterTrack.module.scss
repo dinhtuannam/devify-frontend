@@ -33,6 +33,26 @@
         }
     }
 
+    .track-filter {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 1.6rem 0;
+        background: var(--primary-bg-color);
+        transition: var(--primary-transition);
+        cursor: pointer;
+        border-radius: 10px;
+        .track-filter-title {
+            font-weight: 600;
+            letter-spacing: 0.6;
+            margin-left: 0.8rem;
+            color: #fff;
+        }
+        &:hover {
+            scale: 1.02;
+        }
+    }
+
     .item {
         cursor: pointer;
         display: flex;

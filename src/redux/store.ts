@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import detailCourseReducer from './reducers/course/detailCourse.slice';
 import learningCourseReducer from './reducers/learning/learningCourse.slice';
-import userCartReducer from './reducers/cart/userCart.slice';
+import userCartReducer, { showCartAlert } from './reducers/cart/userCart.slice';
 import userProfileReducer from './reducers/user/getProfile.slice';
 
 export const store = configureStore({

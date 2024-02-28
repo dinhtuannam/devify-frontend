@@ -10,18 +10,17 @@ import { getCourseBySlug } from '../../redux/reducers/course/detailCourse.slice'
 import { AppDispatch } from '../../redux/store';
 import useSelectedItem from '../../hooks/useSelectedItem';
 import DefaultButton from '../../components/Button/DefaultButton/DefaultButton';
-import { addItemToCartRedux } from '../../redux/reducers/cart/userCart.slice';
 import { ToastContainer } from 'react-toastify';
 import { toast } from 'react-toastify';
 import useCheckLogin from '../../hooks/useCheckLogin';
 import 'react-toastify/dist/ReactToastify.css';
+import { addItemToCart } from '../../services/CartService';
 
 const cx = classNames.bind(styles);
 
 function DetailCourse() {
     const stateData = useSelector((state: RootState) => state.detailCourseStore);
     const dispatch = useDispatch<AppDispatch>();
-    const stateCart = useSelector((state: RootState) => state.userCartStore);
     const { selectItem, handleSelectItem } = useSelectedItem();
     const { name } = useParams();
     const isLoginCheck = useCheckLogin();
@@ -30,9 +29,9 @@ function DetailCourse() {
         dispatch(getCourseBySlug(name));
     }, [name, dispatch]);
 
-    useEffect(() => {
-        if (stateCart.loading === false && stateCart.result === true) {
-            toast.success('Đã thêm sản phẩm vào giỏ hàng!', {
+    const showToast = (message: string, result: boolean) => {
+        if (result) {
+            toast.success(message, {
                 position: 'bottom-right',
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -41,25 +40,29 @@ function DetailCourse() {
                 draggable: true,
                 progress: undefined,
             });
-        }
-        if (stateCart.loading === false && stateCart.result === false) {
-            toast.error(stateCart.message, {
-                position: 'bottom-right',
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
-        }
-    }, [stateCart]);
-
-    const handleAddCart = (course: string) => {
-        if (isLoginCheck) {
-            dispatch(addItemToCartRedux(course));
         } else {
-            window.location.href = '/login';
+            toast.error(message, {
+                position: 'bottom-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+    };
+
+    const handleAddCart = async (course: string) => {
+        try {
+            if (isLoginCheck) {
+                const res = await addItemToCart(course);
+                showToast(res.message, res.result);
+            } else {
+                window.location.href = '/login';
+            }
+        } catch (e) {
+            showToast('Đã có lỗi xảy ra vui lòng thử lại', false);
         }
     };
 

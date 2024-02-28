@@ -29,6 +29,7 @@ const initialState: AsyncState<CourseLearningInfo> = {
     result: true,
     message: '',
     data: EmptyCourseLearningInfo,
+    alert: false,
 };
 
 export const getLearningCourseThunk = createAsyncThunk('get-learing-course', async (slug: string | undefined) => {

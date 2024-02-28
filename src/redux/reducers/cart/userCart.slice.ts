@@ -10,11 +10,11 @@ import {
 } from '../../../services/CartService';
 
 interface CartReduxState {
+    alert: boolean;
     loading: boolean;
     result: boolean;
     message: string;
     data: CartItem;
-    action: string;
 }
 
 export const emptyCartItem: CartItem = {
@@ -41,11 +41,11 @@ export const emptyCartItem: CartItem = {
 };
 
 const initialState: CartReduxState = {
+    alert: false,
     loading: false,
     result: false,
     message: '',
     data: emptyCartItem,
-    action: '',
 };
 
 export const getUserCartRedux = createAsyncThunk('getUserCartRedux', async () => {
@@ -76,74 +76,79 @@ export const removeDiscountFromCartRedux = createAsyncThunk('removeDiscountFromC
 export const userCartSlice = createSlice({
     name: 'user-cart-slice',
     initialState,
-    reducers: {},
+    reducers: {
+        showCartAlert: (state) => {
+            state.alert = false;
+        },
+    },
     extraReducers: (builder) => {
         builder
             // *********** get cart
             .addCase(getUserCartRedux.pending, (state) => {
                 state.loading = true;
                 state.result = false;
-                state.action = 'getUserCartRedux';
+                state.alert = false;
+                state.alert = false;
             })
             .addCase(getUserCartRedux.fulfilled, (state, action: PayloadAction<ApiResponse<CartItem>>) => {
                 state.loading = false;
                 state.result = action.payload.result;
                 state.message = action.payload.message;
                 state.data = action.payload.data;
-                state.action = 'getUserCartRedux';
+                state.alert = false;
             })
             .addCase(getUserCartRedux.rejected, (state, action) => {
                 state.loading = false;
                 state.result = false;
                 state.message = '';
-                state.action = '';
+                state.alert = false;
             })
 
             // *********** add item to cart
             .addCase(addItemToCartRedux.pending, (state) => {
                 state.loading = true;
                 state.result = false;
-                state.action = 'addItemToCartRedux';
+                state.alert = false;
             })
             .addCase(addItemToCartRedux.fulfilled, (state, action: PayloadAction<ApiResponse<CartItem>>) => {
                 state.loading = false;
                 state.result = action.payload.result;
                 state.message = action.payload.message;
                 state.data = action.payload.data;
-                state.action = 'addItemToCartRedux';
+                state.alert = true;
             })
             .addCase(addItemToCartRedux.rejected, (state, action) => {
                 state.loading = false;
                 state.result = false;
                 state.message = '';
-                state.action = '';
+                state.alert = false;
             })
 
             // *********** remove item from cart
             .addCase(removeItemFromCartRedux.pending, (state) => {
                 state.loading = true;
                 state.result = false;
-                state.action = 'removeItemFromCartRedux';
+                state.alert = false;
             })
             .addCase(removeItemFromCartRedux.fulfilled, (state, action: PayloadAction<ApiResponse<CartItem>>) => {
                 state.loading = false;
                 state.result = action.payload.result;
                 state.message = action.payload.message;
                 state.data = action.payload.data;
-                state.action = 'removeItemFromCartRedux';
+                state.alert = true;
             })
             .addCase(removeItemFromCartRedux.rejected, (state, action) => {
                 state.loading = false;
                 state.result = false;
                 state.message = '';
-                state.action = '';
+                state.alert = false;
             })
 
             // *********** add discount to cart
             .addCase(addDiscountToCartRedux.pending, (state) => {
                 state.loading = true;
                 state.result = false;
-                state.action = 'addDiscountToCartRedux';
+                state.alert = false;
             })
             .addCase(addDiscountToCartRedux.fulfilled, (state, action: PayloadAction<ApiResponse<CartItem>>) => {
                 state.loading = false;
@@ -152,36 +157,37 @@ export const userCartSlice = createSlice({
                 if (action.payload.result) {
                     state.data = action.payload.data;
                 }
-                state.action = 'addDiscountToCartRedux';
+                state.alert = true;
             })
             .addCase(addDiscountToCartRedux.rejected, (state, action) => {
                 state.loading = false;
                 state.result = false;
                 state.message = '';
-                state.action = '';
+                state.alert = false;
             })
 
             // *********** remove discount from cart
             .addCase(removeDiscountFromCartRedux.pending, (state) => {
                 state.loading = true;
                 state.result = false;
-                state.action = 'removeDiscountFromCartRedux';
+                state.alert = false;
             })
             .addCase(removeDiscountFromCartRedux.fulfilled, (state, action: PayloadAction<ApiResponse<CartItem>>) => {
                 state.loading = false;
                 state.result = action.payload.result;
                 state.message = action.payload.message;
                 state.data = action.payload.data;
-                state.action = 'removeDiscountFromCartRedux';
+                state.alert = true;
             })
             .addCase(removeDiscountFromCartRedux.rejected, (state, action) => {
                 state.loading = false;
                 state.result = false;
                 state.message = '';
-                state.action = '';
+                state.alert = false;
             });
     },
 });
 
+export const { showCartAlert } = userCartSlice.actions;
 const userCartReducer = userCartSlice.reducer;
 export default userCartReducer;

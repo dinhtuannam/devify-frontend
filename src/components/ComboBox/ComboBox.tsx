@@ -38,7 +38,7 @@ export default function (props: IComboBox) {
               );
 
     return (
-        <div className={`${zIndex}`}>
+        <div className={`${zIndex} relative`}>
             <Combobox value={selected} onChange={setSelected}>
                 <div className="relative mt-1 ">
                     <div className="relative w-full cursor-default overflow-hidden rounded-lg border-2  text-left shadow-md sm:text-sm">

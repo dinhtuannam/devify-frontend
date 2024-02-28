@@ -4,7 +4,10 @@ import logo from '../../assets/img/logo.png';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import InputFormData from '../../components/Input/InputFormData/InputFormData';
 import InputPassword from '../../components/Input/InputPassword/InputPassword';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import ComboBox, { IListComboBox } from '../../components/ComboBox/ComboBox';
+import { CreateUser } from '../../types/UserType';
+import { createUserService } from '../../services/UserService';
 const cx = classNames.bind(styles);
 
 interface FormData {
@@ -12,7 +15,8 @@ interface FormData {
     password: string;
     confirmPassword: string;
     email: string;
-    phone: string;
+    displayName: string;
+    role: string;
 }
 
 function RegisterPage() {
@@ -21,10 +25,21 @@ function RegisterPage() {
         password: '',
         confirmPassword: '',
         email: '',
-        phone: '',
+        displayName: '',
+        role: '',
     });
+    const comboBox: IListComboBox[] = [
+        { code: 'customer', name: 'Khách hàng', des: 'Khách hàng' },
+        { code: 'creator', name: 'Nhà sáng tạo', des: 'Nhà sáng tạo' },
+    ];
     const [loading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
+
+    const handleChangeComboBox = (param: IListComboBox) => {
+        console.log(param);
+        setFormData((prevAttribute) => ({ ...prevAttribute, role: param.code }));
+    };
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -34,18 +49,28 @@ function RegisterPage() {
         }));
     };
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         try {
             e.preventDefault();
             setIsLoading(true);
-            setTimeout(() => {
-                window.location.href = '/login';
-            }, 2000);
+            const data: CreateUser = {
+                username: formData.username,
+                password: formData.password,
+                email: formData.email,
+                displayName: formData.displayName,
+                role: formData.role,
+            };
+            const res = await createUserService(data);
             setIsLoading(false);
+            if (res.result) {
+                navigate('/login');
+                setError('');
+            } else {
+                setError(res.message);
+            }
         } catch (e) {
-            console.log('[Register] -> failed');
             setIsLoading(false);
-            setError('Something wrong please try again !');
+            setError('Đã có lỗi xảy ra vui lòng thử lại');
         }
     };
 
@@ -83,24 +108,34 @@ function RegisterPage() {
                         className="input-form"
                     />
                     <InputFormData
+                        title="Tên hiển thị"
+                        name="displayName"
+                        value={formData.displayName}
+                        type="text"
+                        onChange={handleInputChange}
+                        placeholder="Nhập tên hiển thị"
+                        className="input-form"
+                    />
+                    <InputFormData
                         title="Email"
-                        type="password"
+                        type="email"
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
                         placeholder="Nhập email"
                         className="input-form"
                     />
-                    <InputFormData
-                        title="Số điện thoại"
-                        name="phone"
-                        value={formData.phone}
-                        type="password"
-                        onChange={handleInputChange}
-                        placeholder="Nhập số điện thoại"
-                        className="input-form"
-                    />
-                    <div>
+
+                    <div className="mt-8">
+                        <ComboBox
+                            zIndex="z-50"
+                            list={comboBox}
+                            onSet={handleChangeComboBox}
+                            type="role"
+                            select={'customer'}
+                        />
+                    </div>
+                    <div className="mt-4 font-semibold text-red-500">
                         <span>{error}</span>
                     </div>
                     {loading ? (

@@ -45,6 +45,7 @@ function CourseList() {
         if (categories) categories.forEach((cat) => queryStringParams.push(`cat=${encodeURIComponent(cat)}`));
         if (languages) languages.forEach((lang) => queryStringParams.push(`lang=${encodeURIComponent(lang)}`));
         if (levels) levels.forEach((lvl) => queryStringParams.push(`lvl=${encodeURIComponent(lvl)}`));
+        if (searchQuery) queryStringParams.push(`query=${encodeURIComponent(searchQuery)}`);
         const queryString = queryStringParams.join('&');
         navigate((path += `?${queryString}`));
     };

@@ -27,6 +27,7 @@
 
 .user-info {
     @apply border-2
+    bg-transparent
     w-[70%]
     rounded-md
     border-black

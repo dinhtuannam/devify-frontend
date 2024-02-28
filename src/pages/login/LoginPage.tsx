@@ -43,12 +43,9 @@ function LoginPage() {
         try {
             e.preventDefault();
             setIsLoading(true);
-            const res: ApiResponse<LoginResponse> = await handleLogin();
+            const res = await handleLogin();
             if (res.result === true) {
                 setError('');
-                console.log(res.data.info);
-
-                localStorage.setItem('currentUser', JSON.stringify(res.data.info));
                 window.location.href = '/';
             } else {
                 setError(res.message);
@@ -56,16 +53,17 @@ function LoginPage() {
 
             setIsLoading(false);
         } catch (e) {
-            console.log('[Login] -> failed');
             setIsLoading(false);
-            setError('Something wrong please try again !');
+            setError('Đã xảy ra lỗi vui lòng thử lại');
         }
     };
 
     return (
         <div className={cx('wrapper')}>
             <div className={cx('heading')}>
-                <img className={cx('logo')} src={logo} alt={'devify logo'} />
+                <Link to="/">
+                    <img className={cx('logo')} src={logo} alt={'devify logo'} />
+                </Link>
                 <h1 className={cx('title')}>Đăng nhập vào Devify</h1>
             </div>
             <div>

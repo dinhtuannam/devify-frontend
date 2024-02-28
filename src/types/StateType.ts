@@ -4,4 +4,5 @@ export interface AsyncState<T> {
     message: string;
     code: number;
     data: T;
+    alert: boolean;
 }

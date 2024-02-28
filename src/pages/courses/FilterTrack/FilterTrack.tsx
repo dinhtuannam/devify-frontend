@@ -180,8 +180,8 @@ function FilterTrack() {
                         </TrackItem>
                     );
                 })}
-            <div className={cx('track')} onClick={handleFilter}>
-                <span className={cx('track-title')}>Filter</span>
+            <div className={cx('track-filter')} onClick={handleFilter}>
+                <span className={cx('track-filter-title')}>Tiến hành lọc</span>
             </div>
         </div>
     );

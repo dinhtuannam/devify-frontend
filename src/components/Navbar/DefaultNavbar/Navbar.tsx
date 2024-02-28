@@ -5,7 +5,7 @@ import { FaBell, FaUserCircle, FaShoppingCart } from 'react-icons/fa';
 import { AiOutlineLeft, AiOutlineMenu } from 'react-icons/ai';
 import NavbarSearch from './Search/NavbarSearch';
 import { Link, useNavigate } from 'react-router-dom';
-import { currentUserType } from '../../../types/UserType';
+import { UserItem, currentUserType } from '../../../types/UserType';
 import Tippy from '@tippyjs/react';
 import UseLogout from '../../../hooks/useLogout';
 import { useState, Fragment, useEffect } from 'react';
@@ -13,11 +13,12 @@ import useCheckLogin from '../../../hooks/useCheckLogin';
 import useTheme from '../../../hooks/useTheme';
 import DefaultButton from '../../Button/DefaultButton/DefaultButton';
 import MenuItem from '../../Menu/MenuItem/MenuItem';
+import { useGetInfo } from '../../../hooks/useGetInfo';
 const cx = classNames.bind(styles);
 
 function Navbar() {
     const [showTippy, setShowTippy] = useState<boolean>(false);
-    const [currentUser, setCurrentUser] = useState<currentUserType | null>(null);
+    const [currentUser, setCurrentUser] = useState<UserItem | null>(null);
     const { theme, switchTheme } = useTheme();
     const isLoginCheck = useCheckLogin();
     const path = window.location.pathname;
@@ -25,7 +26,7 @@ function Navbar() {
 
     useEffect(() => {
         const userString: string | null = localStorage.getItem('currentUser');
-        const user: currentUserType | null = userString ? JSON.parse(userString) : null;
+        const user: UserItem | null = userString ? JSON.parse(userString) : null;
         setCurrentUser(user);
     }, []);
 

@@ -9,12 +9,14 @@ import {
     getUserCartRedux,
     removeDiscountFromCartRedux,
     removeItemFromCartRedux,
+    showCartAlert,
 } from '../../redux/reducers/cart/userCart.slice';
 import { TiDelete } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
 import Spinner from '../../components/Loading/Spinner/Spinner';
 import { ToastContainer, toast } from 'react-toastify';
 import { checkoutService } from '../../services/PaymentService';
+import { showToast } from '../../hooks/useToast';
 
 function CartPage() {
     const dispatch = useDispatch<AppDispatch>();
@@ -26,29 +28,9 @@ function CartPage() {
     }, [dispatch]);
 
     useEffect(() => {
-        if (state.action !== '' && state.action !== 'getUserCartRedux' && state.message !== '') {
-            if (state.loading === false && state.result === true) {
-                toast.success(state.message, {
-                    position: 'bottom-right',
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
-            }
-            if (state.loading === false && state.result === false) {
-                toast.error(state.message, {
-                    position: 'bottom-right',
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
-            }
+        if (state.result && state.alert) {
+            showToast(state.result, state.message);
+            dispatch(showCartAlert());
         }
     }, [state]);
 
@@ -67,15 +49,7 @@ function CartPage() {
     const checkOut = async () => {
         const res = await checkoutService();
         if (res.code !== 200) {
-            toast.error(res.message, {
-                position: 'bottom-right',
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+            showToast(res.result, res.message);
         }
     };
 
@@ -87,7 +61,10 @@ function CartPage() {
                     <div className="mx-4 w-[75%]">
                         {state.data.items.map((item, index) => {
                             return (
-                                <div className="bg-light-content transition dark:bg-dark-content flex px-6 py-5 items-center text-center mb-8">
+                                <div
+                                    key={index}
+                                    className="bg-light-content transition dark:bg-dark-content flex px-6 py-5 items-center text-center mb-8"
+                                >
                                     <Link to={`/courses/${item.code}`} className="w-[20%]">
                                         <img
                                             src={item.image}

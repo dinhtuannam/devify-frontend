@@ -38,3 +38,21 @@ export interface UserProfile {
     information: UserItem;
     courses: CourseItem[];
 }
+
+export interface CreateUser {
+    username: string;
+    password: string;
+    displayName: string;
+    email: string;
+    role: string;
+}
+
+export interface UpdateUser {
+    code: string;
+    username: string;
+    displayName: string;
+    email: string;
+    social: string;
+    about: string;
+    role: string;
+}
